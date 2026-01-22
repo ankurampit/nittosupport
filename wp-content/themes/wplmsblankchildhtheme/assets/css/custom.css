@@ -1,0 +1,60 @@
+/* Image Slider */
+.carousel img {
+    height: auto;
+    margin-top: 0% !important;
+}
+
+.navbar-nav{
+    display: -webkit-inline-box;
+}
+
+.dropdown-menu{
+    position: absolute !important;
+}
+
+.course-cat-heading {
+    margin-bottom: 40px;
+}   
+
+.course-cate a:after {
+    content: "";
+    width: 45px;
+    height: 45px;
+    background-color: #ffffff;
+    position: absolute;
+    right: 19px;
+    top: 23px;
+    border-radius: 50%;
+    z-index: 2;
+}
+
+.course-cate{
+    background-color: #880b17;
+    border-radius: 45px;
+    padding: 14px;
+    margin-top: 20px;
+}
+
+.course-cate a {
+    color: white;
+    font-weight: bold;
+    font-size: 17px;
+}
+
+
+.flexslider{
+    margin-bottom: 0px !important;
+}
+
+.training-site{
+    align-items: flex-start;
+    padding-right: 61px;
+}
+
+.lst-cate li{
+    text-align: left;
+}
+
+.login-input-button{
+    margin: 0px;
+}

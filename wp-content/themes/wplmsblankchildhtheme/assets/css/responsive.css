@@ -1,0 +1,214 @@
+/* ===============================
+   GLOBAL OVERFLOW FIX
+================================ */
+
+html,
+body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+
+/* ===============================
+   HEADER BASE
+================================ */
+
+.headerWide {
+    width: 100%;
+    background: #f2f2f2;
+}
+
+.headerWide .header {
+    padding: 10px 0;
+}
+
+/* ===============================
+   LOGO
+================================ */
+
+.headerWide .logo img {
+    max-height: 55px;
+    width: auto;
+}
+
+/* ===============================
+   NAVBAR
+================================ */
+
+.navbar {
+    margin-bottom: 0;
+    border: none;
+    background: transparent;
+}
+
+.navbar-nav > li > a {
+    padding: 15px 12px;
+    font-weight: 500;
+    color: #000;
+}
+
+.navbar-nav > li > a:hover {
+    background: transparent;
+    color: #c00; /* brand hover */
+}
+
+/* Logout icon alignment */
+.navbar-nav img {
+    vertical-align: middle;
+}
+
+/* ===============================
+   TOGGLER
+================================ */
+
+.navbar-toggle {
+    margin-top: 10px;
+    margin-right: 0;
+    border: none;
+}
+
+.navbar-toggle .icon-bar {
+    background-color: #000;
+}
+
+
+/* ===============================
+   BASE (desktop default)
+================================ */
+
+.material-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.material-tabs li {
+    flex: 0 0 auto;
+}
+
+.material-tabs li a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+}
+
+.material-tabs {
+    margin-top: 20px;
+}
+
+/* ===============================
+   MOBILE & TABLET
+================================ */
+
+
+@media (max-width: 991px) {
+
+    .material-tabs li {
+        flex: 0 0 33.333%;
+    }
+
+    .material-tabs li a {
+        justify-content: center;
+        text-align: center;
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 767px) {
+
+    /* Force both menus to stack properly */
+    .navbar-collapse > .navbar-nav {
+        float: none;
+        width: 100%;
+        margin: 0;
+        text-align: center;
+    }
+
+    /* Space between the two ULs */
+    .navbar-collapse > .navbar-nav + .navbar-nav {
+        margin-top: 10px;
+        border-top: 1px solid rgba(255,255,255,0.3);
+        padding-top: 10px;
+    }
+
+    /* Ensure all items are visible */
+    .navbar-nav > li {
+        float: none;
+        display: block;
+        width: 100%;
+        border-bottom: 1px solid #aaa8a8;
+    }
+
+    .navbar-nav > li > a {
+        display: block;
+        width: 100%;
+        padding: 12px 0;
+    }
+
+    .navbar-nav{
+        display: contents;
+    }
+
+    .headerWide .navbar-collapse {
+        padding: 0px;
+    }
+
+     .material-tabs {
+        flex-direction: column;
+        gap: 0;
+        width: 100%;
+    }
+
+    .material-tabs li {
+        width: 100%;
+        border-bottom: 1px solid #e5e5e5;
+        margin-top: 15px;
+    }
+
+    .material-tabs li:last-child {
+        border-bottom: none;
+    }
+
+    .material-tabs li a {
+        flex-direction: row;
+        justify-content: flex-start;
+        padding: 12px 15px;
+    }
+
+    .material-tabs img {
+        max-width: 24px;
+        height: auto;
+    }
+
+    .material-tabs .title {
+        font-size: 16px;
+    }
+}
+
+
+/* ===============================
+   VERY SMALL DEVICES
+================================ */
+
+@media (max-width: 480px) {
+
+    .headerWide .logo img {
+        max-height: 36px;
+    }
+
+    .navbar-nav > li > a {
+        font-size: 15px;
+    }
+
+     .material-tabs li a {
+        padding: 10px 12px;
+    }
+
+    .material-tabs .title {
+        font-size: 15px;
+    }
+}

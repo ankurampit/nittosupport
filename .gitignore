@@ -1,0 +1,19 @@
+# WordPress sensitive files
+wp-config.php
+.htaccess
+
+# Uploads
+wp-content/uploads/
+
+# Cache / logs
+wp-content/cache/
+wp-content/wflogs/
+*.log
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+
+# Dependencies (if any)
+node_modules/
+vendor/

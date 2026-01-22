@@ -1,0 +1,13 @@
+/* Image Slider */
+.carousel img {
+    height: auto;
+    margin-top: 0% !important;
+}
+
+.navbar-nav{
+    display: -webkit-inline-box;
+}
+
+.dropdown-menu{
+    position: absolute !important;
+}

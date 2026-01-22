@@ -1,0 +1,87 @@
+.course-details-wrapper {
+    background: #fff;
+    padding: 20px;
+}
+
+.course-title-heading {
+    text-align: center;
+    font-weight: 800;
+    font-size: 28px;
+    margin-bottom: 25px;
+}
+
+.course-details-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    font-family: Arial, sans-serif;
+}
+
+.course-details-table thead th {
+    background: #f4f4f4;
+    padding: 12px 10px;
+    border: 1px solid #ddd;
+    font-weight: 600;
+    text-align: left;
+}
+
+.course-details-table tbody td {
+    padding: 15px 10px;
+    border: 1px solid #eee;
+    vertical-align: middle;
+}
+
+/* Course titles */
+.course-lines .line-en,
+.course-lines .line-fr {
+    font-size: 15px;
+    line-height: 20px;
+}
+
+.course-lines .line-fr {
+    color: #444;
+}
+
+/* Badge images */
+.course-badge img {
+    width: 60px;
+    height: 60px;
+    border-radius: 6px;
+    object-fit: cover;
+}
+
+/* Completion date two-line structure */
+.completion-date div {
+    font-size: 14px;
+    color: #333;
+    line-height: 18px;
+}
+
+/* Progress Bar */
+.progress-bar {
+    background: #e6e6e6;
+    height: 14px;
+    border-radius: 20px;
+    width: 140px;
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: #2d9cdb; /* blue like your screenshot */
+    border-radius: 20px;
+}
+
+.progress-text {
+    margin-top: 5px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* Toyo Dollar */
+.toyo-dollar {
+    font-weight: 600;
+    color: #444;
+    white-space: nowrap;
+}

@@ -1,0 +1,12 @@
+/*
+Theme Name: Nitto Support Theme
+Author: Provat Das
+Description: A custom WordPress them for nittosupport.ca
+Version: 1.0
+License: GNU General Public License v2 or later
+Text Domain: nittosupport
+*/
+
+html{
+    margin-top: 0 !important;
+}
