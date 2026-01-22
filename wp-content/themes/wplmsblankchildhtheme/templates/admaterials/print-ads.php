@@ -11,6 +11,7 @@ get_header();
 
 $edit_post_id = isset($_GET['edit']) ? intval($_GET['edit']) : 0;
 $current_page_url = get_permalink();
+$page = "print-ads";
 ?>
 
 <?php

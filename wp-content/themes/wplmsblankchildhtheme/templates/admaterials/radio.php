@@ -11,6 +11,8 @@ get_header();
 
 $edit_post_id = isset($_GET['edit']) ? intval($_GET['edit']) : 0;
 $current_page_url = get_permalink();
+
+$page = 'radio';
 ?>
 
 <?php
@@ -64,10 +66,9 @@ require_once get_stylesheet_directory() . '/templates/admaterials/top-navigation
             <table class="advertising-material-table" id="print-ads-table">
                 <thead>
                     <tr class="table-head">
-                        <th class="tbl-heading">Image English</th>
-                        <th class="tbl-heading">Description English</th>
-                        <th class="tbl-heading">Image French</th>
-                        <th class="tbl-heading">Description French</th>
+                        <th class="tbl-heading">MP3</th>
+                        <th class="tbl-heading">English</th>
+                        <th class="tbl-heading">French</th>
                         <th class="tbl-heading">Action</th>
                     </tr>
                 </thead>
@@ -94,17 +95,16 @@ require_once get_stylesheet_directory() . '/templates/admaterials/top-navigation
 
                             $img_en   = get_post_meta($post_id, 'picture_jpeg_version_english', true);
                             $img_fr   = get_post_meta($post_id, 'picture_jpeg_version_french_:', true);
-                            $mp3_en   = get_post_meta($post_id, 'mp3_english', true);
-                            $mp3_fr   = get_post_meta($post_id, 'mp3_french', true);
                             $title_en = get_post_meta($post_id, 'ad_name_english', true);
                             $title_fr = get_post_meta($post_id, 'ad_name_french', true);
-                            $start    = get_post_meta($post_id, 'do_not_use_before_', true);
-                            $end      = get_post_meta($post_id, 'do_not_use_after_', true);
+                            $start    = get_post_meta($post_id, 'do_not_use_before', true);
+                            $end      = get_post_meta($post_id, 'do_not_use_after', true);
                             $coop     = get_post_meta($post_id, 'coop_%_', true);
                             $note_en  = get_post_meta($post_id, 'do_not_use_before_title_english_', true);
                             $note_fr  = get_post_meta($post_id, 'do_not_use_before_title_french_', true);
 
-
+                            $start_date = covertDateToReadableFormat($start);
+                            $end_date   = covertDateToReadableFormat($end);
                             if (is_numeric($mp3_en)) {
                                 $audio_en = wp_get_attachment_url($mp3_en);
                             }
@@ -115,39 +115,25 @@ require_once get_stylesheet_directory() . '/templates/admaterials/top-navigation
 
                             <tr class="table-body" draggable="true" data-post-id="<?php echo esc_attr($post_id); ?>">
                                 <td class=" table-img-1 file">
-                                    <?php if (!empty($mp3_en)) : ?>
-                                        <audio controls class="audio-player">
-                                            <source src="<?php echo esc_url($audio_en); ?>" type="audio/mpeg">
-                                        </audio>
-                                    <?php else : ?>
-                                        <span>No audio file</span>
-                                    <?php endif; ?>
+                                    <img src="<?php echo esc_url(get_stylesheet_directory_uri() . '/assets/images/radio-icon.png'); ?>" alt="Audio Placeholder" class="audio-placeholder">
                                 </td>
 
                                 <td>
                                     <p><strong>Title:</strong> <?php echo esc_html($title_en); ?></p>
-                                    <p><strong>Start Date:</strong> <?php echo esc_html($start); ?></p>
-                                    <p><strong>End Date:</strong> <?php echo esc_html($end); ?></p>
+                                    <p><strong>Start Date:</strong> <?php echo esc_html($start_date); ?></p>
+                                    <p><strong>End Date:</strong> <?php echo esc_html($end_date); ?></p>
                                     <p><strong>Coop:</strong> <?php echo esc_html($coop); ?></p>
                                     <?php if ($note_en) : ?>
                                         <p><strong>Note:</strong> <?php echo esc_html($note_en); ?></p>
                                     <?php endif; ?>
                                 </td>
 
-                                <td class="table-img-2 file">
-                                    <?php if (!empty($mp3_fr)) : ?>
-                                        <audio controls class="audio-player">
-                                            <source src="<?php echo esc_url($audio_fr); ?>" type="audio/mpeg">
-                                        </audio>
-                                    <?php else : ?>
-                                        <span>No audio file</span>
-                                    <?php endif; ?>
-                                </td>
+
 
                                 <td>
                                     <p><strong>Title:</strong> <?php echo esc_html($title_fr); ?></p>
-                                    <p><strong>Start Date:</strong> <?php echo esc_html($start); ?></p>
-                                    <p><strong>End Date:</strong> <?php echo esc_html($end); ?></p>
+                                    <p><strong>Start Date:</strong> <?php echo esc_html($start_date); ?></p>
+                                    <p><strong>End Date:</strong> <?php echo esc_html($end_date); ?></p>
                                     <p><strong>Coop:</strong> <?php echo esc_html($coop); ?></p>
                                     <?php if ($note_fr) : ?>
                                         <p><strong>Note:</strong> <?php echo esc_html($note_fr); ?></p>
@@ -168,10 +154,6 @@ require_once get_stylesheet_directory() . '/templates/admaterials/top-navigation
                                         </a>
                                     </div>
 
-
-                                    <!-- <div class="action-icons" title="Translate (not implemented)">
-                                        <i class="fa fa-language"></i>
-                                    </div> -->
                                     <div class="action-icons" title="Preview (not implemented)">
                                         <i class="fa fa-eye"></i>
                                     </div>

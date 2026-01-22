@@ -90,20 +90,16 @@ function single_category_selection_for_materials()
 
 add_action('acf/save_post', function ($post_id) {
 
-    // Frontend only
     if (is_admin()) return;
 
-    // Avoid autosave & revisions
     if (wp_is_post_autosave($post_id) || wp_is_post_revision($post_id)) {
         return;
     }
 
-    // Only materials post type
     if (get_post_type($post_id) !== 'materials') {
         return;
     }
 
-    // Get slug from hidden ACF field
     $term_slug = get_field('material_term_slug', $post_id);
     if (empty($term_slug)) {
         return;
@@ -133,3 +129,12 @@ add_action('wp_ajax_delete_material_post', function () {
 
     wp_send_json_success();
 });
+
+function covertDateToReadableFormat($dateString)
+{
+    $date = DateTime::createFromFormat('Ymd', $dateString);
+    if ($date) {
+        return $date->format('F j, Y');
+    }
+    return '';
+}

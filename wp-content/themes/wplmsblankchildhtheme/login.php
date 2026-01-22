@@ -11,7 +11,6 @@ get_header('header.php');
 
 <section class="container">
     <div class="content loginContent">
-        <!--Paragraph text start-->
         <div class="topody">
             <div class="row">
                 <div class="col-sm-6 paddLFT60">
@@ -53,7 +52,6 @@ get_header('header.php');
                         method="post"
                         novalidate="novalidate">
 
-                        <!-- 🔸 Tell WordPress what action to trigger -->
                         <input type="hidden" name="action" value="custom_user_login">
 
                         <div class="input-group">
