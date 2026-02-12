@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<!-- saved from url=(0048)https://nittosupport.ca/training/?v=4326ce96e26c -->
+<html lang="en-US" class=" js_active  vc_desktop  vc_transform  vc_transform "><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<link href="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/bootstrap.css" rel="stylesheet" type="text/css">
+<!-- Custom CSS -->
+<link href="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/global-style.css" rel="stylesheet" type="text/css">
+<!-- Media queries CSS -->
+<link href="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/media-queries.css" rel="stylesheet" type="text/css">
+<!-- bootstrap select CSS -->
+<link rel="stylesheet" type="text/css" href="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/bootstrap-select.min.css">
+<!-- Custom css for listing page  -->
+<link href="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/jquery.scrolling-tabs.css" rel="stylesheet">
+<title>Nitto Support Site – Welcome to the Nitto Tires training module site.</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <meta name="author" content="Nitto Tires"><link rel="shortcut icon" href="https://nittosupport.ca/training/wp-content/uploads/2019/12/favicon.png">
+              <link rel="icon" type="image/png" href="https://nittosupport.ca/training/wp-content/uploads/2019/12/favicon.png"><meta name="robots" content="noindex, nofollow">
+<link rel="alternate" hreflang="en" href="https://nittosupport.ca/training">
+<link rel="alternate" hreflang="fr" href="https://nittosupport.ca/training/fr/">
+<link rel="alternate" hreflang="x-default" href="https://nittosupport.ca/training">
+<link rel="dns-prefetch" href="https://stackpath.bootstrapcdn.com/">
+<link rel="dns-prefetch" href="https://fonts.googleapis.com/">
+<link rel="alternate" type="application/rss+xml" title="Nitto Support Site » Feed" href="https://nittosupport.ca/training/feed/">
+<link rel="alternate" type="application/rss+xml" title="Nitto Support Site » Comments Feed" href="https://nittosupport.ca/training/comments/feed/">
+<script type="text/javascript">
+window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/svg\/","svgExt":".svg","source":{"wpemoji":"https:\/\/nittosupport.ca\/training\/wp-includes\/js\/wp-emoji.js?ver=6.2.8","twemoji":"https:\/\/nittosupport.ca\/training\/wp-includes\/js\/twemoji.js?ver=6.2.8"}};
+/**
+ * @output wp-includes/js/wp-emoji-loader.js
+ */
+
+( function( window, document, settings ) {
+	var src, ready, ii, tests;
+
+	// Create a canvas element for testing native browser support of emoji.
+	var canvas = document.createElement( 'canvas' );
+	var context = canvas.getContext && canvas.getContext( '2d' );
+
+	/**
+	 * Checks if two sets of Emoji characters render the same visually.
+	 *
+	 * @since 4.9.0
+	 *
+	 * @private
+	 *
+	 * @param {string} set1 Set of Emoji to test.
+	 * @param {string} set2 Set of Emoji to test.
+	 *
+	 * @return {boolean} True if the two sets render the same.
+	 */
+	function emojiSetsRenderIdentically( set1, set2 ) {
+		// Cleanup from previous test.
+		context.clearRect( 0, 0, canvas.width, canvas.height );
+		context.fillText( set1, 0, 0 );
+		var rendered1 = canvas.toDataURL();
+
+		// Cleanup from previous test.
+		context.clearRect( 0, 0, canvas.width, canvas.height );
+		context.fillText( set2, 0, 0 );
+		var rendered2 = canvas.toDataURL();
+
+		return rendered1 === rendered2;
+	}
+
+	/**
+	 * Determines if the browser properly renders Emoji that Twemoji can supplement.
+	 *
+	 * @since 4.2.0
+	 *
+	 * @private
+	 *
+	 * @param {string} type Whether to test for support of "flag" or "emoji".
+	 *
+	 * @return {boolean} True if the browser can render emoji, false if it cannot.
+	 */
+	function browserSupportsEmoji( type ) {
+		var isIdentical;
+
+		if ( ! context || ! context.fillText ) {
+			return false;
+		}
+
+		/*
+		 * Chrome on OS X added native emoji rendering in M41. Unfortunately,
+		 * it doesn't work when the font is bolder than 500 weight. So, we
+		 * check for bold rendering support to avoid invisible emoji in Chrome.
+		 */
+		context.textBaseline = 'top';
+		context.font = '600 32px Arial';
+
+		switch ( type ) {
+			case 'flag':
+				/*
+				 * Test for Transgender flag compatibility. Added in Unicode 13.
+				 *
+				 * To test for support, we try to render it, and compare the rendering to how it would look if
+				 * the browser doesn't render it correctly (white flag emoji + transgender symbol).
+				 */
+				isIdentical = emojiSetsRenderIdentically(
+					'\uD83C\uDFF3\uFE0F\u200D\u26A7\uFE0F', // as a zero-width joiner sequence
+					'\uD83C\uDFF3\uFE0F\u200B\u26A7\uFE0F'  // separated by a zero-width space
+				);
+
+				if ( isIdentical ) {
+					return false;
+				}
+
+				/*
+				 * Test for UN flag compatibility. This is the least supported of the letter locale flags,
+				 * so gives us an easy test for full support.
+				 *
+				 * To test for support, we try to render it, and compare the rendering to how it would look if
+				 * the browser doesn't render it correctly ([U] + [N]).
+				 */
+				isIdentical = emojiSetsRenderIdentically(
+					'\uD83C\uDDFA\uD83C\uDDF3',       // as the sequence of two code points
+					'\uD83C\uDDFA\u200B\uD83C\uDDF3'  // as the two code points separated by a zero-width space
+				);
+
+				if ( isIdentical ) {
+					return false;
+				}
+
+				/*
+				 * Test for English flag compatibility. England is a country in the United Kingdom, it
+				 * does not have a two letter locale code but rather a five letter sub-division code.
+				 *
+				 * To test for support, we try to render it, and compare the rendering to how it would look if
+				 * the browser doesn't render it correctly (black flag emoji + [G] + [B] + [E] + [N] + [G]).
+				 */
+				isIdentical = emojiSetsRenderIdentically(
+					// as the flag sequence
+					'\uD83C\uDFF4\uDB40\uDC67\uDB40\uDC62\uDB40\uDC65\uDB40\uDC6E\uDB40\uDC67\uDB40\uDC7F',
+					// with each code point separated by a zero-width space
+					'\uD83C\uDFF4\u200B\uDB40\uDC67\u200B\uDB40\uDC62\u200B\uDB40\uDC65\u200B\uDB40\uDC6E\u200B\uDB40\uDC67\u200B\uDB40\uDC7F'
+				);
+
+				return ! isIdentical;
+			case 'emoji':
+				/*
+				 * Why can't we be friends? Everyone can now shake hands in emoji, regardless of skin tone!
+				 *
+				 * To test for Emoji 14.0 support, try to render a new emoji: Handshake: Light Skin Tone, Dark Skin Tone.
+				 *
+				 * The Handshake: Light Skin Tone, Dark Skin Tone emoji is a ZWJ sequence combining 🫱 Rightwards Hand,
+				 * 🏻 Light Skin Tone, a Zero Width Joiner, 🫲 Leftwards Hand, and 🏿 Dark Skin Tone.
+				 *
+				 * 0x1FAF1 == Rightwards Hand
+				 * 0x1F3FB == Light Skin Tone
+				 * 0x200D == Zero-Width Joiner (ZWJ) that links the code points for the new emoji or
+				 * 0x200B == Zero-Width Space (ZWS) that is rendered for clients not supporting the new emoji.
+				 * 0x1FAF2 == Leftwards Hand
+				 * 0x1F3FF == Dark Skin Tone.
+				 *
+				 * When updating this test for future Emoji releases, ensure that individual emoji that make up the
+				 * sequence come from older emoji standards.
+				 */
+				isIdentical = emojiSetsRenderIdentically(
+					'\uD83E\uDEF1\uD83C\uDFFB\u200D\uD83E\uDEF2\uD83C\uDFFF', // as the zero-width joiner sequence
+					'\uD83E\uDEF1\uD83C\uDFFB\u200B\uD83E\uDEF2\uD83C\uDFFF'  // separated by a zero-width space
+				);
+
+				return ! isIdentical;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Adds a script to the head of the document.
+	 *
+	 * @ignore
+	 *
+	 * @since 4.2.0
+	 *
+	 * @param {Object} src The url where the script is located.
+	 * @return {void}
+	 */
+	function addScript( src ) {
+		var script = document.createElement( 'script' );
+
+		script.src = src;
+		script.defer = script.type = 'text/javascript';
+		document.getElementsByTagName( 'head' )[0].appendChild( script );
+	}
+
+	tests = Array( 'flag', 'emoji' );
+
+	settings.supports = {
+		everything: true,
+		everythingExceptFlag: true
+	};
+
+	/*
+	 * Tests the browser support for flag emojis and other emojis, and adjusts the
+	 * support settings accordingly.
+	 */
+	for( ii = 0; ii < tests.length; ii++ ) {
+		settings.supports[ tests[ ii ] ] = browserSupportsEmoji( tests[ ii ] );
+
+		settings.supports.everything = settings.supports.everything && settings.supports[ tests[ ii ] ];
+
+		if ( 'flag' !== tests[ ii ] ) {
+			settings.supports.everythingExceptFlag = settings.supports.everythingExceptFlag && settings.supports[ tests[ ii ] ];
+		}
+	}
+
+	settings.supports.everythingExceptFlag = settings.supports.everythingExceptFlag && ! settings.supports.flag;
+
+	// Sets DOMReady to false and assigns a ready function to settings.
+	settings.DOMReady = false;
+	settings.readyCallback = function() {
+		settings.DOMReady = true;
+	};
+
+	// When the browser can not render everything we need to load a polyfill.
+	if ( ! settings.supports.everything ) {
+		ready = function() {
+			settings.readyCallback();
+		};
+
+		/*
+		 * Cross-browser version of adding a dom ready event.
+		 */
+		if ( document.addEventListener ) {
+			document.addEventListener( 'DOMContentLoaded', ready, false );
+			window.addEventListener( 'load', ready, false );
+		} else {
+			window.attachEvent( 'onload', ready );
+			document.attachEvent( 'onreadystatechange', function() {
+				if ( 'complete' === document.readyState ) {
+					settings.readyCallback();
+				}
+			} );
+		}
+
+		src = settings.source || {};
+
+		if ( src.concatemoji ) {
+			addScript( src.concatemoji );
+		} else if ( src.wpemoji && src.twemoji ) {
+			addScript( src.twemoji );
+			addScript( src.wpemoji );
+		}
+	}
+
+} )( window, document, window._wpemojiSettings );
+</script><script src="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/twemoji.js.download" type="text/javascript" defer=""></script><script src="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/wp-emoji.js.download" type="text/javascript" defer=""></script>
+<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 0.07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel="stylesheet" id="badgeos-font-awesome-css" href="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/font-awesome.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="wp-block-library-css" href="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/style.css" type="text/css" media="all">
+<link rel="stylesheet" id="wplms-style-css" href="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/style.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="woocommerce-css-css" href="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/woocommerce.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="font-awesome-css" href="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/font-awesome(1).min.css" type="text/css" media="all">
+<link rel="stylesheet" id="wplms-v4style-css" href="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/v4.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="vicons-css" href="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/vicons.css" type="text/css" media="all">
+<link rel="stylesheet" id="minimal-css" href="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/minimal.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="bp-login-form-block-css" href="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/login-form.css" type="text/css" media="all">
+<link rel="stylesheet" id="bp-member-block-css" href="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/member.css" type="text/css" media="all">
+<link rel="stylesheet" id="bp-members-block-css" href="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/members.css" type="text/css" media="all">
+<link rel="stylesheet" id="bp-dynamic-members-block-css" href="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/dynamic-members.css" type="text/css" media="all">
+<link rel="stylesheet" id="bp-latest-activities-block-css" href="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/latest-activities.css" type="text/css" media="all">
+<link rel="stylesheet" id="wp-components-css" href="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/style(1).css" type="text/css" media="all">
+<link rel="stylesheet" id="wp-block-editor-css" href="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/style(2).css" type="text/css" media="all">
+<link rel="stylesheet" id="wp-nux-css" href="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/style(3).css" type="text/css" media="all">
+<link rel="stylesheet" id="wp-reusable-blocks-css" href="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/style(4).css" type="text/css" media="all">
+<link rel="stylesheet" id="wp-editor-css" href="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/style(5).css" type="text/css" media="all">
+<link rel="stylesheet" id="bos_blocks-bos-style-css-css" href="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/blocks.style.build.css" type="text/css" media="1">
+<link rel="stylesheet" id="wc-blocks-vendors-style-css" href="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/wc-blocks-vendors-style.css" type="text/css" media="all">
+<link rel="stylesheet" id="wc-blocks-style-css" href="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/wc-blocks-style.css" type="text/css" media="all">
+<link rel="stylesheet" id="classic-theme-styles-css" href="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/classic-themes.css" type="text/css" media="all">
+<style id="global-styles-inline-css" type="text/css">
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--duotone--dark-grayscale: url('#wp-duotone-dark-grayscale');--wp--preset--duotone--grayscale: url('#wp-duotone-grayscale');--wp--preset--duotone--purple-yellow: url('#wp-duotone-purple-yellow');--wp--preset--duotone--blue-red: url('#wp-duotone-blue-red');--wp--preset--duotone--midnight: url('#wp-duotone-midnight');--wp--preset--duotone--magenta-yellow: url('#wp-duotone-magenta-yellow');--wp--preset--duotone--purple-green: url('#wp-duotone-purple-green');--wp--preset--duotone--blue-orange: url('#wp-duotone-blue-orange');--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel="stylesheet" id="bos-community-style-css" href="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/bos-community.css" type="text/css" media="all">
+<link rel="stylesheet" id="bbp-default-css" href="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/bbpress.css" type="text/css" media="all">
+<link rel="stylesheet" id="inactive-logout-css" href="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/index.css" type="text/css" media="all">
+<link rel="stylesheet" id="toyotraining-css" href="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/toyotraining-public.css" type="text/css" media="all">
+<style id="woocommerce-inline-inline-css" type="text/css">
+.woocommerce form .form-row .required { visibility: visible; }
+</style>
+<link rel="stylesheet" id="wpml-legacy-vertical-list-0-css" href="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/style(1).min.css" type="text/css" media="all">
+<style id="wpml-legacy-vertical-list-0-inline-css" type="text/css">
+.wpml-ls-statics-shortcode_actions .wpml-ls-current-language > a {color:#000000;}.wpml-ls-statics-shortcode_actions .wpml-ls-current-language:hover>a, .wpml-ls-statics-shortcode_actions .wpml-ls-current-language>a:focus {color:#ffffff;background-color:#23527c;}
+</style>
+<link rel="stylesheet" id="wpml-menu-item-0-css" href="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/style(2).min.css" type="text/css" media="all">
+<link rel="stylesheet" id="wpml-tm-admin-bar-css" href="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/admin-bar-style.css" type="text/css" media="all">
+<link rel="stylesheet" id="badgeos-single-css" href="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/badgeos-single.css" type="text/css" media="all">
+<link rel="stylesheet" id="bp-course-css-css" href="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/course_template.css" type="text/css" media="all">
+<link rel="stylesheet" id="h5p-plugin-styles-css" href="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/h5p.css" type="text/css" media="all">
+<link rel="stylesheet" id="wplms_child_theme_style-css" href="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/style(6).css" type="text/css" media="all">
+<link rel="stylesheet" id="evcal_google_fonts-css" href="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/css" type="text/css" media="screen">
+<link rel="stylesheet" id="evcal_cal_default-css" href="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/eventon_styles.css" type="text/css" media="all">
+<link rel="stylesheet" id="evo_font_icons-css" href="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/font-awesome.css" type="text/css" media="all">
+<link rel="stylesheet" id="eventon_dynamic_styles-css" href="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/eventon_dynamic_styles.css" type="text/css" media="all">
+<link rel="stylesheet" id="evo_dv_styles-css" href="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/dv_styles.css" type="text/css" media="all">
+<link rel="stylesheet" id="js_composer_front-css" href="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/js_composer.min.css" type="text/css" media="all">
+<script type="text/javascript" src="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/jquery-3.7.0.min.js.download" id="jquery-core-js"></script>
+<script type="text/javascript" src="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/jquery-migrate-3.4.0.min.js.download" id="jquery-migrate-js"></script>
+<script type="text/javascript" src="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/jquery.knob.js.download" id="knobjs-js"></script>
+<script type="text/javascript" id="bp-confirm-js-extra">
+/* <![CDATA[ */
+var BP_Confirm = {"are_you_sure":"Are you sure?"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/confirm.js.download" id="bp-confirm-js"></script>
+<script type="text/javascript" src="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/react-refresh-runtime.js.download" id="wp-react-refresh-runtime-js"></script>
+<script type="text/javascript" src="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/react-refresh-entry.js.download" id="wp-react-refresh-entry-js"></script>
+<script type="text/javascript" src="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/toyotraining-public.js.download" id="toyotraining-js"></script>
+<script type="text/javascript" id="wplms-h5p-front-end-js-extra">
+/* <![CDATA[ */
+var default_wplms_h5p_strings = {"insert":"Insert","title":"Title","previous":"Previous","next":"Next","security":"e76d9c1f38","add_wplms_h5p":"Add wplms h5p"};
+var wplms_h5p_contents = [{"id":"1","title":"Demo Course 1"},{"id":"2","title":"Observe GSi5 features"},{"id":"3","title":"Observe GSi6 HP all around winter tire"},{"id":"4","title":"Versado Noir Video Quiz"},{"id":"5","title":"Versado Eco Quiz"},{"id":"6","title":"Open Country Q\/T Video Quiz - English"},{"id":"7","title":"Proxes Sport Video Quiz"},{"id":"8","title":"Proxes ST III Video Quiz"},{"id":"9","title":"Celsius and Celsius CUV"},{"id":"10","title":"Open Country AT II All Weather"}];
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/wplms-h5p-front-end.js.download" id="wplms-h5p-front-end-js"></script>
+<script type="text/javascript" id="wpml-browser-redirect-js-extra">
+/* <![CDATA[ */
+var wpml_browser_redirect_params = {"pageLanguage":"en","languageUrls":{"en_us":"https:\/\/nittosupport.ca\/training","en":"https:\/\/nittosupport.ca\/training","us":"https:\/\/nittosupport.ca\/training","fr_fr":"https:\/\/nittosupport.ca\/training\/fr\/","fr":"https:\/\/nittosupport.ca\/training\/fr\/"},"cookie":{"name":"_icl_visitor_lang_js","domain":"nittosupport.ca","path":"\/training\/","expiration":24}};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/app.js.download" id="wpml-browser-redirect-js"></script>
+<link rel="https://api.w.org/" href="https://nittosupport.ca/training/wp-json/"><link rel="alternate" type="application/json" href="https://nittosupport.ca/training/wp-json/wp/v2/pages/88"><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://nittosupport.ca/training/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://nittosupport.ca/training/wp-includes/wlwmanifest.xml">
+<meta name="generator" content="WordPress 6.2.8">
+<meta name="generator" content="WooCommerce 7.9.0">
+<link rel="canonical" href="https://nittosupport.ca/training/">
+<link rel="shortlink" href="https://nittosupport.ca/training/">
+<link rel="alternate" type="application/json+oembed" href="https://nittosupport.ca/training/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fnittosupport.ca%2Ftraining%2F">
+<link rel="alternate" type="text/xml+oembed" href="https://nittosupport.ca/training/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fnittosupport.ca%2Ftraining%2F&amp;format=xml">
+<meta name="generator" content="WPML ver:4.6.4 stt:1,4;">
+
+	<script type="text/javascript">var ajaxurl = 'https://nittosupport.ca/training/wp-admin/admin-ajax.php?lang=en&bpml_filter=true';</script>
+
+<style>body.loading .pusher:before{content:'';position:fixed;left:0;top:0;width:100%;height:100%;background:rgba(255,255,255,.95);z-index:999}body.loading.pageloader2 .global:after,body.loading.pageloader2 .global:before{content:'';position:fixed;left:50%;top:50%;margin:-8px 0 0 -8px;width:15px;height:15px;border-radius:50%;z-index:9999;background:#009dd8;z-index:9999;animation:flipzminus linear 1s infinite}body.loading.pageloader2 .global:after{animation:flipzplus linear 1s infinite}@keyframes flipzminus{0%{transform:translateX(-30px);opacity:1}50%{transform:translateX(0);opacity:.5}100%{transform:translate(30px);opacity:1}}@keyframes flipzplus{0%{transform:translate(30px);opacity:1}50%{transform:translateX(0);opacity:.5}100%{transform:translateX(-30px);opacity:1}}</style><script>window.addEventListener( 'load', function( event ) {document.querySelector('body').classList.remove('loading');});</script>	<noscript><style>.woocommerce-product-gallery{ opacity: 1 !important; }</style></noscript>
+	
+
+<!-- EventON Version -->
+<meta name="generator" content="EventON 2.6.15">
+
+<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style><meta name="generator" content="Powered by WPBakery Page Builder - drag and drop page builder for WordPress.">
+<link rel="icon" href="https://nittosupport.ca/training/wp-content/uploads/2019/12/favicon-100x100.png" sizes="32x32">
+<link rel="icon" href="https://nittosupport.ca/training/wp-content/uploads/2019/12/favicon.png" sizes="192x192">
+<link rel="apple-touch-icon" href="https://nittosupport.ca/training/wp-content/uploads/2019/12/favicon.png">
+<meta name="msapplication-TileImage" content="https://nittosupport.ca/training/wp-content/uploads/2019/12/favicon.png">
+<style>.button,input[type=button], input[type=submit],.button.hero,.heading_more:before,.vibe_carousel .flex-direction-nav a,.sidebar .widget #searchform input[type="submit"], #signup_submit, #submit,button,.login_sidebar .login_content #vbp-login-form #sidebar-wp-submit,#buddypress a.button,.generic-button a:hover,#buddypress input[type=button],body.activity-permalink .ac-form input[type=submit],#buddypress input[type=submit],#buddypress input[type=reset],#buddypress ul.button-nav li a,#buddypress .item-list-tabs ul li a:hover,#buddypress div.generic-button a:hover,a.bp-title-button,.woocommerce-account .woocommerce-MyAccount-navigation li.is-active a,#buddypress div.item-list-tabs#subnav ul li.current a,#buddypress div.item-list-tabs ul li a span,#buddypress div.item-list-tabs ul li.selected a,#buddypress div.item-list-tabs ul li.current a,#vibe_bp_login #wplogin-modal .btn-default,#vibe_bp_login #wplogin-modal .btn-block,.single #buddypress .item-list-tabs#subnav ul li.selected a, .single-item #buddypress .item-list-tabs#subnav ul li.selected a,.course_button.button,.unit_button.button,.woocommerce div.product .woocommerce-tabs ul.tabs li.active,.woocommerce #content div.product .woocommerce-tabs ul.tabs li.active,.woocommerce-page div.product .woocommerce-tabs ul.tabs li.active,.woocommerce-page #content div.product .woocommerce-tabs ul.tabs li.active,.woocommerce a.button,.woocommerce button.button,.woocommerce input.button,.woocommerce #respond input#submit,.woocommerce #content input.button,.woocommerce-page a.button,.woocommerce-page button.button,.woocommerce-page input.button,.woocommerce-page #respond input#submit,.woocommerce-page #content input.button,.woocommerce ul.products li a.added_to_cart,.woocommerce ul.products li a.button,.woocommerce a.button.alt,.woocommerce button.button.alt,.woocommerce input.button.alt,.woocommerce #respond input#submit.alt,.woocommerce #content input.button.alt,.woocommerce-page a.button.alt,.woocommerce-page button.button.alt,.woocommerce-page input.button.alt,.woocommerce-page #respond input#submit.alt,.woocommerce-page #content input.button.alt,.woocommerce .widget_layered_nav_filters ul li a,.woocommerce-page .widget_layered_nav_filters ul li a,.woocommerce .widget_price_filter .ui-slider .ui-slider-range,.woocommerce-page .widget_price_filter .ui-slider .ui-slider-range,.woocommerce div.product .woocommerce-tabs ul.tabs li.active, .woocommerce div.product .woocommerce-tabs ul.tabs li:hover,.price_slider .ui-slider-range,.ui-slider .ui-slider-handle,.tabs-left > .nav-tabs > li > a:hover, .tabs-left > .nav-tabs > li > a:focus,.page-numbers.current, .pagination .page-numbers.current, .pagination span.current,.block_media .hover-link,.vibe_filterable li a:hover,.vibe_filterable li.active a,#wplms-calendar td.active,.btn.primary,#wplms-calendar td a span,.tagcloud a,.checkoutsteps ul li.checkout_begin,.widget.pricing .course_sharing .socialicons.round li > a:hover,.widget.pricing .course_sharing .socialicons.square li > a:hover,.widget_carousel .flex-direction-nav a, .vibe_carousel .flex-direction-nav a,#question #submit:hover,.ques_link:hover,.reset_answer,.quiz_timeline li:hover > span, .quiz_timeline li.active > span,.course_timeline li.done > span, .course_timeline li:hover > span, .course_timeline li.active > span,.quiz_timeline li.active>a>span,.vbplogin em,#buddypress div.item-list-tabs#subnav ul li.switch_view a.active,#buddypress .activity-list li.load-more a:hover,.note-tabs ul li.selected a, .note-tabs ul li.current a,.data_stats li:hover, .data_stats li.active,.wplms_clp_stats li.active,.wplms_clp_stats li:hover,.course_students li .progress .bar,.in_quiz .pagination ul li span,.quiz_meta .progress .bar,.page-links span,#vibe_bp_login input[type=submit],.single-course.c2 #item-nav div.item-list-tabs#object-nav li.current a, .single-course.c3 #item-nav div.item-list-tabs#object-nav li.current a, .single-course.c5 #item-nav div.item-list-tabs#object-nav li.current a,.single-course.c6 #item-nav div.item-list-tabs#object-nav li.current a,.single-course.c7 #item-nav div.item-list-tabs#object-nav li.current a,.minimal .widget .course_cat_nav ul li a:hover span,.minimal .pusher #buddypress a.button:hover,.minimal #buddypress #item-nav .item-list-tabs ul li.current a:after, .minimal #buddypress #item-nav .item-list-tabs ul li.selected a:after,.vibe_carousel .flex-control-nav li a, .widget_carousel .flex-control-nav li a,.course8 .block_content .more a, .course8 .block_content .cat_btn,.wplms_course_categories > *{background-color:#880b17; }.tagcloud a:hover,.instructor_action_buttons li a span,.total_students span,.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover,.unit_content p span.side_comment:hover, .unit_content p span.side_comment.active,.v_module.custom_post_carousel .heading_more,#buddypress .activity-list li.load-more a:hover, .load-more a:hover,.instructor strong span,#buddypress .item-list-tabs ul li a:hover,.archive #buddypress .course_category,.course_front_progressbar .progress .bar,.widget .course_cat_nav ul li.current-cat-parent>a, .widget .course_cat_nav ul li.current-cat>a,.widget .course_cat_nav ul li a span,.woocommerce nav.woocommerce-pagination ul li span.current,.woocommerce nav.woocommerce-pagination ul li a:hover,.widget .price_slider .ui-slider-handle,#bbpress-forums #favorite-toggle a:hover,#bbpress-forums #subscription-toggle a:hover,.pagetitle #subscription-toggle a:hover,#bbpress-forums .bbp-pagination .bbp-pagination-links a.page-numbers:hover, #bbpress-forums .bbp-pagination .bbp-pagination-links span.current,.mooc .vbpcart span em, .sleek .vbpcart span em,.minimal .pusher h3.heading span:after,.minimal #buddypress div.item-list-tabs ul li.selected a:after,.minimal #buddypress div.item-list-tabs ul li.selected a span,.minimal #buddypress div.item-list-tabs#subnav ul li.switch_view a.active,.minimal .pusher #buddypress input[type=submit]:hover, .minimal .pusher .button:hover, .minimal .pusher input[type=submit]:hover,.minimal.single-course.c2 #item-nav .item-list-tabs#object-nav ul li.current a:after, .minimal.single-course.c2 #item-nav .item-list-tabs#object-nav ul li.selected a:after, .minimal.single-course.c3 #item-nav .item-list-tabs#object-nav ul li.current a:after, .minimal.single-course.c3 #item-nav .item-list-tabs#object-nav ul li.selected a:after,.minimal.single-course.c2 .course_sub_action.current a:after, .minimal.single-course.c3 .course_sub_action.current a:after,.single-course.c4.minimal #buddypress .item-list-tabs#object-nav li.current a:after,.minimal.single-course.submissions .course_sub_action.current a:after,.minimal.single-course.c5 #item-nav .item-list-tabs#object-nav ul li.current a:after, .minimal.single-course.c5 #item-nav .item-list-tabs#object-nav ul li.selected a:after,.minimal .pusher h3.heading span:after, .minimal .pusher h4.widget_title span:after,.minimal.woocommerce-page a.button:hover,.minimal.woocommerce a.button:hover,.minimal.woocommerce ul.products li a.button:hover, .minimal .pagination a.page-numbers:hover, .minimal .pagination a:hover,.minimal .pagination .page-numbers.current,.minimal .pagination span.current,.minimal.woocommerce-page #content input.button:hover, .minimal.woocommerce-page input.button:hover,.minimal .pusher .woocommerce a.button:hover,.minimal #buddypress #group-create-tabs.item-list-tabs li.current>a:after,.elegant #buddypress div.item-list-tabs li.selected a:before,.elegant.archive #buddypress div.item-list-tabs li.selected a,.elegant #item-nav div.item-list-tabs#object-nav li.current a:before,.elegant #buddypress .item-list-tabs#subnav ul li.current a:before,.elegant #buddypress #item-nav div.item-list-tabs#object-nav li.current a:before,.elegant #buddypress #members-activity div.item-list-tabs ul li.selected a:before,.elegant.single-course.c4 #buddypress .item-list-tabs#object-nav li.current a:before,.elegant.single #buddypress .item-list-tabs#subnav ul li.selected a:before,.login_page_content .nav.nav-tabs>li.active>a:after,.block.general .block_content .general_details,.modern .vibe_carousel .flex-direction-nav a:hover,.modern .pusher h3.heading span:before, .modern .pusher h4.widget_title span:before,.modern #buddypress #item-nav .item-list-tabs ul li.current a:after, .modern #buddypress #item-nav .item-list-tabs ul li.selected a:after,.modern .pusher #title .pagetitle h1:after,.modern #buddypress div.item-list-tabs ul li.current a:after, .modern #buddypress div.item-list-tabs ul li.selected a:after,.modern #buddypress div.item-list-tabs ul li.current a span, .modern #buddypress div.item-list-tabs ul li.selected a span,.save_quiz_progress .save_progress_inner,.submit_quiz_progress .save_progress_inner,body.loading.pageloader2 .global:before,body.loading.pageloader2 .global:after,.course_pursue_panel .course_action_points,.course_pursue_panel .course_timeline li.unit_line.active:before,.block.simple .block_content .simple_category a:before, .block.simple .block_media:before,.block.generic .block_content .generic_category a:before,.block.generic .block_content .block_title a:before, .block.courseitem.course6 .block_media .postblock_cats .postblock_cat,.progress .bar,.block.courseitem.course6 .block_media .course_start_date,.block.courseitem.course6 .block_content .course_instructor:after{background:#880b17; }.link,.instructor_line h3 a:hover,.minimal .generic-button a,#notes_discussions .actions a:hover, ul.item-list.loading:after,#ajaxloader:after, .course_timeline li.active a, .course_timeline li:hover a,#notes_discussions .actions a.reply_unit_comment.meta_info, .side_comments ul.actions li a:hover, .v_module.custom_post_carousel .vibe_carousel.noheading .flex-direction-nav .flex-next, .v_module.custom_post_carousel .vibe_carousel.noheading .flex-direction-nav .flex-prev,.side_comments a.reply_unit_comment.meta_info,.nav.nav-tabs>li.active>a>span,.unit_content .reply a,.widget .item-options a.selected,.footerwidget .item-options a.selected,.course_front_progressbar>span,#buddypress div.generic-button a,.woocommerce div.product .connected_courses li a,.widget .course_cat_nav ul li.current-cat-parent>a>span, .widget .course_cat_nav ul li.current-cat>a>span,#bbpress-forums #favorite-toggle a,#bbpress-forums #subscription-toggle a,.pagetitle #subscription-toggle a,.minimal.woocommerce ul.products li a.button,.minimal.woocommerce a.button,.minimal #buddypress ul.item-list li .item-credits a.button,.minimal .note-tabs ul li a,.minimal .pagination span,.minimal .pagination label,.minimal .pagination .page-numbers.current,.minimal .pagination span.current,.minimal .pagination a.page-numbers,.minimal .pagination a,.minimal.woocommerce-page a.button,.minimal.woocommerce nav.woocommerce-pagination ul li a,.minimal #bbpress-forums .bbp-pagination .bbp-pagination-links a.page-numbers, .minimal #bbpress-forums .bbp-pagination .bbp-pagination-links span,.minimal #buddypress div.item-list-tabs ul li a:hover, .minimal #buddypress div.item-list-tabs ul li.selected a,.minimal #buddypress div.item-list-tabs#subnav ul li.switch_view a.active,.minimal .widget .course_cat_nav ul li a:hover,.minimal .widget .course_cat_nav ul li a span,.minimal .pusher .button,.minimal .pusher #buddypress a.button,.minimal .pusher #buddypress input[type=submit], .minimal .pusher .button, .minimal .pusher input[type=submit],.minimal .pusher #buddypress input[type=button],.minimal #buddypress #item-nav .item-list-tabs ul li.current a, .minimal #buddypress #item-nav .item-list-tabs ul li.selected a,.minimal #buddypress div.item-list-tabs#subnav ul li.current a, .minimal #buddypress div.item-list-tabs#subnav ul li.selected a,.minimal.bp-user.p2 #buddypress div.item-list-tabs#object-nav li a:hover, .minimal.bp-user.p3 #buddypress div.item-list-tabs#object-nav li a:hover, .minimal.bp-user.p4 #buddypress div.item-list-tabs#object-nav li a:hover,.minimal.single-course.c2 #item-nav .item-list-tabs#object-nav ul li.current a, .minimal.single-course.c2 #item-nav .item-list-tabs#object-nav ul li.selected a, .minimal.single-course.c3 #item-nav .item-list-tabs#object-nav ul li.current a, .minimal.single-course.c3 #item-nav .item-list-tabs#object-nav ul li.selected a,.minimal.single-course.c2 #item-nav .item-list-tabs#object-nav ul li a:hover, .minimal.single-course.c3 #item-nav .item-list-tabs#object-nav ul li a:hover,.minimal .mooc .woocart .buttons .button, .minimal .sleek .woocart .buttons .button,.minimal .woocommerce ul.products li.product .button,.minimal .pusher .woocommerce a.button,.elegant #item-nav div.item-list-tabs#object-nav li a:hover,.elegant #item-nav div.item-list-tabs#object-nav li.current a,.elegant #buddypress #item-nav div.item-list-tabs#object-nav li.current a,.elegant #buddypress #item-nav div.item-list-tabs#object-nav li a:hover,.elegant #buddypress #members-activity div.item-list-tabs ul li.selected a,.elegant #buddypress #members-activity div.item-list-tabs ul li a:hover,.elegant.single-course.c3 #item-nav div.item-list-tabs#object-nav li.current a,.elegant.single-course.c4 #buddypress .item-list-tabs#object-nav li.current a,.login_page_content .nav.nav-tabs>li.active>a,.block.postblock .block_content .course_instructor,.elegant.single #buddypress .item-list-tabs#subnav ul li.selected a,.modern #buddypress #item-nav .item-list-tabs ul li.current a, .modern #buddypress #item-nav .item-list-tabs ul li.selected a,.modern nav li a:hover, .modern nav li.current_menu_item a, .modern nav li.current_page_item a,.modern #buddypress div.item-list-tabs ul li a:hover,.modern #buddypress div.item-list-tabs ul li.current a, .modern #buddypress div.item-list-tabs ul li.selected a,.modern #buddypress div.item-list-tabs ul li a span,.modern #buddypress div.item-list-tabs#subnav ul li.current a, .modern #buddypress div.item-list-tabs#subnav ul li.selected a{color:#880b17; }.button,.radio>input[type=radio]:checked+label:before,.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover.tab-pane li:hover img,.checkbox>input[type=checkbox]:checked+label:before,.pagination .page-numbers.current, .pagination span.current,#buddypress div.item-list-tabs ul li.current,#buddypress div.item-list-tabs#subnav ul li.current a,.single #buddypress .item-list-tabs#subnav ul li.selected a, .single-item #buddypress .item-list-tabs#subnav ul li.selected a,.unit_button.button,#buddypress div#item-header #item-header-avatar,.gallery a:hover,.woocommerce div.product .woocommerce-tabs ul.tabs li.active,.woocommerce a.button,.woocommerce button.button,.woocommerce input.button,.woocommerce #respond input#submit,.woocommerce #content input.button,.woocommerce-page a.button,.woocommerce-page button.button,.woocommerce-page input.button,.woocommerce-page #respond input#submit,.woocommerce-page #content input.button,.woocommerce a.button.alt,.woocommerce button.button.alt,.woocommerce input.button.alt,.woocommerce #respond input#submit.alt,.woocommerce #content input.button.alt,.woocommerce-page a.button.alt,.woocommerce-page button.button.alt,.woocommerce-page input.button.alt,.woocommerce-page #respond input#submit.alt,.woocommerce-page #content input.button.alt,.woocommerce .widget_layered_nav_filters ul li a,.woocommerce-page .widget_layered_nav_filters ul li a,.woocommerce div.product .woocommerce-tabs ul.tabs li.active, .woocommerce div.product .woocommerce-tabs ul.tabs li:hover,.tabs-left > .nav-tabs > li > a:hover, .tabs-left > .nav-tabs > li > a:focus,.tabs-left > .nav-tabs .active > a, .tabs-left > .nav-tabs .active > a:hover, .tabs-left > .nav-tabs .active > a:focus,.vibe_filterable li a:hover,.vibe_filterable li.active a,#wplms-calendar td.active,.checkoutsteps ul li.checkout_begin,.widget_course_list a:hover img,.widget_course_list a:hover img,.quiz_timeline li.active,.widget_course_list a:hover img,.vcard:hover img,.postsmall .post_thumb a:hover,.button.hero,.unit_content .commentlist li.bypostauthor >.comment-body>.vcard img,.unit_content .commentlist li:hover >.comment-body>.vcard img,#buddypress div.generic-button a,#buddypress div.item-list-tabs#subnav ul li.switch_view a.active,.woocommerce nav.woocommerce-pagination ul li span.current,#bbpress-forums #favorite-toggle a,#bbpress-forums .bbp-pagination .bbp-pagination-links span.current,#bbpress-forums #subscription-toggle a,.pagetitle #subscription-toggle a,.minimal.woocommerce ul.products li a.button,.minimal.woocommerce a.button,.minimal .note-tabs,.minimal .pagination span,.minimal .pagination label,.minimal .pagination .page-numbers.current,.minimal .pagination span.current,.minimal .pagination a.page-numbers,.minimal .pagination a,.minimal.woocommerce-page a.button,.minimal.woocommerce nav.woocommerce-pagination ul li a,.minimal #bbpress-forums .bbp-pagination .bbp-pagination-links a.page-numbers, .minimal #bbpress-forums .bbp-pagination .bbp-pagination-links span,.minimal #buddypress div.item-list-tabs ul li a:hover, .minimal .pusher #buddypress a.button,.minimal .generic-button a,.minimal #buddypress div.item-list-tabs ul li.selected a,.minimal #buddypress div.item-list-tabs ul li a span,.minimal .widget .course_cat_nav ul li a span,.minimal .pusher #buddypress input[type=button],.minimal .pusher #buddypress input[type=submit], .minimal .pusher .button, .minimal .pusher input[type=submit],.minimal.woocommerce-page #content input.button, .minimal.woocommerce-page input.button,.minimal .pusher .woocommerce a.button,.minimal.woocommerce div.product .woocommerce-tabs ul.tabs li.active, .minimal.woocommerce div.product .woocommerce-tabs ul.tabs li:hover,.elegant #buddypress div.item-list-tabs li.selected{border-color:#880b17;}a:hover,.author_desc .social li a:hover,#course_creation_tabs li.active:after,.widget ul > li:hover > a,.course_students li > ul > li > a:hover,.quiz_students li > ul > li > a:hover,#buddypress div.activity-meta a ,#buddypress div.activity-meta a.button,#buddypress .acomment-options a,.widget .menu li.current-menu-item a,#buddypress a.primary,#buddypress a.secondary,.activity-inner a,#latest-update h6 a,.bp-primary-action,.bp-secondary-action,#buddypress div.item-list-tabs ul li.selected a span,#buddypress div.item-list-tabs ul li.current a span,#buddypress div.item-list-tabs ul li a:hover span,.activity-read-more a,.unitattachments h4 span,.unitattachments li a:after,.noreviews a,.expand .minmax:hover,.connected_courses li a,#buddypress #item-body span.highlight a,#buddypress div#message-thread div.message-content a,.course_students li > ul > li > a:hover,.quiz_students li > ul > li > a:hover,.assignment_students li > ul > li > a:hover,.widget ul li:hover > a,.widget ul li.current-cat a,.quiz_timeline li:hover a, .quiz_timeline li.active a,.woocommerce .star-rating span, .woocommerce-page .star-rating span, .product_list_widget .star-rating span,#vibe-tabs-notes_discussion .view_all_notes:hover,.instructor strong a:hover,.minimal .woocommerce nav.woocommerce-pagination ul li a,.single-item.groups.g3.minimal #item-body .item-list-tabs#subnav ul li.current.selected a, .single-item.groups.g4.minimal #item-body .item-list-tabs#subnav ul li.current.selected a,.bp-user.p3 #item-body .item-list-tabs#subnav ul li.current.selected a,.bp-user.p4 #item-body .item-list-tabs#subnav ul li.current.selected a,.minimal #buddypress div.item-list-tabs ul li a span,.minimal.single-item.groups.g2 #buddypress div.item-list-tabs#object-nav li a:hover, .minimal.single-item.groups.g3 #buddypress div.item-list-tabs#object-nav li a:hover, .minimal.single-item.groups.g4 #buddypress div.item-list-tabs#object-nav li a:hover,.minimal.single-course.c5 #item-nav .item-list-tabs#object-nav ul li a:hover,.minimal.single-course.c5 #item-nav .item-list-tabs#object-nav ul li.current a,.minimal.woocommerce-page #content input.button, .minimal.woocommerce button.button,.minimal.woocommerce-page input.button,.elegant #buddypress .dir-form div.item-list-tabs ul li.selected a,.elegant.directory.d3 #buddypress .item-list-tabs ul li a:hover{color:#880b17;}.minimal.woocommerce .button,.minimal.woocommerce button.button,.minimal #buddypress div.item-list-tabs#subnav ul li.switch_view a.active,.minimal.directory #buddypress div.item-list-tabs#subnav ul li.switch_view a.active{border-color:#880b17 !important;}.minimal nav li a:hover,.minimal nav li:hover>a, .minimal nav li.current_menu_item>a,.minimal nav li.current_page_item>a,.minimal.woocommerce div.product .woocommerce-tabs ul.tabs li.active a, .minimal.woocommerce div.product .woocommerce-tabs ul.tabs li:hover a,.elegant #buddypress .item-list-tabs#subnav ul li.current a,.elegant.single-course #item-nav div.item-list-tabs#object-nav li.current a,.elegant.directory.d3 #buddypress .item-list-tabs li.selected a,.elegant.directory.d4 #buddypress .item-list-tabs li.selected a,.elegant.bp-user.p4 #buddypress .item-list-tabs#subnav li.selected.current a, .elegant.single-item.groups.g4 #buddypress .item-list-tabs#subnav li.selected.current a {color:#880b17 !important; }.woocommerce a.button, .button,#nav_horizontalli.current-menu-ancestor>a, #headertop a.btn,button,#nav_horizontal li.current-menu-item>a, .total_students span,#nav_horizontal li a:hover, .button.hero,.tagcloud a:hover,#nav_horizontal li:hover a,.course_button.button span.amount,#buddypress .item-list-tabs ul li a:hover,.login_sidebar .login_content #vbp-login-form #sidebar-wp-submit,.vibe_filterable li.active a,.tabbable .nav.nav-tabs li:hover a,.btn,a.btn.readmore:hover,.checkbox>input[type=checkbox]:checked+label:after,footer .tagcloud a:hover,.tagcloud a,.in_quiz .pagination ul li span,.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus,.generic-button a:hover,.woocommerce-account .woocommerce-MyAccount-navigation li.is-active a,body.activity-permalink .ac-form input[type=submit],.hover-link:hover,#buddypress .activity-list li.load-more a:hover,#buddypress div.generic-button a:hover,.archive #buddypress .course_category,.archive #buddypress .course_category h3,#buddypress ul.item-list li .item-credits a.button,#buddypress ul.item-list li .item-credits a.button span,#course_creation_tabs li.done:after,#buddypress .item-list-tabs ul li a:hover,.pagination .current,#question #submit:hover,.ques_link:hover,.reset_answer:hover,.widget .course_cat_nav ul li.current-cat-parent>a, .widget .course_cat_nav ul li.current-cat>a,.widget .course_cat_nav ul li a span,.woocommerce ul.products li.product .button,.woocommerce nav.woocommerce-pagination ul li span.current,.woocommerce nav.woocommerce-pagination ul li a:hover,.woocommerce #respond input#submit, .woocommerce #content input.button, .woocommerce-page a.button, .woocommerce-page button.button, .woocommerce-page input.button, .quiz_timeline li.active>a>span,.woocommerce div.product .woocommerce-tabs ul.tabs li.active, .woocommerce div.product .woocommerce-tabs ul.tabs li:hover,#vibe_bp_login input[type=submit],.woocommerce-page #respond input#submit,#bbpress-forums #favorite-toggle a:hover, #bbpress-forums #subscription-toggle a:hover,#bbpress-forums .bbp-pagination .bbp-pagination-links a.page-numbers:hover, #bbpress-forums .bbp-pagination .bbp-pagination-links span.current,#buddypress ul.button-nav li a,.tabs ul.nav.nav-tabs>li.active>a>span,.mooc .vbpcart span em, .sleek .vbpcart span em,.single-course.c2 #item-nav div.item-list-tabs#object-nav li.current a, .single-course.c3 #item-nav div.item-list-tabs#object-nav li.current a, .single-course.c5 #item-nav div.item-list-tabs#object-nav li.current a, .single-item.groups.g2 #buddypress div.item-list-tabs#object-nav li a:hover, .single-item.groups.g3 #buddypress div.item-list-tabs#object-nav li a:hover, .single-item.groups.g4 #buddypress div.item-list-tabs#object-nav li a:hover,.v_module.custom_post_carousel .heading_more,.minimal .pusher #buddypress a.button:hover,.minimal .note-tabs ul li.selected a,.minimal #buddypress div.item-list-tabs ul li.selected a span,.minimal .widget .course_cat_nav ul li a:hover span,.minimal .pagination .page-numbers.current,.minimal .pagination span.current,.minimal.woocommerce-page a.button:hover,.minimal.woocommerce a.button:hover,.minimal .pusher .button:hover,.minimal.woocommerce ul.products li a.button:hover, .minimal .pagination a.page-numbers:hover, .minimal .pagination a:hover,.minimal .pusher #buddypress input[type=submit]:hover,.minimal .pusher input[type=submit]:hover,.minimal.woocommerce-page #content input.button:hover, .minimal.woocommerce-page input.button:hover,.minimal .mooc .woocart .buttons .button:hover,.minimal .sleek .woocart .buttons .button:hover,.minimal .pusher .woocommerce a.button:hover,.elegant #buddypress .dir-form div.item-list-tabs ul li:not(.selected) a:hover,.elegant.single-course.c4 #buddypress .item-list-tabs#object-nav li a:hover,.elegant .widget.pricing a.button,.block.general .block_content .general_details>a,.modern .vibe_carousel .flex-direction-nav a:hover,.course_pursue_panel .course_action_points,.course_pursue_panel .course_action_points h1,.course_pursue_panel .course_time strong,.course_pursue_panel .course_time strong span,.block.courseitem.course6 .block_media .postblock_cats .postblock_cat,.block.courseitem.course6 .block_media .course_start_date,.wplms_course_categories > *{color:#ffffff;}#logo img,#alt_logo img{height:48px;max-height:48px;}#logo img,#alt_logo img{max-height:48px;}#logo{padding-top:4px;}#logo{padding-bottom:10px;}#headertop,header.fixed,.pagesidebar,#pmpro_confirmation_table thead,header #searchdiv.active #searchform input[type=text],div.pmpro_checkout h3,#pmpro_levels_table thead,.boxed #headertop .container,header.sleek.transparent.fixed{background-color:#FFF;}#headertop,#headertop a,.sidemenu li a,.sidemenu .mobile_icons>a,#pmpro_confirmation_table thead,.pmpro_checkout thead th,#pmpro_levels_table thead, header.fixed .topmenu>li>a,header.fixed #searchicon,header.fixed nav>.menu>li>a{color:#444;}header,.sidemenu li.active a, .sidemenu li a:hover,.note-tabs,header #searchform input[type="text"],.boxed header:not(.transparent) .container,.reset_answer:hover{background-color:#FFF;}nav .menu li a,nav .menu li.current-menu-item a,.topmenu li a,.sleek .topmenu>li>a, .sleek nav>.menu>li>a,header #searchicon,.mooc .topmenu>li>a, .mooc nav>.menu>li>a,#login_trigger,a.vibebp-login >a{color:#444;}nav .menu li a,nav .menu li.current-menu-item a,.sleek nav>.menu>li>a,header #searchicon, .mooc nav>.menu>li>a,#login_trigger{font-size:14px;}.sub-menu,nav .sub-menu,#mooc_menu nav .menu li:hover>.menu-sidebar,header #searchform,.sleek .woocart,.megadrop .menu-cat_subcat .sub_cat_menu, .megadrop .menu-cat_subcat .sub_posts_menu{background-color:#FFF;}nav .menu li>.sub-menu li a, nav .menu li.current-menu-item .sub-menu li a,nav .sub-menu li.current-menu-item a,nav .menu li .menu-sidebar .widget h4.widget_title,nav .menu li .menu-sidebar .widget ul li a,nav .menu li .menu-sidebar .widget,.megadrop .menu-sidebar,#mooc_menu nav .menu li:hover>.menu-sidebar,#mooc_menu nav .menu li:hover>.menu-sidebar a,.megadrop .menu-sidebar .widget ul li a,.megadrop .menu-sidebar .widget .widgettitle,.megadrop .menu-sidebar .widgettitle,.sleek .woocart .cart_list.product_list_widget .mini_cart_item a, .sleek .woocart .cart_list.product_list_widget .mini_cart_item span,.sleek .woocart .total,.sleek .woocart .cart_list.product_list_widget .empty,.mooc .woocart .cart_list.product_list_widget .mini_cart_item a, .mooc .woocart .cart_list.product_list_widget .mini_cart_item span,.mooc .woocart .total,.sleek .woocart .cart_list.product_list_widget .empty{color:#444;}nav>.menu>li>a,.sleek .topmenu>li>a, .sleek nav>.menu>li>a{font-family:"Montserrat";}nav .menu li>.sub-menu li,nav ul.menu li> .sub-menu .menu-sidebar .widget ul li a,nav .menu li>.sub-menu li a{font-size:14px;}header nav>.menu>li>a,header.sleek nav>.menu>li>a,header.sleek .topmenu>li>a, header #searchicon,.mooc .topmenu>li>a, .mooc nav>.menu>li>a,#alt_logo{padding-top:28px;padding-bottom:28px;}#headertop a, .sidemenu li a{font-family:"Montserrat";}.logged-out #vibe_bp_login .fullscreen_login,#vibe_bp_login ul+ul{background:#ffffff;}#close_full_popup:before,#vibe_bp_login ul+ul li a,#vibe_bp_login ul+ul li a{color:#545454;}#vibe_bp_login,#wplms_custom_registration_form,#wplms_forgot_password_form,.logged-out #vibe_bp_login .fullscreen_login #vbp-login-form,.login_sidebar,#vibe_bp_login #wplms_custom_registration_form, #vibe_bp_login{background:#ff4367;}#vibe_bp_login .fullscreen_login label,#vibe_bp_login label,#vibe_bp_login ul li#vbplogout a,.login_sidebar .login_content #vbp-login-form label,.login_sidebar .login_content #sidebar-me #bpavatar+ul li#username a,.login_sidebar .login_content #sidebar-me #bpavatar+ul li a, .login_sidebar .login_content #sidebar-me #bpavatar+ul+ul li a,.login_sidebar .login_content #vbp-login-form label .tip,#vibe_bp_login a:hover, #vibe_bp_login ul li a, a.vbpforgot{color:#ffffff;}h1{font-family:"Roboto";}h2{font-family:"Roboto";}h3{font-family:"Roboto";}h4{font-family:"Roboto";}h5{font-family:"Roboto";}h6{font-family:"Roboto";}#buddypress .widget_title,.widget .widget_title{font-family:"Roboto";}#buddypress .widget_title,.widget .widget_title{color:#444;}body,.pusher{background-color:#FFF;}.boxed .pusher,.content,#item-body,.widget.pricing,.dir-list,.item-list-tabs,#groups-dir-list, #course-dir-list,#group-create-body,body.boxed.custom-background .pusher,#buddypress .dir-form div.item-list-tabs#subnav,.unit_content{background-color:#FFF;}body,.content,#item-body,.widget.pricing,.dir-list,.item-list-tabs,#groups-dir-list, #course-dir-list,#buddypress ul.item-list li div.item-desc{color:#444;}body a,.content p a,.course_description p a,#buddypress a.activity-time-since,.author_info .readmore,.assignment_heading.heading a,.v_text_block a,.main_unit_content a:not(.button),.reply a, .link,.ahref{color:#105796;}span.amount,span.amount+.subs,.course_price .subs,.course_price>a,.block.courseitem .block_content .star-rating+strong, .block.courseitem .block_content .star-rating+a, .block.courseitem .instructor_course+strong, .block.courseitem .instructor_course+a,.pricing_course li strong,.widget .course_details > ul > li:first-child a, .widget .course_details > ul > li:first-child strong > span, .item-credits, .curriculum_check li span.done,.item-credits a,.pricing_course li strong span.subs,.widget .course_details > ul > li:first-child a strong > span, .widget .course_details > ul > li:first-child span.subs, #buddypress ul.item-list li .item-credits strong, #buddypress ul.item-list li .item-credits strong span.amount,#buddypress ul.item-list li .item-credits span{color:#ff4367;}body,.content,#item-body,#buddypress ul.item-list li div.item-desc,p{font-family:"Roboto";}#buddypress div.item-list-tabs,.widget .item-options,#buddypress div.item-list-tabs#object-nav,#buddypress div.item-list-tabs,.quiz_bar,.widget .course_cat_nav,.single-course.c2 #item-nav,.single-course.c3 #item-nav,.single-course.c5 #item-nav,.widget .course_cat_nav ul li a,.minimal.single-course.c2 #item-nav, .minimal.single-course.c3 #item-nav, .minimal.single-course.c5 #item-nav,.elegant.bp-user.p2 #buddypress #item-nav, .elegant.bp-user.p3 #buddypress #item-nav, .elegant.bp-user.p4 #buddypress #item-nav, .elegant.single-course.c2 #item-nav, .elegant.single-course.c3 #item-nav, .elegant.single-course.c5 #item-nav, .single-course.c6 #item-nav,.single-course.c7 #item-nav,.elegant.single-item.groups.g2 #buddypress #item-nav, .elegant.single-item.groups.g3 #buddypress #item-nav, .elegant.single-item.groups.g4 #buddypress #item-nav{background-color:#FFF;}#buddypress div.item-list-tabs,.widget .item-options,.flexMenu-popup li a,#buddypress div.item-list-tabs#object-nav,.quiz_timeline li>a>span,.unit_prevnext,.quiz_bar,.course_timeline li.active a,.course_timeline li a,.minimal .course_timeline li.active a,.minimal .course_timeline li a,#buddypress .item-list-tabs ul li a,.widget .course_cat_nav ul li.current-cat-parent>ul>li:not(.current-cat)>a,.single-course.c2 #item-nav div.item-list-tabs#object-nav li a, .single-course.c3 #item-nav div.item-list-tabs#object-nav li a, .single-course.c5 #item-nav div.item-list-tabs#object-nav li a,.single-course.c6 #item-nav div.item-list-tabs#object-nav li a,.single-course.c7 #item-nav div.item-list-tabs#object-nav li a,.widget .course_cat_nav ul li a{color:#444444;}#course_creation_tabs,#buddypress div#item-header,.page-template-start .unit_prevnext,.page-template-start .course_timeline h4,.widget .course_cat_nav ul li>ul li,.single-course .course_header,.minimal.single-course.c2 .course_header, .minimal.single-course.c3 .course_header, .minimal.single-course.c5 .course_header,.elegant.single-course.c2 .course_header, .elegant.single-course.c3 .course_header{background-color:#FAFAFA;}#course_creation_tabs li,#course_creation_tabs li a,#course_creation_tabs li i,#course_creation_tabs li.active a, #course_creation_tabs li.active i,.quiz_timeline li a,.quiz_timeline li.done a,.unit_prevnext a,.ques_link,.countdown,.countdown+span,.countdown+span+span,#buddypress div#item-header,.page-template-start .unit_prevnext,.page-template-start .course_timeline h4,.minimal .course_timeline li h4,.minimal .unit_prevnext a,.single-course .course_header,.page-template-start .course_timeline.accordion li.section:after,.minimal.single-course.c2 .course_header, .minimal.single-course.c3 .course_header, .minimal.single-course.c5 .course_header,.minimal.single-course.c2 #item-nav .item-list-tabs#object-nav ul li a, .minimal.single-course.c3 #item-nav .item-list-tabs#object-nav ul li a, .minimal.single-course.c5 #item-nav .item-list-tabs#object-nav ul li a,.elegant.single-course.c2 .course_header, .elegant.single-course.c3 .course_header,.elegant.bp-user.p2 #buddypress #item-nav div.item-list-tabs#object-nav li a, .elegant.bp-user.p3 #buddypress #item-nav div.item-list-tabs#object-nav li a, .elegant.bp-user.p4 #buddypress #item-nav div.item-list-tabs#object-nav li a, .elegant.single-course.c2 #item-nav div.item-list-tabs#object-nav li a, .elegant.single-course.c3 #item-nav div.item-list-tabs#object-nav li a, .elegant.single-course.c4 #buddypress .item-list-tabs#object-nav li a, .elegant.single-course.c5 #buddypress .item-list-tabs#object-nav li a, .elegant.single-course.c5 #item-nav div.item-list-tabs#object-nav li a, .elegant.single-item.groups.g2 #buddypress #item-nav div.item-list-tabs#object-nav li a, .elegant.single-item.groups.g3 #buddypress #item-nav div.item-list-tabs#object-nav li a, .elegant.single-item.groups.g4 #buddypress #item-nav div.item-list-tabs#object-nav li a, .elegant.single-item.groups.g4 #buddypress .item-list-tabs#object-nav li a{color:#444444;}.button.primary,#vibe_bp_login li span,#buddypress li span.unread-count,#buddypress tr.unread span.unread-count,#searchsubmit{background-color:#ff4367;}footer,.bbp-header,.bbp-footer,.boxed footer .container,footer .form_field, footer .input-text, footer .ninja-forms-field, footer .wpcf7 input.wpcf7-text, footer #s,footer .chosen-container.chosen-with-drop .chosen-drop,footer .chosen-container-active.chosen-with-drop .chosen-single, footer .chosen-container-single .chosen-single{background-color:#2f3349;}footer,footer a,.footerwidget li a,footer .form_field, footer .input-text, footer .ninja-forms-field, footer .wpcf7 input.wpcf7-text, footer #s,.footerwidget .widget_course_list li h6,.footerwidget .widget_course_list li h6 span,footer .course-list1,footer .chosen-container.chosen-with-drop .chosen-drop,footer .chosen-container-active.chosen-with-drop .chosen-single, footer .chosen-container-single .chosen-single{color:#ffffff;}.footertitle, footer h4,footer a,.footerwidget ul li a{color:#ffffff;}#footerbottom,.boxed #footerbottom .container{background-color:#212335;}#footerbottom,#footerbottom a{color:#ffffff;}nav .menu li.hasmegamenu:hover>.sub-menu{left:20%;}.more_course a { color:#fff; }#headertop li{ border-color:#444;}#buddypress div.item-list-tabs ul li a:hover span,#buddypress .item-list-tabs ul li.current a span, #buddypress .item-list-tabs ul li.selected a span,.widget .course_cat_nav ul li.current-cat-parent>a span, .widget .course_cat_nav ul li.current-cat>a span,.course_pursue_panel .course_progressbar.progress .bar{background:#ffffff;}.minimal.woocommerce nav.woocommerce-pagination a:hover{color:#ffffff !important;}header #searchform:after,nav>.menu>li:hover>a:before{ border-color:transparent transparent #FFF transparent !important;}.elegant header nav>.menu>li.current-menu-item>a, .elegant header nav>.menu>li.current_page_item>a, .elegant header nav>.menu>li:hover>a{border-color:#FFF;color:#FFF;}.groove header nav>.menu>li.current-menu-item>a, .groove header nav>.menu>li.current_page_item>a, .groove header nav>.menu>li:hover>a{background:#FFF;}.unit_content p span.side_comment:hover:after,.unit_content p span.side_comment.active:after{border-color: #880b17 transparent transparent #880b17 !important;;}#vibe_bp_login:after{ border-color:transparent transparent #ffffff transparent;}header.fixed #trigger .lines, header.fixed #trigger .lines:after, header.fixed #trigger .lines:before,header.sleek.fixed #trigger .lines, header.sleek.fixed #trigger .lines:after, header.sleek.fixed #trigger .lines:before{background:#444;}#trigger .lines, #trigger .lines:before,#trigger .lines:after {background:#444} header #searchicon, header #searchform input[type="text"]{color:#444;} .unit_prevnext{border-color:#FFF ;}.flexMenu-popup{background:#FFF !important;}.course_timeline,.quiz_details{background:#FFF;}.unit_prevnext,.course_timeline h4{background:#FAFAFA;}.quiz_timeline li > span,.quiz_timeline li>a>span{background:#FAFAFA;}.course_timeline,.course_timeline li.unit_line,.course_timeline li > span,.quiz_timeline .timeline_wrapper{border-color:#FAFAFA;}.button.primary,#vibe_bp_login li span{border-color:#ff4367}#buddypress a.bp-primary-action:hover span,#buddypress #reply-title small a:hover span, #buddypress div.messages-options-nav a,.unit_module ul.actions li span{color:#ff4367}nav .menu-item-has-children:hover > a:before,header.sleek .vbpcart.active:after{border-color:transparent transparent #FFF transparent;}.archive.woocommerce.minimal ul.products li.product .button.add_to_cart_button:hover,.woocommerce.minimal #respond input#submit.alt:hover, .woocommerce.minimal a.button.alt:hover, .woocommerce.minimal button.button.alt:hover, .woocommerce.minimal input.button.alt:hover,.minimal.woocommerce-page a.button:hover{background:#880b17 !important;}body.loading.pageloader1 .global:before{border-top-color:#880b17;}body.loading.pageloader1 .global:after{border-left-color:#880b17;}#vibe_bp_login:after{border-color:transparent transparent #ff4367;}header #trigger{top:28px !important;}header.sleek #vibe_bp_login,header.mooc #vibe_bp_login{top:58px;}header.mooc #mooc_searchform{margin-top:28px;}#save_quiz_progress{border-color:#444444;}footer .form_field, footer .input-text, footer .ninja-forms-field, footer .wpcf7 input.wpcf7-text, footer #s,footer .chosen-container.chosen-with-drop .chosen-drop,footer .chosen-container-active.chosen-with-drop .chosen-single, footer .chosen-container-single .chosen-single{border-color:#212335;}</style><style type="text/css" data-type="vc_custom-css">.three_featured_blocks,.three_featured_blocks h3{
+    color:#fff;
+}
+
+.three_featured_blocks .wpb_wrapper{
+    display:grid;
+    grid-template-columns:1fr 64px;
+}
+
+.three_featured_blocks .wpb_wrapper i{
+    grid-column:2/3;
+    grid-row:1/3;
+}
+
+.three_featured_blocks h3{
+    margin-top:0;
+}
+a.term_block {
+    border-radius: 10px;
+    overflow: hidden;
+    height:140px;
+    font-size:24px;
+}
+a.term_block .term_name:after{
+    content:'';
+    background:rgba(255,67,103,0.8) !important;
+    display:block;
+    width:100%;
+    height:100%;
+    position: absolute;
+    z-index: 1;
+}
+a.term_block .term_name>span{z-index:9;}
+
+.home_counter_item {
+    font-size:16px;
+    font-weight:600;
+    text-align:center;
+    padding:30px 0;
+}
+
+.home_counter_item .numscroller{
+    font-size:42px;
+    color:#ff4367;
+}
+#home_video_text h2{font-size:48px;color:#ff4367;}
+#home_video_text h2,#home_video_text{color:#fff;}
+#consecutive_layer_slider .vc_column_container{margin-top:-35px;}
+.block{border-radius:8px;overflow:hidden;}
+.member_avatar img {
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    border-radius: 50%;
+}
+
+.member_block3 {
+    padding:15px;
+    border-radius:50%;
+    overflow:hidden;
+}
+.member_info h3 a{font-weight:600;}
+.member_avatar:hover:after {border-radius:50%;}
+.wplms_registration_form {
+    padding: 30px;
+    background: #ff4367;
+    border-radius: 5px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    color: #fff;
+}
+
+.wplms_registration_form legend, .wplms_registration_form label{
+    border:none;
+    font-size:16px;
+    color:#fff;margin:0 0 10px
+}
+
+.wplms_registration_form input{
+    width:100%;
+    border-radius:5px;
+    border:2px solid rgba(255,255,255,0.2);
+}.wplms_registration_form li+li{
+    margin-top:30px;
+    display:inline-block;
+    width:100%;
+}
+.g-recaptcha{
+    margin-top:30px;
+}.vibe_countdown{text-align:left !important;}</style><style type="text/css" data-type="vc_shortcodes-custom-css">.vc_custom_1525327714591{padding-top: 60px !important;}.vc_custom_1709152689470{padding-bottom: 0% !important;}.vc_custom_1758737504965{padding-right: 20% !important;padding-left: 20% !important;}</style><noscript><style> .wpb_animate_when_almost_visible { opacity: 1; }</style></noscript></head>
+<body class="home-page bp-legacy home page-template page-template-notitle page-template-notitle-php page page-id-88 logged-in theme-wplms woocommerce-js d5 g4 p4 c4 minimal pageloader2 wpb-js-composer js-comp-ver-6.9.0 vc_responsive">
+<!-- Header start -->
+
+<header class="headerWide">
+    <div class="container header">
+        <div class="row">
+            <div class="col-xs-4 logo">
+               <a href="https://nittosupport.ca/dashboard"><img src="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/logo.png" alt="Logo" title="Logo" class="img-responsive"></a> 
+            </div>
+            
+            <div class="col-xs-8">
+                <nav class="navbar navbar-default" role="navigation">   
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#example-navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <!--<a class = "navbar-brand" href = "#">Menu</a>-->
+                    </div>
+                    
+                    <div class="collapse navbar-collapse" id="example-navbar-collapse">
+                        <ul class="nav navbar-nav">
+                            <!-- <li class = ""><a href = "https://nittosupport.ca/dashboard">Home</a></li> -->
+                            <li class="">
+                            <a href="https://nittosupport.ca/assets/uploads/coopguide/1739295824_Coop_policies_Nitto_03_2025_EN.pdf" target="_blank">Coop Guide</a>                            </li>
+                            <li class="">
+                            <a href="https://nittosupport.ca/frontend/contactus/">Contact Us</a>                            </li>
+                            <li class="dropdown">
+                                <a href="https://nittosupport.ca/training/?v=4326ce96e26c#" class="dropdown-toggle" data-toggle="dropdown">
+                                    My Account   
+                                    <b class="caret"></b>
+                                </a>
+                                <ul class="dropdown-menu">
+                                                                        <li><a href="https://nittosupport.ca/updateprofile">Update Profile</a></li>
+                                    <li><a href="https://nittosupport.ca/changepassword">Change Password</a></li>
+									                                                                        <li><a href="https://nittosupport.ca/training/training/nitto-dollars/?v=4326ce96e26c">Nitto Dollars</a></li>
+                                    <li><a href="https://nittosupport.ca/training/all-badges?v=4326ce96e26c">All Badges</a></li>
+                                </ul>
+                            </li>
+                            <!--<li><a href = "#">My Account</a></li>-->
+                            <li><a href="https://nittosupport.ca/frontend/logout"><img src="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/Logout-button-blk.png" alt="Logout" title="Logout" style="width:24px;"></a></li>
+                            <li> 
+<div class="lang_sel_list_vertical wpml-ls-statics-shortcode_actions wpml-ls wpml-ls-legacy-list-vertical" id="lang_sel_list">
+	<ul>
+
+					<li class="icl-fr wpml-ls-slot-shortcode_actions wpml-ls-item wpml-ls-item-fr wpml-ls-first-item wpml-ls-last-item wpml-ls-item-legacy-list-vertical">
+				<a href="https://nittosupport.ca/training/fr/?v=4326ce96e26c" class="wpml-ls-link">
+                    <span class="wpml-ls-native icl_lang_sel_native" lang="fr">Français</span></a>
+			</li>
+		
+	</ul>
+</div>
+</li>
+                        </ul>
+                    </div>
+                    
+                </nav>
+            </div>
+            
+        </div>
+    </div>
+</header>
+<!-- Header end -->
+<!-- Sticky social media icon Start -->  
+<section class="sticky-container innerSticker">
+    <ul class="sticky">
+                <li>
+            <img src="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/tw-white.png" alt="Twitter">
+            <p><a href="https://twitter.com/nittotire" target="_blank">Follow Us on<br>Twitter</a></p>
+        </li>
+        <li>
+            <img src="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/fb-white.png" alt="Facebook">
+            <p><a href="https://www.facebook.com/NittoTire/" target="_blank">Like Us on<br>Facebook</a></p>
+        </li>
+        <li>
+            <img src="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/yt-white.png" alt="Youtube">
+            <p><a href="https://www.youtube.com/channel/UCacuBR0xB-Hay8pkx1JtDZg" target="_blank">Subscribe on<br>YouYube</a></p>
+        </li>
+    </ul>
+</section>
+<!-- Sticky social media icon end -->
+<!-- Slider Start -->
+<div class="innerSlider">
+    <section id="myCarousel" class="carousel slide">  
+                <!-- Carousel indicators -->
+        <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class=""></li><li data-target="#myCarousel" data-slide-to="1" class="active"></li> 
+        </ol>   
+        <!-- Carousel items -->
+        <div class="carousel-inner">
+                    <div class="item">
+                <a href="https://www.nittosupport.ca/" target="_blank">
+                    <img src="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/1587495291_Inside_Page_Banners_Training_EN.png" alt="">
+                </a>
+            </div>
+                    <div class="item active">
+                <a href="https://www.nittosupport.ca/" target="_blank">
+                    <img src="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/1554332412_Inside_Page_Promo_EN.png" alt="">
+                </a>
+            </div>
+          
+        </div>
+    </section> 
+</div>
+<!-- Slider end -->
+<!-- Content start --> 
+<!-- categories list start -->
+<section class="cl-wrapper">
+    <div class="container">
+        <div class="navbar-inrtp-MenuBx">
+        <div class="text-center"><!--New div add-->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#NavbarInrtopMenu"><!--New button for mobile icon-->
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse" id="NavbarInrtopMenu">
+        <ul class="clearfix lst-cate">
+		                                            <li><a href="https://nittosupport.ca/admaterials/index/1"><i><img src="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/lst-ico-2.png"></i>Advertising Material</a></li>
+                                                                                                        <li><a href="https://nittosupport.ca/dealerresource/index"><i><img src="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/lst-ico-3.png"></i>Dealer Resources</a></li>
+                                        <!--<//?php
+                    if($val['Management']==1 && ($userData[0]['accessotbannermanage']==1 || $userData[0]['accesstoweekvideomanage']==1)) 
+                    {
+                    ?>
+                        <li><a href="<//?php echo main_url();?>/management/index"><i><img src="<//?php echo main_url();?>/assets/img/management-icon.png"></i><//?php echo $management_text; ?></a></li>
+                    <//?php 
+                    }
+                    ?>-->
+                                            <li><a href="https://nittosupport.ca/training/?v=4326ce96e26c#" onclick="promo_met_Submissions()"><i><img src="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/resource11.png"></i>Point of Purchase</a></li>
+                        <form name="promomet_frm" id="promomet_frm" method="POST" action="https://pos.nittosupport.ca/webservices/lncatch.php?v=4326ce96e26c" accept-charset="UTF-8">
+                            <input name="email" type="hidden" value="rgolab@toyocanada.com">
+                            <input name="language" type="hidden" value="en">
+                            <!-- <input name="link" type="hidden" value="contactus"  /> -->
+                        </form>
+                        <script>
+                        function promo_met_Submissions(){
+                            document.forms['promomet_frm'].submit(); 
+                        }
+                        </script>
+                                                                <li><a onclick="promoSubmissions()" href="https://nittosupport.ca/training/?v=4326ce96e26c#"><i><img src="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/dealer31.png"></i>Promo Materials</a></li>
+                        <form name="promo_frm" id="promo_frm" method="POST" action="https://promo.nittosupport.ca/webservices/lncatch.php?v=4326ce96e26c" accept-charset="UTF-8">
+                            <input name="email" type="hidden" value="rgolab@toyocanada.com">
+                            <input name="language" type="hidden" value="en">
+                            
+                        </form>
+                        <script>
+                        function promoSubmissions(){
+                            document.forms['promo_frm'].submit(); 
+                        }
+                        </script>
+                                                                <li><a href="https://nittosupport.ca/training?v=4326ce96e26c"><i><img src="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/lst-ico-1.png"></i>Training Site</a></li>
+                    					                            </ul>
+        </div>
+        </div>
+    </div>
+</section>  <section id="content">
+	    <div class="container">
+        <div class="vc_row wpb_row vc_row-fluid vc_custom_1525327714591"><div class="wpb_column vc_column_container vc_col-sm-12"><div class="vc_column-inner"><div class="wpb_wrapper">
+	<div class="wpb_text_column wpb_content_element  vc_custom_1709152689470">
+		<div class="wpb_wrapper">
+			<h2 style="font-size: 36px; font-weight: 800; text-align: center;">Choose your <span style="color: #880b17;"><span style="color: #880b17;">Course.</span></span></h2>
+
+		</div>
+	</div>
+
+	<div class="wpb_text_column wpb_content_element  vc_custom_1758737504965">
+		<div class="wpb_wrapper">
+			<p style="margin-bottom: 60px; text-align: left;">The intention of this site is to offer educational material for a user with a single profile to become comfortable with Nitto Products and Tire Technology in general.<br>
+For making this effort, in most courses, you will be rewarded with the Nitto $s program. Courses are offered in both English and French. However, please note you will only be rewarded in the language completed first, not for both. Thank you and good luck!<br>
+<strong style="color: red;">Because of our starting to transition to a new Nitto support site, we have temporarily suspended the Nitto $ program . Please continue with the courses. We ensure you are credited for these courses on the new site.</strong></p>
+
+		</div>
+	</div>
+</div></div></div></div>
+    
+        <div class="vc_row wpb_row vc_row-fluid">
+            <div class="wpb_column vc_column_container vc_col-sm-12">
+                <div class="vc_column-inner">
+                    <div class="wpb_wrapper"><!-- vc_grid start -->
+                        <div class="vc_grid-container-wrapper vc_clearfix">
+                            <div class="vc_grid-container vc_clearfix wpb_content_element vc_basic_grid bithomegrid">
+                                <style type="text/css" data-type="vc_shortcodes-custom-css">.vc_custom_1419240516480{background-color: #f9f9f9 !important;}
+                                </style>
+                                <div class="vc_grid vc_row vc_grid-gutter-30px vc_pageable-wrapper vc_hook_hover" data-vc-pageable-content="true">
+                                    <div class="row" data-vc-grid-content="true">
+                                      
+                                       
+
+                                        <!-- <div class="vc_grid-item vc_clearfix vc_col-sm-6 vc_grid-item-zone-c-bottom vc_visible-item fadeIn animated">
+                                            <div class="vc_grid-item-mini vc_clearfix">
+                                                <div class="vc_gitem-animated-block ">
+                                                    <div class="vc_gitem-zone vc_gitem-zone-a vc-gitem-zone-height-mode-auto vc-gitem-zone-height-mode-auto-1-1 vc_gitem-is-link" style="background-image: url('') !important;">
+                                                        <a href="" title="Winter Tires" class="vc_gitem-link vc-zone-link">
+                                                        </a>   
+                                                        <img src="" class="vc_gitem-zone-img" alt="">
+                                                            <div class="vc_gitem-zone-mini">
+                                                            </div>
+                                                    </div>
+                                                </div>
+                                                <div class="vc_gitem-zone vc_gitem-zone-c vc_custom_1419240516480">
+                                                    <div class="vc_gitem-zone-mini">
+                                                        <div class="vc_gitem_row vc_row vc_gitem-row-position-top">
+                                                            <div class="vc_col-sm-12 vc_gitem-col vc_gitem-col-align-">
+                                                                <div class="vc_custom_heading vc_gitem-post-data vc_gitem-post-data-source-post_title">
+                                                                    <h4 style="text-align: left"></h4>
+                                                                </div>
+                                                                <div class="vc_custom_heading vc_gitem-post-data vc_gitem-post-data-source-post_excerpt">
+                                                                    <p style="text-align: left"></p>
+                                                                </div>   
+                                                                <div class="vc_btn3-container vc_btn3-left">
+                                                                    <a class="vc_general vc_btn3 vc_btn3-size-md vc_btn3-shape-rounded vc_btn3-style-flat vc_btn3-color-juicy-pink" a="" href="" title="Read more">Read more</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>    
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="vc_clearfix"></div>
+                                        </div>-->
+                                                                                                                                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- .padder -->
+        </div>
+</section>
+<footer class="footerWide">
+    <div class="container footer">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="social-ft">
+                    <a href="https://twitter.com/nittotire" target="_blank" class="twitter-ico"></a>
+                    <a href="https://www.facebook.com/NittoTire/" target="_blank" class="facebook-ico"></a>
+                    <a href="https://www.youtube.com/channel/UCacuBR0xB-Hay8pkx1JtDZg" target="_blank" class="youtube-ico"></a>
+                </div>
+                <ul class="footerMenu">
+                                        <li><a href="https://nittosupport.ca/frontend/privacypolicy/">Privacy Policy</a></li>
+                    <li><a href="https://nittosupport.ca/frontend/contactus/" "="">Contact Us</a></li>
+                </ul>
+                <p>Copyright © 2018 Nitto Tires. All rights reserved.Powered by BIT</p>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Footer end -->
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+
+<script src="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/bootstrap.min.js.download"></script>
+
+<script src="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/customSelect.js.download"></script>
+<script src="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/custom-script.js.download"></script>
+
+<script src="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/jquery.scrolling-tabs.js.download"></script>
+<script type="text/javascript">
+$('.tabcustom').scrollingTabs();
+</script>
+
+
+<script type="text/javascript">
+$('document').ready(function(){
+    if ( $("div").hasClass("bar") ) { 
+        
+        var persenteg = $('.course_front_progressbar .bar').attr('data-percentage');
+        
+        if(persenteg<100)
+        {
+            $( "li" ).remove( ".course_certificate" );
+        }
+        console.log(persenteg);
+    }
+    else{
+        $( "li" ).remove( ".course_certificate" );
+    }
+        if (typeof $('.course_details .course_certificate a').html() != 'undefined') {
+        var url = $('.course_details .course_certificate a').attr('href');
+        var pos = url.lastIndexOf('&u=');
+        url = url.substr(0, pos);
+        url += '&u=' + '6';
+        $('.course_details .course_certificate a').attr('href', url);
+    }
+    })
+// <![CDATA[
+var $ = jQuery.noConflict(); $(document).ready(function()  { $('#myCarousel').carousel({ interval: 6000, cycle: true }); });
+// ]]>
+$('#myCarousel').carousel({
+    interval: 6000
+})
+</script>
+		<script type="text/javascript" alt="evo_map_styles">
+		/*<![CDATA[*/
+		var gmapstyles = 'default';
+		/* ]]> */
+		</script>		
+		        <script>
+            jQuery('document').ready(function ($){
+                $('#add_course_assignment').on('click',function(event){
+                    var clone = $('.new_assignment').clone().attr('id','id'+Math.floor(Math.random()*100));
+                    clone.removeClass('hide');
+                    clone.addClass('new_unit');
+                    clone.find('.select_existing_cpt select').addClass('selectcurriculumcpt');
+                    clone.find('input[name="name"]').attr('name','name'+Math.floor(Math.random()*100));
+                    $('ul.curriculum').append(clone);
+                    $('#course_curriculum').trigger('add_section');
+                    return false;
+                });
+                $('#course_curriculum').on('active',function (){
+                    $('select.chosen[multiple]').select2();
+                });
+            });
+        </script>
+        <style>
+        li.new_assignment {
+            display: inline-block;
+            width: 100%;
+            margin: 30px;
+            position: relative;
+        }
+        li.new_assignment a.rem {position:absolute;top:0;right:0;}
+        </style>
+                <!--START INACTIVE LOGOUT MODAL CONTENT-->
+        <div id="ina-logout-modal-container" class="ina-logout-modal-container"></div>
+        <!--END INACTIVE LOGOUT MODAL CONTENT-->
+		        <div id="searchdiv">
+            <form role="search" method="get" id="searchform" action="https://nittosupport.ca/training/">
+                <input type="text" value="" name="s" id="s" placeholder="Hit enter to search...">
+                            <input type="hidden" name="v" value="4326ce96e26c"></form>
+            <span></span>
+        </div>
+					<script type="text/javascript">
+		(function () {
+			var c = document.body.className;
+			c = c.replace(/woocommerce-no-js/, 'woocommerce-js');
+			document.body.className = c;
+		})();
+	</script>
+	<div class="evo_lightboxes" style="display:block">					<div class="evo_lightbox eventcard eventon_events_list" id="">
+						<div class="evo_content_in">													
+							<div class="evo_content_inin">
+								<div class="evo_lightbox_content">
+									<a class="evolbclose ">X</a>
+									<div class="evo_lightbox_body eventon_list_event evo_pop_body evcal_eventcard"> </div>
+								</div>
+							</div>							
+						</div>
+					</div>
+					</div><link rel="stylesheet" id="badgeos-front-css" href="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/badgeos-front.css" type="text/css" media="all">
+<style id="core-block-supports-inline-css" type="text/css">
+/**
+ * Core styles: block-supports
+ */
+
+</style>
+<script type="text/javascript" src="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/wp-polyfill-inert.js.download" id="wp-polyfill-inert-js"></script>
+<script type="text/javascript" src="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/regenerator-runtime.js.download" id="regenerator-runtime-js"></script>
+<script type="text/javascript" src="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/wp-polyfill.js.download" id="wp-polyfill-js"></script>
+<script type="text/javascript" src="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/react.js.download" id="react-js"></script>
+<script type="text/javascript" src="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/react-dom.js.download" id="react-dom-js"></script>
+<script type="text/javascript" src="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/escape-html.js.download" id="wp-escape-html-js"></script>
+<script type="text/javascript" src="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/element.js.download" id="wp-element-js"></script>
+<script type="text/javascript" id="inactive-logout-js-extra">
+/* <![CDATA[ */
+var inactiveLogout = {"ajaxurl":"https:\/\/nittosupport.ca\/training\/wp-admin\/admin-ajax.php","modal":{"ok":"Ok","close":"Close without Reloading","login_wait":"Logging in. Please wait","continue":"Continue Browsing","wakeup_continue":"Ok","headerText":"Session Timeout","message":"<p>You are being timed-out out due to inactivity.<\/p>\n","logout_message":"<p>You are being timed-out out due to inactivity.<\/p>\n","disableCloseWithoutReloadBtn":""},"settings":{"timeout":3600,"disable_countdown":"1","warn_message_enabled":false,"countdown_timeout":10,"redirect":"https:\/\/supportnew.nittosupport.ca\/frontend\/logout"},"security":"b5fcf75bac"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/index.js.download" id="inactive-logout-js"></script><div class="ReactModalPortal"></div>
+<script type="text/javascript" id="mediaelement-core-js-before">
+var mejsL10n = {"language":"en","strings":{"mejs.download-file":"Download File","mejs.install-flash":"You are using a browser that does not have Flash player enabled or installed. Please turn on your Flash player plugin or download the latest version from https:\/\/get.adobe.com\/flashplayer\/","mejs.fullscreen":"Fullscreen","mejs.play":"Play","mejs.pause":"Pause","mejs.time-slider":"Time Slider","mejs.time-help-text":"Use Left\/Right Arrow keys to advance one second, Up\/Down arrows to advance ten seconds.","mejs.live-broadcast":"Live Broadcast","mejs.volume-help-text":"Use Up\/Down Arrow keys to increase or decrease volume.","mejs.unmute":"Unmute","mejs.mute":"Mute","mejs.volume-slider":"Volume Slider","mejs.video-player":"Video Player","mejs.audio-player":"Audio Player","mejs.captions-subtitles":"Captions\/Subtitles","mejs.captions-chapters":"Chapters","mejs.none":"None","mejs.afrikaans":"Afrikaans","mejs.albanian":"Albanian","mejs.arabic":"Arabic","mejs.belarusian":"Belarusian","mejs.bulgarian":"Bulgarian","mejs.catalan":"Catalan","mejs.chinese":"Chinese","mejs.chinese-simplified":"Chinese (Simplified)","mejs.chinese-traditional":"Chinese (Traditional)","mejs.croatian":"Croatian","mejs.czech":"Czech","mejs.danish":"Danish","mejs.dutch":"Dutch","mejs.english":"English","mejs.estonian":"Estonian","mejs.filipino":"Filipino","mejs.finnish":"Finnish","mejs.french":"French","mejs.galician":"Galician","mejs.german":"German","mejs.greek":"Greek","mejs.haitian-creole":"Haitian Creole","mejs.hebrew":"Hebrew","mejs.hindi":"Hindi","mejs.hungarian":"Hungarian","mejs.icelandic":"Icelandic","mejs.indonesian":"Indonesian","mejs.irish":"Irish","mejs.italian":"Italian","mejs.japanese":"Japanese","mejs.korean":"Korean","mejs.latvian":"Latvian","mejs.lithuanian":"Lithuanian","mejs.macedonian":"Macedonian","mejs.malay":"Malay","mejs.maltese":"Maltese","mejs.norwegian":"Norwegian","mejs.persian":"Persian","mejs.polish":"Polish","mejs.portuguese":"Portuguese","mejs.romanian":"Romanian","mejs.russian":"Russian","mejs.serbian":"Serbian","mejs.slovak":"Slovak","mejs.slovenian":"Slovenian","mejs.spanish":"Spanish","mejs.swahili":"Swahili","mejs.swedish":"Swedish","mejs.tagalog":"Tagalog","mejs.thai":"Thai","mejs.turkish":"Turkish","mejs.ukrainian":"Ukrainian","mejs.vietnamese":"Vietnamese","mejs.welsh":"Welsh","mejs.yiddish":"Yiddish"}};
+</script>
+<script type="text/javascript" src="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/mediaelement-and-player.js.download" id="mediaelement-core-js"></script>
+<script type="text/javascript" src="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/mediaelement-migrate.js.download" id="mediaelement-migrate-js"></script>
+<script type="text/javascript" id="mediaelement-js-extra">
+/* <![CDATA[ */
+var _wpmejsSettings = {"pluginPath":"\/training\/wp-includes\/js\/mediaelement\/","classPrefix":"mejs-","stretching":"responsive","audioShortcodeLibrary":"mediaelement","videoShortcodeLibrary":"mediaelement"};
+/* ]]> */
+</script>
+<script type="text/javascript" id="thickbox-js-extra">
+/* <![CDATA[ */
+var thickboxL10n = {"next":"Next >","prev":"< Prev","image":"Image","of":"of","close":"Close","noiframes":"This feature requires inline frames. You have iframes disabled or your browser does not support them.","loadingAnimation":"https:\/\/nittosupport.ca\/training\/wp-includes\/js\/thickbox\/loadingAnimation.gif"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/thickbox.js.download" id="thickbox-js"></script>
+<script type="text/javascript" id="shortcodes-js-js-extra">
+/* <![CDATA[ */
+var vibe_shortcode_strings = {"sending_mail":"Sending mail","error_string":"Error :","invalid_string":"Invalid ","captcha_mismatch":"Captcha Mismatch"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/shortcodes.js.download" id="shortcodes-js-js"></script>
+<script type="text/javascript" id="wc-geolocation-js-extra">
+/* <![CDATA[ */
+var wc_geolocation_params = {"wc_ajax_url":"\/training\/?wc-ajax=%%endpoint%%","home_url":"https:\/\/nittosupport.ca\/training"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/geolocation.js.download" id="wc-geolocation-js"></script>
+<script type="text/javascript" src="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/jquery.blockUI.js.download" id="jquery-blockui-js"></script>
+<script type="text/javascript" src="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/js.cookie.js.download" id="js-cookie-js"></script>
+<script type="text/javascript" id="woocommerce-js-extra">
+/* <![CDATA[ */
+var woocommerce_params = {"ajax_url":"\/training\/wp-admin\/admin-ajax.php","wc_ajax_url":"\/training\/?wc-ajax=%%endpoint%%"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/woocommerce.js.download" id="woocommerce-js"></script>
+<script type="text/javascript" src="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/course-module-js.min.js.download" id="bp-extras-js-js"></script>
+<script type="text/javascript" src="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/wp-mediaelement.js.download" id="wp-mediaelement-js"></script>
+<script type="text/javascript" id="buddypress-js-js-extra">
+/* <![CDATA[ */
+var BP_DTheme = {"accepted":"Accepted","close":"Close","comments":"comments","leave_group_confirm":"Are you sure you want to leave this group?","mark_as_fav":"Favorite","my_favs":"My Favorites","rejected":"Rejected","remove_fav":"Remove Favorite","show_all":"Show all","show_all_comments":"Show all comments for this thread","show_x_comments":"Show all %d comments","unsaved_changes":"Your profile has unsaved changes. If you leave the page, the changes will be lost.","view":"View","too_short":"Too short","weak":"Weak","good":"Good","strong":"Strong"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/buddypress.js.download" id="buddypress-js-js"></script>
+<script type="text/javascript" id="bp-course-js-js-extra">
+/* <![CDATA[ */
+var vibe_course_module_strings = {"timeout":"TIMEOUT","too_fast_answer":"Too Fast or Answer not marked.","answer_saved":"Answer Saved.","processing":"Processing...","saving_answer":"Saving Answer...please wait","remove_user_text":"This step is irreversible. Are you sure you want to remove the User from the course ?","remove_user_button":"Confirm, Remove User from Course","confirm":"Confirm","cancel":"Cancel","reset_user_text":"This step is irreversible. All Units, Quiz results would be reset for this user. Are you sure you want to Reset the Course for this User?","reset_user_button":"Confirm, Reset Course for this User","quiz_reset":"This step is irreversible. All Questions answers would be reset for this user. Are you sure you want to Reset the Quiz for this User? ","quiz_reset_button":"Confirm, Reset Quiz for this User","marks_saved":"Marks Saved","quiz_marks_saved":"Quiz Marks Saved","save_quiz":"Save Quiz progress","saved_quiz_progress":"Saved","submit_quiz":"Submit Quiz","sending_messages":"Sending Messages ...","adding_students":"Adding Students to Course ...","successfuly_added_students":"Students successfully added to Course","unable_add_students":"Unable to Add students to Course","select_fields":"Please select fields to download","download":"Download","theme_color":"#880b17","single_dark_color":"#FAFAFA","for_course":"for Course","active_filters":"Active Filters","clear_filters":"Clear all filters","remove_comment":"Are you sure you want to remove this note?","remove_comment_button":"Confirm, remove note","private_comment":"Make Private","add_comment":"Add your note","submit_quiz_error":"Please add questions or retake the quiz !","remove_announcement":"Are you sure you want to remove this Annoucement?","start_quiz_notification":"You're about to start the Quiz. Please click confirm to begin the quiz.","submit_quiz_notification":"Are you sure you want to submit the quiz. Submitting the quiz will freeze all your answers, you can not change them.  Please confirm.","check_results":"Check results","correct":"Correct","incorrect":"Incorrect","confirm_apply":"Are you sure you want to apply for this Course ?","instructor_uncomplete_unit":"Are you sure you want mark this unit \"incomplete\" for the user ?","instructor_complete_unit":"Are you sure you want to mark this unit \"complete\" for the user ?","unanswered_questions":"You have few unanswered questions. Are you sure you want to continue ?","enter_more_characters":"Please enter 4 or more characters ...","correct_answer":"Correct Answer","explanation":"Explanation","And":"and","go":"Go","security":"757031636a","confirm_course_retake":"Are you sure you want to retake course?"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/course.js.download" id="bp-course-js-js"></script>
+<script type="text/javascript" src="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/eventon_functions.js.download" id="evcal_functions-js"></script>
+<script type="text/javascript" src="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/handlebars.js.download" id="evo_handlebars-js"></script>
+<script type="text/javascript" src="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/jquery.mobile.min.js.download" id="evo_mobile-js"></script>
+<script type="text/javascript" src="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/jquery.mousewheel.min.js.download" id="evo_mouse-js"></script>
+<script type="text/javascript" id="evcal_ajax_handle-js-extra">
+/* <![CDATA[ */
+var the_ajax_script = {"ajaxurl":"https:\/\/nittosupport.ca\/training\/wp-admin\/admin-ajax.php","postnonce":"10004ad223"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/eventon_script.js.download" id="evcal_ajax_handle-js"></script>
+<script type="text/javascript" src="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/front-scripts.js.download" id="wcml-front-scripts-js"></script>
+<script type="text/javascript" id="cart-widget-js-extra">
+/* <![CDATA[ */
+var actions = {"is_lang_switched":"0","force_reset":"0"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/cart_widget.js.download" id="cart-widget-js"></script>
+<script type="text/javascript" id="wpb_composer_front_js-js-extra">
+/* <![CDATA[ */
+var vcData = {"currentTheme":{"slug":"wplms"}};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/js_composer_front.min.js.download" id="wpb_composer_front_js-js"></script>
+<script type="text/javascript" id="wplms-js-extra">
+/* <![CDATA[ */
+var wplms = {"more":"More","view_more":"View More","menu":"Menu","wplms_woocommerce_validate":"Please fill in all the required fields (indicated by *)","open_menu":"Open\/Close Menu","invalid_mail":"Invalid email entered !","signon_security":"2fa74a17b9"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/wplms.legacy.js.download" id="wplms-js"></script>
+<script type="text/javascript" src="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/jquery.mousewheel.min(1).js.download" id="evo_dv_mousewheel-js"></script>
+<script type="text/javascript" src="./Nitto Support Site – Welcome to the Nitto Tires training module site._files/dv_script.js.download" id="evo_dv_script-js"></script>
+
+</body></html>

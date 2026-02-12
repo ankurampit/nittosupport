@@ -1,0 +1,81 @@
+/**
+ * jquery-bootstrap-scrolling-tabs
+ * @version v2.4.0
+ * @link https://github.com/mikejacobson/jquery-bootstrap-scrolling-tabs
+ * @author Mike Jacobson <michaeljjacobson1@gmail.com>
+ * @license MIT License, http://www.opensource.org/licenses/MIT
+ */
+.scrtabs-tab-container * {
+  box-sizing: border-box; }
+
+.scrtabs-tab-container {
+  height: auto; position: relative;}
+  .scrtabs-tab-container .tab-content {
+    clear: left; }
+
+.scrtabs-tab-container.scrtabs-bootstrap4 .scrtabs-tabs-movable-container > .navbar-nav {
+  -ms-flex-direction: row;
+  flex-direction: row; }
+
+.scrtabs-tabs-fixed-container {
+  float: left;
+  height: auto;
+  overflow: hidden;
+  width: 100% !important;
+}
+
+.scrtabs-tabs-movable-container {
+  position: relative; }
+  .scrtabs-tabs-movable-container .tab-content {
+    display: none; }
+
+.scrtabs-tab-container.scrtabs-rtl .scrtabs-tabs-movable-container > ul.nav-tabs {
+  padding-right: 0; }
+
+.scrtabs-tab-scroll-arrow {
+  border: 0;
+  background-color: #fff;
+  color: #101010;
+  display: none;
+  font-size: 20px;
+  height: 32px;
+  width: 32px; 
+    line-height: 32px;
+    text-align: center;
+    border-radius: 50%;
+  position:absolute;
+  top:80px;
+    z-index: 999;
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.20);
+-moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.20);
+box-shadow: 0px 0px  10px rgba(0,0,0,0.20);
+}
+.scrtabs-tab-scroll-arrow:hover {
+    background-color: #2e93fd; 
+    color: #fff;
+}
+.scrtabs-tab-scroll-arrow-left{
+    left: -15px;
+}
+.scrtabs-tab-scroll-arrow-right{
+    right: -15px;
+}
+.scrtabs-tab-scroll-arrow,
+.scrtabs-tab-scroll-arrow .scrtabs-click-target {
+  cursor: pointer; }
+
+.scrtabs-tab-scroll-arrow.scrtabs-with-click-target {
+  cursor: default; }
+
+.scrtabs-tab-scroll-arrow.scrtabs-disable,
+.scrtabs-tab-scroll-arrow.scrtabs-disable .scrtabs-click-target {
+  color: #ddd;
+  cursor: default; }
+
+.scrtabs-tab-scroll-arrow.scrtabs-disable:hover {
+  background-color: initial; }
+/*
+
+.scrtabs-tabs-fixed-container ul.nav-tabs > li {
+  white-space: nowrap; }
+*/

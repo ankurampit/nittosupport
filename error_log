@@ -1,0 +1,14 @@
+[04-Nov-2025 09:00:59 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_select_db() in /home/nittosupport/demo.nittosupport.ca/public_html/index.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/nittosupport/demo.nittosupport.ca/public_html/index.php on line 3
+[04-Nov-2025 09:01:27 UTC] PHP Fatal error:  Uncaught ArgumentCountError: mysqli_select_db() expects exactly 2 arguments, 1 given in /home/nittosupport/demo.nittosupport.ca/public_html/index.php:3
+Stack trace:
+#0 /home/nittosupport/demo.nittosupport.ca/public_html/index.php(3): mysqli_select_db('nittosupport_de...')
+#1 {main}
+  thrown in /home/nittosupport/demo.nittosupport.ca/public_html/index.php on line 3
+[04-Nov-2025 09:03:50 UTC] PHP Fatal error:  Uncaught ArgumentCountError: mysqli_select_db() expects exactly 2 arguments, 1 given in /home/nittosupport/demo.nittosupport.ca/public_html/index.php:3
+Stack trace:
+#0 /home/nittosupport/demo.nittosupport.ca/public_html/index.php(3): mysqli_select_db('nittosupport_de...')
+#1 {main}
+  thrown in /home/nittosupport/demo.nittosupport.ca/public_html/index.php on line 3

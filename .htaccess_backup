@@ -1,0 +1,20 @@
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /nittosupport/
+RewriteRule ^index\.php$ - [L]
+
+# Add trailing slash to wp-admin
+RewriteRule ^([_0-9a-zA-Z-]+/)?wp-admin$ $1wp-admin/ [R=302,L]
+
+# Allow existing files/directories
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Multisite: rewrite for subsites
+RewriteRule ^([_0-9a-zA-Z-]+/)?(wp-(content|admin|includes).*) /nittosupport/$2 [L]
+RewriteRule ^([_0-9a-zA-Z-]+/)?(.*\.php)$ /nittosupport/$2 [L]
+
+# Main multisite rewrite
+RewriteRule . index.php [L]
+</IfModule> 

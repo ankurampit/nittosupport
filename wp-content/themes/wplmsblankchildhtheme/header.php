@@ -27,7 +27,7 @@
         <div class="container header">
             <div class="row">
                 <div class="col-xs-7 logo">
-                    <a href="https://nittosupport.ca/"><img src="https://nittosupport.ca/assets/img/logo.png" alt="Logo" title="Logo" class="img-responsive"></a>
+                    <a href="<?php echo home_url(); ?>"><img src="<?php echo get_stylesheet_directory_uri() . '/assets/images/logo.png' ?>" rel="stylesheet" alt="Logo" title="Logo" class="img-responsive"></a>
                 </div>
                 <div class="col-xs-5">
                     <nav class="navbar navbar-default" role="navigation">
@@ -67,16 +67,16 @@
     <section class="sticky-container innerSticker">
         <ul class="sticky">
             <li>
-                <img src="https://nittosupport.ca/training/wp-content/themes/wplmsblankchildhtheme/img/tw-white.png" alt="Twitter">
-                <p><a href="https://twitter.com/nittotire" target="_blank">Follow Us on<br>Twitter</a></p>
+                <img src="<?php echo get_stylesheet_directory_uri() . '/assets/images/tw-white.png' ?>" alt="Twitter">
+                <p><a href="*" target="_blank">Follow Us on<br>Twitter</a></p>
             </li>
             <li>
-                <img src="https://nittosupport.ca/training/wp-content/themes/wplmsblankchildhtheme/img/fb-white.png" alt="Facebook">
-                <p><a href="https://www.facebook.com/NittoTire/" target="_blank">Like Us on<br>Facebook</a></p>
+                <img src="<?php echo get_stylesheet_directory_uri() . '/assets/images/fb-white.png' ?>" alt="Facebook">
+                <p><a href="*" target="_blank">Like Us on<br>Facebook</a></p>
             </li>
             <li>
-                <img src="https://nittosupport.ca/training/wp-content/themes/wplmsblankchildhtheme/img/yt-white.png" alt="Youtube">
-                <p><a href="https://www.youtube.com/channel/UCacuBR0xB-Hay8pkx1JtDZg" target="_blank">Subscribe
+                <img src="<?php echo get_stylesheet_directory_uri() . '/assets/images/yt-white.png' ?>" rel="stylesheet" alt="Youtube">
+                <p><a href="*" target="_blank">Subscribe
                         on<br>YouYube</a></p>
             </li>
         </ul>
