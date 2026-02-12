@@ -229,62 +229,97 @@ class WPLMS_ZIP_UPLOAD_HANDLER{
 		return array();
 	}
 
-	function getFile($dir){
-        $myDirectory = opendir($dir);
-        $fileArray = array();
-        $myDirectory = opendir($dir);
-        $fileArray = array();
-        $file1 = '';
-        // get each entry
+    
+    function getFile($dir) {
+    // Open the directory
+	    $myDirectory = opendir($dir);
+	    $fileArray = array();
+	    $file1 = '';
 
-        while($entryName = readdir($myDirectory)) {
-          	if ($entryName != "." && $entryName !=".."){
-          		$f = '';
-	          	if($entryName == 'imsmanifest.xml'){
-	          		$xml = simplexml_load_file($dir.'/'.$entryName);
-	 
-	          		if(!empty($xml->resources->resource)){
+	    // Debugging: print the directory contents
+	    //print_r("Scanning directory: $dir\n");
 
-	          			$link = (string)$xml->resources->resource[0]['href'];
+	    // Read the directory entries
+	    while ($entryName = readdir($myDirectory)) {
+	        // Skip the "." and ".." entries
+	        if ($entryName != "." && $entryName != "..") {
+	            // Initialize the file path
+	            $f = '';
 
-	          			$f = $dir.'/'.$link;
-	          			$entryName = $link;
-	          			return $entryName;
-	          		}
-
-	          		if(!empty($xml->resources->resource->attributes()) && !empty($xml->resources->resource->attributes()->href)){
-	          			
-	          			$link = (string)$xml->resources->resource->attributes()->href;
-	          			$f = $dir.'/'.$link;
-	          			$entryName = $link;
-	          			return $entryName;
-	          		}
-	          	}
-
-	          	if(empty($f)){	
-	          		$f = $this->getUploadsPath().$entryName;
-	          	}
-
-          		$fname = pathinfo ($f, PATHINFO_FILENAME);
-            	$ext = pathinfo ($f,PATHINFO_EXTENSION);
-            	if (in_array($ext,array('html','htm','mov','avi','mp4','mp3','txt'))){
-	              	if(!empty($entryName)){
-		                if(strpos($fname, 'index') !== false || strpos($fname, 'story') !== false){
-		                    return $entryName;
-		                    break;
-		                }else{
-		                    $file1 = $entryName;
-		                }
+	            // If the entry is a directory, recurse into it
+	            if (is_dir($dir . '/' . $entryName)) {
+	                // Recursively call getFile to scan the subdirectory
+	                $subDirectoryFile = $this->getFile($dir . '/' . $entryName);
+	                if ($subDirectoryFile) {
+	                    return $subDirectoryFile;  // Return the file if found in subdirectory
 	                }
 	            }
-          	}
-        }
-        closedir($myDirectory);
-        if(!empty($file1)){
-          	return $file1;
-        }
-        return false;
-    }
+
+	            // If it's imsmanifest.xml, handle it specifically
+	            if ($entryName == 'imsmanifest.xml') {
+	                // Load the XML file
+	                $xml = simplexml_load_file($dir . '/' . $entryName);
+
+	                // If resources->resource exists, get the link
+	                if (!empty($xml->resources->resource)) {
+	                    // Get the href of the resource
+	                    $link = (string)$xml->resources->resource[0]['href'];
+
+	                    // Ensure we use the correct path based on the XML
+	                    $f = $dir . '/' . $link;
+
+	                    // Check if the file exists in the directory
+	                    if (file_exists($f)) {
+	                        return $link;  // Return the link directly if found
+	                    } else {
+	                        echo "File $link not found!";
+	                    }
+	                }
+
+	                // If there are attributes with href, get the link
+	                if (!empty($xml->resources->resource->attributes()) && !empty($xml->resources->resource->attributes()->href)) {
+	                    $link = (string)$xml->resources->resource->attributes()->href;
+	                    $f = $dir . '/' . $link;
+	                    return $link;  // Return the link directly
+	                }
+	            }
+
+	            // If no special imsmanifest.xml logic, just set the file path
+	            if (empty($f)) {
+	                $f = $this->getUploadsPath() . $entryName;
+	            }
+
+	            // Get the file name and extension
+	            $fname = pathinfo($f, PATHINFO_FILENAME);
+	            $ext = pathinfo($f, PATHINFO_EXTENSION);
+
+	            // Check if the file has a valid extension
+	            if (in_array(strtolower($ext), array('html', 'htm'))) {
+	                // If the filename contains 'index' or 'story', return this file
+	                if (strpos($fname, 'index') !== false || strpos($fname, 'story') !== false) {
+	                    return $entryName;
+	                } else {
+	                    // Otherwise, keep track of the last valid file found
+	                    $file1 = $entryName;
+	                }
+	            }
+	        }
+	    }
+
+	    // Close the directory
+	    closedir($myDirectory);
+
+	    // If a valid file was found, return it
+	    if (!empty($file1)) {
+	        return $file1;
+	    }
+
+	    // If no valid file was found, return false
+	    return false;
+	}
+
+
+
 
 	function print_js(){ 
 		wp_enqueue_script('package_uploads',WPLMS_PLUGIN_INCLUDES_URL.'/vibe-shortcodes/js/package_uploads.js',array('jquery'),'1.3');
@@ -337,91 +372,70 @@ class WPLMS_ZIP_UPLOAD_HANDLER{
 	}
 
 
+	function extractZip($fileName, $target, $dir, $user_id = null) {
+	    $arr = array();
 
-	function extractZip($fileName,$target,$dir,$user_id=null){
-	 		$arr = array();
+	    if (!class_exists('\ZipArchive')) {
+	        return new \WP_Error('zip_error', 'PHP Zip extension not loaded');
+	    }
 
-	 		if ( ! class_exists( '\ZipArchive' ) ) {
-                        return new \WP_Error( 'zip_error', 'PHP Zip extension not loaded' );
-	                }
+	    $zip = new ZipArchive;
+	    $res = $zip->open($fileName);
+	    if ($res === TRUE) {
 
-	 	 $zip = new ZipArchive;
-	     $res = $zip->open($fileName);
-	     if ($res === TRUE) {
+	        // Allowed extensions for extraction
+	        $ext = wp_get_ext_types();
+	        unset($ext["archive"]);
+	        unset($ext["code"]["php"]);
+	        $allowed_extensions = array_merge(...array_values($ext));
+	        $allowed_extensions[] = "xsd";
+	        $allowed_extensions[] = "xml";
+	        $allowed_extensions[] = "json";
 
-	     	$ext = wp_get_ext_types();
-	     	unset($ext["archive"]);
-	     	unset($ext["code"]["php"]);
-	     	$allowed_extensions = array_merge(...array_values($ext));
-	     	$allowed_extensions[]="xsd";$allowed_extensions[]="xml";
-	     	$file_names_to_extract = [];
-		    for ($i = 0; $i < $zip->numFiles; $i++) {
-		        $fileName = $zip->getNameIndex($i);
-		        $fileExtension = pathinfo($fileName, PATHINFO_EXTENSION);
-		        if (in_array(strtolower($fileExtension), $allowed_extensions)) {
-		            $file_names_to_extract[] = $fileName; 
-		        }
-		    }
+	        // Files to be extracted
+	        $file_names_to_extract = [];
+	        for ($i = 0; $i < $zip->numFiles; $i++) {
+	            $fileName = $zip->getNameIndex($i);
+	            $fileExtension = pathinfo($fileName, PATHINFO_EXTENSION);
 
-	     	 $zip->extractTo($target, $file_names_to_extract);
-	         //$zip->extractTo($target);//,$allowed_extensions);
-	         $zip->close();
-			 $file = $this->getFile($target);
+	            // Check if the file extension is allowed for extraction
+	            if (in_array(strtolower($fileExtension), $allowed_extensions)) {
+	                $file_names_to_extract[] = $fileName;
+	            }
+	        }
 
-			$non_allowed_extensions = ["php", "py", "rb", "cgi", "pl", "jsp", "java","exe","asp", "aspx", "jsp","sh", "bash", "bat"];
+	        // Debugging: print file names to be extracted
+	        //print_r($file_names_to_extract);
 
-			$non_allowed_mimes =  [
-			    "application/x-httpd-php",
-			    "text/x-python",
-			    "application/php",
-			    "application/x-ruby",
-			    "text/x-php",
-			    "application/x-msdos-program",
-			    "application/x-cgi",
-			    "application/x-perl",
-			    "application/x-jsp",
-			    "text/x-java-source,java",
-			    "application/x-msdownload",
-			    "text/asp",
-			    "application/xml",
-			    "application/x-jsp",
-			    "application/x-sh",
-			    "application/x-bsh",
-			    "application/bat"
-			];
+	        // Extract the selected files
+	        $zip->extractTo($target, $file_names_to_extract);
+	        $zip->close();
 
-			//scan folder and subfolders for mimetype check
-			$files = wplms_getAllFiles($target);
-			if(!empty($files)){
-				foreach($files as $nfile){
-					$extension = pathinfo($nfile, PATHINFO_EXTENSION);
-					if(in_array($extension,$non_allowed_extensions)){
-						@unlink($nfile);
-					}
-					$mime_type = $this->_mime_content_type($nfile);
-				
-					if(in_array($mime_type,$non_allowed_mimes)){
-						@unlink($nfile);
-					}
-				}
-			}
+	        // Debugging: list extracted files in the target directory
+	        $extractedFiles = scandir($target);
+	        //print_r($extractedFiles);
 
+	        // Search for the index.html file
+	        $file = $this->getFile($target);
 
-			if($file){
-				 $arr[0] = 'uploaded'; 
-				 $arr[1] = $this->getUploadsUrl($user_id).$dir."/".$file; 
-				 $arr[2] = $dir;
-				 $arr[3] =$file;
-				 $arr[4] = $this->getUploadsPath($user_id).$dir; 
-			 }else{
-				 $arr[0] = __('Please upload zip file, Index.html file not found in package','wplms').$target.print_r($file);
-				 $this->rrmdir($target);
-			 }
-	     }else{
-			$arr[0] = __('Upload failed !','wplms');;
-	     }
-		 return  $arr;
+	        if ($file) {
+	            $arr[0] = 'uploaded';
+	            $arr[1] = $this->getUploadsUrl($user_id) . $dir . "/" . $file;
+	            $arr[2] = $dir;
+	            $arr[3] = $file;
+	            $arr[4] = $this->getUploadsPath($user_id) . $dir;
+	        } else {
+	            $arr[0] = __('Please upload zip file, Index.html file not found in package', 'wplms');
+	            $this->rrmdir($target);
+	        }
+	    } else {
+	        $arr[0] = __('Upload failed!', 'wplms');
+	    }
+
+	    return $arr;
 	}
+
+
 
 	function rrmdir($dir) {
 		if (is_dir($dir)) {

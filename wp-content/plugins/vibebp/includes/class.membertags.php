@@ -30,8 +30,8 @@ class VibeBP_MemberTagsTaxonomy{
 	}
 	function vibebp_register_menu_page(){
 	    add_users_page(
-			__('Member Tags','vibe'),
-	        __('Member Tags','vibe'),
+			__('Member Tags','vibebp'),
+	        __('Member Tags','vibebp'),
 	        'manage_options',
 			'edit-tags.php?taxonomy=member_tag'
 		);
@@ -40,26 +40,26 @@ class VibeBP_MemberTagsTaxonomy{
 	function vibebp_register_custom_post_type(){
 		register_taxonomy( 'member_tag', 'user', array(
 			'labels'                     => array(
-			    'name'                       => _x( 'Member Tags', 'Member Tags Name', 'vibe-projects' ),
-			    'singular_name'              => _x( 'Member Tag', 'Member TagsName', 'vibe-projects' ),
-			    'menu_name'                  => __( 'Member Tags', 'vibe-projects' ),
-			    'all_items'                  => __( 'All Member Tags', 'vibe-projects' ),
-			    'parent_item'                => __( 'Parent Member Tag', 'vibe-projects' ),
-			    'parent_item_colon'          => __( 'Parent Member Tag:', 'vibe-projects' ),
-			    'new_item_name'              => __( 'New Member TagsName', 'vibe-projects' ),
-			    'add_new_item'               => __( 'Add Member Tag', 'vibe-projects' ),
-			    'edit_item'                  => __( 'Edit Member Tag', 'vibe-projects' ),
-			    'update_item'                => __( 'Update Member Tag', 'vibe-projects' ),
-			    'view_item'                  => __( 'View Member Tag', 'vibe-projects' ),
-			    'separate_items_with_commas' => __( 'Separate member_tag with commas', 'vibe-projects' ),
-			    'add_or_remove_items'        => __( 'Add or remove member tag', 'vibe-projects' ),
-			    'choose_from_most_used'      => __( 'Choose from the most used', 'vibe-projects' ),
-			    'popular_items'              => __( 'Popular Member Tags', 'vibe-projects' ),
-			    'search_items'               => __( 'Search Member Tags', 'vibe-projects' ),
-			    'not_found'                  => __( 'Not Found', 'vibe-projects' ),
-			    'no_terms'                   => __( 'No member tag', 'vibe-projects' ),
-			    'items_list'                 => __( 'Member Tags list', 'vibe-projects' ),
-			    'items_list_navigation'      => __( 'Member Tags list navigation', 'vibe-projects' ),
+			    'name'                       => _x( 'Member Tags', 'Member Tags Name', 'vibebp'),
+			    'singular_name'              => _x( 'Member Tag', 'Member TagsName', 'vibebp'),
+			    'menu_name'                  => __( 'Member Tags', 'vibebp'),
+			    'all_items'                  => __( 'All Member Tags', 'vibebp'),
+			    'parent_item'                => __( 'Parent Member Tag', 'vibebp'),
+			    'parent_item_colon'          => __( 'Parent Member Tag:', 'vibebp'),
+			    'new_item_name'              => __( 'New Member TagsName', 'vibebp'),
+			    'add_new_item'               => __( 'Add Member Tag', 'vibebp'),
+			    'edit_item'                  => __( 'Edit Member Tag', 'vibebp'),
+			    'update_item'                => __( 'Update Member Tag', 'vibebp'),
+			    'view_item'                  => __( 'View Member Tag', 'vibebp'),
+			    'separate_items_with_commas' => __( 'Separate member_tag with commas', 'vibebp'),
+			    'add_or_remove_items'        => __( 'Add or remove member tag', 'vibebp'),
+			    'choose_from_most_used'      => __( 'Choose from the most used', 'vibebp'),
+			    'popular_items'              => __( 'Popular Member Tags', 'vibebp'),
+			    'search_items'               => __( 'Search Member Tags', 'vibebp'),
+			    'not_found'                  => __( 'Not Found', 'vibebp'),
+			    'no_terms'                   => __( 'No member tag', 'vibebp'),
+			    'items_list'                 => __( 'Member Tags list', 'vibebp'),
+			    'items_list_navigation'      => __( 'Member Tags list navigation', 'vibebp'),
 			),
 		    'hierarchical'               => false,
 		    'public'                     => false,
@@ -84,7 +84,7 @@ class VibeBP_MemberTagsTaxonomy{
 
 	  unset( $columns['posts'] );
 
-	  $columns['users'] = __( 'Users' );
+	  $columns['users'] = __( 'Users' ,'vibebp');
 
 	  return $columns;
 	}
@@ -134,7 +134,7 @@ class VibeBP_MemberTagsTaxonomy{
 	
 	function add_user_member_tag_metabox($true,$user_id){
 		$screen_id = get_current_screen()->id;
-		add_meta_box( 'member_tag_taxonomy', __( 'Select Member Tag', 'vibe-projects' ), array($this,'get_member_tag_taxonomy'), $screen_id,'side' );
+		add_meta_box( 'member_tag_taxonomy', __( 'Select Member Tag', 'vibebp'), array($this,'get_member_tag_taxonomy'), $screen_id,'side' );
 	}
 	function get_member_tag_taxonomy($user = null ){
 		    $terms = get_terms([

@@ -89,6 +89,28 @@ class Widget_Image extends Widget_Base {
 		return [ 'image', 'photo', 'visual' ];
 	}
 
+	protected function is_dynamic_content(): bool {
+		return false;
+	}
+
+	/**
+	 * Get style dependencies.
+	 *
+	 * Retrieve the list of style dependencies the widget requires.
+	 *
+	 * @since 3.24.0
+	 * @access public
+	 *
+	 * @return array Widget style dependencies.
+	 */
+	public function get_style_depends(): array {
+		return [ 'widget-image' ];
+	}
+
+	public function has_widget_inner_wrapper(): bool {
+		return ! Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
+	}
+
 	/**
 	 * Register image widget controls.
 	 *
@@ -124,7 +146,9 @@ class Widget_Image extends Widget_Base {
 			[
 				'name' => 'image', // Usage: `{name}_size` and `{name}_custom_dimension`, in this case `image_size` and `image_custom_dimension`.
 				'default' => 'large',
-				'separator' => 'none',
+				'condition' => [
+					'image[url]!' => '',
+				],
 			]
 		);
 
@@ -139,6 +163,9 @@ class Widget_Image extends Widget_Base {
 					'custom' => esc_html__( 'Custom Caption', 'elementor' ),
 				],
 				'default' => 'none',
+				'condition' => [
+					'image[url]!' => '',
+				],
 			]
 		);
 
@@ -150,6 +177,7 @@ class Widget_Image extends Widget_Base {
 				'default' => '',
 				'placeholder' => esc_html__( 'Enter your image caption', 'elementor' ),
 				'condition' => [
+					'image[url]!' => '',
 					'caption_source' => 'custom',
 				],
 				'dynamic' => [
@@ -169,6 +197,9 @@ class Widget_Image extends Widget_Base {
 					'file' => esc_html__( 'Media File', 'elementor' ),
 					'custom' => esc_html__( 'Custom URL', 'elementor' ),
 				],
+				'condition' => [
+					'image[url]!' => '',
+				],
 			]
 		);
 
@@ -181,6 +212,7 @@ class Widget_Image extends Widget_Base {
 					'active' => true,
 				],
 				'condition' => [
+					'image[url]!' => '',
 					'link_to' => 'custom',
 				],
 				'show_label' => false,
@@ -205,6 +237,7 @@ class Widget_Image extends Widget_Base {
 					'no' => esc_html__( 'No', 'elementor' ),
 				],
 				'condition' => [
+					'image[url]!' => '',
 					'link_to' => 'file',
 				],
 			]
@@ -226,18 +259,23 @@ class Widget_Image extends Widget_Base {
 				'label' => esc_html__( 'Alignment', 'elementor' ),
 				'type' => Controls_Manager::CHOOSE,
 				'options' => [
-					'left' => [
-						'title' => esc_html__( 'Left', 'elementor' ),
+					'start' => [
+						'title' => esc_html__( 'Start', 'elementor' ),
 						'icon' => 'eicon-text-align-left',
 					],
 					'center' => [
 						'title' => esc_html__( 'Center', 'elementor' ),
 						'icon' => 'eicon-text-align-center',
 					],
-					'right' => [
-						'title' => esc_html__( 'Right', 'elementor' ),
+					'end' => [
+						'title' => esc_html__( 'End', 'elementor' ),
 						'icon' => 'eicon-text-align-right',
 					],
+				],
+				'classes' => 'elementor-control-start-end',
+				'selectors_dictionary' => [
+					'left' => is_rtl() ? 'end' : 'start',
+					'right' => is_rtl() ? 'start' : 'end',
 				],
 				'selectors' => [
 					'{{WRAPPER}}' => 'text-align: {{VALUE}};',
@@ -350,6 +388,7 @@ class Widget_Image extends Widget_Base {
 					'fill' => esc_html__( 'Fill', 'elementor' ),
 					'cover' => esc_html__( 'Cover', 'elementor' ),
 					'contain' => esc_html__( 'Contain', 'elementor' ),
+					'scale-down' => esc_html__( 'Scale Down', 'elementor' ),
 				],
 				'default' => '',
 				'selectors' => [
@@ -379,7 +418,8 @@ class Widget_Image extends Widget_Base {
 					'{{WRAPPER}} img' => 'object-position: {{VALUE}};',
 				],
 				'condition' => [
-					'object-fit' => 'cover',
+					'height[size]!' => '',
+					'object-fit' => [ 'cover', 'contain', 'scale-down' ],
 				],
 			]
 		);
@@ -530,6 +570,7 @@ class Widget_Image extends Widget_Base {
 				'label' => esc_html__( 'Caption', 'elementor' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
 				'condition' => [
+					'image[url]!' => '',
 					'caption_source!' => 'none',
 				],
 			]
@@ -541,22 +582,27 @@ class Widget_Image extends Widget_Base {
 				'label' => esc_html__( 'Alignment', 'elementor' ),
 				'type' => Controls_Manager::CHOOSE,
 				'options' => [
-					'left' => [
-						'title' => esc_html__( 'Left', 'elementor' ),
+					'start' => [
+						'title' => esc_html__( 'Start', 'elementor' ),
 						'icon' => 'eicon-text-align-left',
 					],
 					'center' => [
 						'title' => esc_html__( 'Center', 'elementor' ),
 						'icon' => 'eicon-text-align-center',
 					],
-					'right' => [
-						'title' => esc_html__( 'Right', 'elementor' ),
+					'end' => [
+						'title' => esc_html__( 'End', 'elementor' ),
 						'icon' => 'eicon-text-align-right',
 					],
 					'justify' => [
 						'title' => esc_html__( 'Justified', 'elementor' ),
 						'icon' => 'eicon-text-align-justify',
 					],
+				],
+				'classes' => 'elementor-control-start-end',
+				'selectors_dictionary' => [
+					'left' => is_rtl() ? 'end' : 'start',
+					'right' => is_rtl() ? 'start' : 'end',
 				],
 				'default' => '',
 				'selectors' => [
@@ -630,7 +676,7 @@ class Widget_Image extends Widget_Base {
 					],
 				],
 				'selectors' => [
-					'{{WRAPPER}} .widget-image-caption' => 'margin-top: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .widget-image-caption' => 'margin-block-start: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
@@ -657,7 +703,7 @@ class Widget_Image extends Widget_Base {
 	 *
 	 * @access private
 	 * @since 2.3.0
-	 * @param $settings
+	 * @param array $settings
 	 *
 	 * @return string
 	 */
@@ -786,7 +832,7 @@ class Widget_Image extends Widget_Base {
 			var link_url;
 
 			if ( 'custom' === settings.link_to ) {
-				link_url = settings.link.url;
+				link_url = settings.link?.url;
 			}
 
 			if ( 'file' === settings.link_to ) {
@@ -804,7 +850,7 @@ class Widget_Image extends Widget_Base {
 			}
 
 			if ( link_url ) {
-					#><a class="elementor-clickable" data-elementor-open-lightbox="{{ settings.open_lightbox }}" href="{{ link_url }}"><#
+					#><a class="elementor-clickable" data-elementor-open-lightbox="{{ settings.open_lightbox }}" href="{{ elementor.helpers.sanitizeUrl( link_url ) }}"><#
 			}
 						#><img src="{{ image_url }}" class="{{ imgClass }}" /><#
 

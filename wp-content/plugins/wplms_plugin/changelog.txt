@@ -1,3 +1,31 @@
+* 1.9.9.8.1
+* vuln. fixes
+* 1.9.9.8
+* forgot password template fix
+* Vuln fixes #54fc5b7f-2903-4e9a-9e45-e43a66016c9d
+* Vuln. fixes  97da49f1-b8da-4cab-a21f-dd71cb409c24
+* 1.9.9.7
+* sanitize search
+* show pre-course name in error
+* updated function exists
+* correct managing courses link
+* expand notifications args
+* contact widget fix
+* SCORM Fix
+* remove certifiate force
+* assignment title fix
+* Total progress migrated to function
+* fix is Loading of button
+* Upload handler fixes
+* remove debug statemenet
+* 1.9.9.6
+* scorm upload handler fix
+* default featured image fix
+* more fixes
+* intval in functions
+* Pmpro membership update fixes
+* tabs filter change
+* hide quiz questions when more than 9
 * 1.9.9.5.4
 * allowed files handler
 * filter on tokens

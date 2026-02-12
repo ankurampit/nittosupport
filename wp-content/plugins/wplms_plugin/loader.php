@@ -5,17 +5,17 @@
  * Description: The most advanced Learning management system for WordPress - wplms.io
  * Author: VibeThemes
  * Author URI: https://vibethemes.com
- * Version: 1.9.9.5.4
+ * Version: 1.9.9.8.1
  * Text Domain: wplms
  * Domain Path: /languages 
- * Tested up to: 6.7.2
+ * Tested up to: 6.8.1
  *
  * @package WPLMS
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-define( 'WPLMS_PLUGIN_VERSION','1.9.9.5.4');
+define( 'WPLMS_PLUGIN_VERSION','1.9.9.8.1');
 
 
 defined('WPLMS_TOKEN') or define('WPLMS_TOKEN', 'token');

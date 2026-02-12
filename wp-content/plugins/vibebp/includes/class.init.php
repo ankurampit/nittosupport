@@ -187,7 +187,8 @@ class VibeBP_Init{
 				        	if(!empty($item['parent_slug'])){
 				        		$item['parent'] = $item['parent_slug'];
 				        	}
-				        	$item['name'] = apply_filters('vibebp_force_apply_translations',translate($item['name'],'vibebp'),$item);
+				        	
+				        	$item['name'] = apply_filters('vibebp_force_apply_translations',$item['name'],$item);
 				        	if(!empty($item['parent_slug']) && $item['parent_slug']==bp_get_profile_slug() && $item['slug']=='edit'){
 				        		$index = count($nav);
 				        	}
@@ -261,6 +262,7 @@ class VibeBP_Init{
  			
             foreach($types as $type => $labels){
             	register_sidebar( array(
+            		// Translators: %s is user name
 			        'name' => sprintf(__( 'VibeBP Member Dashboard for %s','vibebp' ),$labels->labels['name']),
 			        'id' => 'vibebp-dashboard-'.$type,
 			        'description' => __( 'Widgets appear in Dashboard', 'vibebp' ),

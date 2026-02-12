@@ -45,9 +45,11 @@ class WPLMS_Commissions_Report{
 	}
 
 	function enqueue_script($hook){
-		if($hook === 'lms_page_lms-stats' && $_GET['tab'] == 'commissions'){
+		if($hook === 'lms_page_lms-stats' && !empty($_GET['tab']) ){
 			//development
 			//wp_enqueue_script('wplms_commission_stats',plugins_url('../../assets/stats/commissions/dist/js/bundle.js',__FILE__),array('wp-element','react','react-dom'),rand(1,999),true);
+			if(esc_attr($_GET['tab']) == 'commissions'){
+
 			
 			wp_enqueue_style('wplms_commission_stats',plugins_url('../../assets/stats/css/main.css',__FILE__),array(),rand(1,999));
 
@@ -84,6 +86,7 @@ class WPLMS_Commissions_Report{
 					    padding: 1rem;
 					}
 	            </style>'; 
+			}
 		}
 	}
 

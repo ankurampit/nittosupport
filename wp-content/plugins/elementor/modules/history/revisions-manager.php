@@ -176,9 +176,9 @@ class Revisions_Manager {
 				'timestamp' => strtotime( $revision->post_modified ),
 				'date' => sprintf(
 					/* translators: 1: Human readable time difference, 2: Date. */
-					__( '%1$s ago (%2$s)', 'elementor' ),
-					$human_time,
-					$date
+					esc_html__( '%1$s ago (%2$s)', 'elementor' ),
+					'<time>' . $human_time . '</time>',
+					'<time>' . $date . '</time>'
 				),
 				'type' => $type,
 				'typeLabel' => $type_label,
@@ -247,7 +247,7 @@ class Revisions_Manager {
 	 * @param $data
 	 *
 	 * @return array
-	 * @throws \Exception
+	 * @throws \Exception If the revision ID is not set.
 	 */
 	public static function ajax_get_revision_data( array $data ) {
 		if ( ! isset( $data['id'] ) ) {
@@ -278,7 +278,7 @@ class Revisions_Manager {
 	 * @since 2.0.0
 	 * @access public
 	 * @static
-	 * @param array $return_data
+	 * @param array    $return_data
 	 * @param Document $document
 	 *
 	 * @return array
@@ -357,7 +357,7 @@ class Revisions_Manager {
 	}
 
 	/**
-	 * @throws \Exception
+	 * @throws \Exception If the user doesn't have permissions or not found.
 	 */
 	public static function ajax_get_revisions( $data ) {
 		Plugin::$instance->documents->check_permissions( $data['editor_post_id'] );

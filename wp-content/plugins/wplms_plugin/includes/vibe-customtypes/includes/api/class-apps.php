@@ -449,7 +449,7 @@ Class WPLMS_oAuth_Apps{
 		
 		// $access_tokens_results = $wpdb->get_results("SELECT meta_value FROM {$wpdb->usermeta} WHERE meta_key = 'access_tokens'");
 		if(isset($_GET['wplms_api_clients_userid'])){
-			$wplms_api_clients_userid = $_GET['wplms_api_clients_userid'];
+			$wplms_api_clients_userid = esc_attr($_GET['wplms_api_clients_userid']);
 		}
 
 		$total_query     = apply_filters('wplms_usermeta_direct_query',"SELECT COUNT(meta_value) FROM {$wpdb->usermeta} WHERE meta_key = 'access_tokens'");
@@ -468,7 +468,7 @@ Class WPLMS_oAuth_Apps{
 
 		$items_per_page = apply_filters('wplms_api_connected_clients_number',5);
 
-		$page             = isset( $_REQUEST['wplms_cc_page'] ) ? abs( (int) $_REQUEST['wplms_cc_page'] ) : 1;
+		$page             = isset( $_REQUEST['wplms_cc_page'] ) ? abs( (int) esc_attr($_REQUEST['wplms_cc_page'] )) : 1;
 		$offset         = ( $page * $items_per_page ) - $items_per_page;
 		$add_where = '';
 		if(!empty($wplms_api_clients_userid) && (is_numeric($wplms_api_clients_userid) || is_array($wplms_api_clients_userid))){
@@ -484,8 +484,8 @@ Class WPLMS_oAuth_Apps{
 			}
 		}
 
-		if(isset($_GET['wplms_api_clients_orderby'])){
-			$wplms_api_clients_orderby = sanitize_text_field($_GET['wplms_api_clients_orderby']);
+		if(isset($_GET['wplms_api_clients_orderby']) && esc_attr($_GET['wplms_api_clients_orderby'])=='ASC'){
+			$wplms_api_clients_orderby = 'ASC';
 		}else{
 			$wplms_api_clients_orderby = 'DESC';
 		}
@@ -555,12 +555,25 @@ Class WPLMS_oAuth_Apps{
 
 		<form id="api_username_orderby_form" method="get" action="?<?php echo $_SERVER['QUERY_STRING']; ?>">
 			<?php
-			
-				foreach($_GET as $key => $value){
-					if(!in_array($key,array('wplms_api_clients_userid[]','wplms_api_clients_orderby','wplms_cc_page'))){
-						echo '<input type="hidden" name="'.$key.'" value="'.$value.'" />';
+				$keys=  array( 'wplms_api_clients_userid', 'wplms_api_clients_orderby', 'wplms_cc_page' );
+
+				foreach ( $keys as $key ) {
+					$value = esc_attr($_GET[$key]);
+						// Handle array-type query params safely
+					if ( is_array( $value ) ) {
+						foreach ( $value as $v ) {
+							echo '<input type="hidden" name="' . esc_attr( $key ) . '[]" value="' . esc_attr( $v ) . '" />';
+						}
+					} else {
+						echo '<input type="hidden" name="' . esc_attr( $key ) . '" value="' . esc_attr( $value ) . '" />';
 					}
 				}
+
+				// foreach($_GET as $key => $value){
+				// 	if(!in_array($key,array('wplms_api_clients_userid[]','wplms_api_clients_orderby','wplms_cc_page'))){
+				// 		echo '<input type="hidden" name="'.$key.'" value="'.$value.'" />';
+				// 	}
+				// }
 			?>
 			<?php echo $clients_pagination; ?>
 			<select name="wplms_api_clients_userid[]" id="wplms_api_clients_userid" class="selectusers_clients" data-placeholder="<?php echo __('Enter Student Usernames/Emails, separated by comma','wplms');?>" multiple>

@@ -4,8 +4,8 @@
  if ( ! defined( 'ABSPATH' ) ) exit;
 
 function vibe_lms_stats() {
-    $tab = isset( $_GET['tab'] ) ? $_GET['tab'] : 'overview';
-    $subtab = isset( $_GET['subtab'] ) ? $_GET['subtab'] : 'overview';
+    $tab = isset( $_GET['tab'] ) ? esc_attr($_GET['tab']) : 'overview';
+    $subtab = isset( $_GET['subtab'] ) ? esc_attr($_GET['subtab']) : 'overview';
 	lms_stats_tabs($tab);    
 	lms_stats_sub_tabs($tab,$subtab);
 	lms_stats_tab_content($tab,$subtab);
@@ -508,11 +508,11 @@ function lms_stats_course_content($subtab='overview'){
 	$num = 20;
 	$paged=0;
 	if(!empty($_REQUEST['paged']) && $_REQUEST['paged'] && is_numeric($_REQUEST['paged'])){
-		$paged=$_REQUEST['paged'];
+		$paged=esc_attr($_REQUEST['paged']);
 	}
 	$page_num=0;
 	if(isset($_GET['paged']) && is_numeric($_GET['paged']) && $_GET['paged'])
-			$page_num=($_GET['paged'])*$num;
+			$page_num=esc_attr($_GET['paged'])*$num;
 
 	
 
@@ -672,17 +672,17 @@ function lms_stats_course_content($subtab='overview'){
 						?>
 						</ul>
 						<?php
-						if(isset($_GET['paged']) && $_GET['paged']){
-							echo '<a href="?page=lms-stats&tab=course&subtab='.$_GET['subtab'].'&paged='.($_GET['paged']-1).'" class="button">&lsaquo; '.__('Prev','wplms').'</a>';
+						if(isset($_GET['paged']) && esc_attr($_GET['paged'])){
+							echo '<a href="?page=lms-stats&tab=course&subtab='.esc_attr($_GET['subtab']).'&paged='.esc_attr($_GET['paged']-1).'" class="button">&lsaquo; '.__('Prev','wplms').'</a>';
 						}
 						if($total == $num){
 							if(isset($_GET['paged']) && $_GET['paged']){
-								$paged =$_GET['paged'];
+								$paged =esc_attr($_GET['paged']);
 								echo '&nbsp;&nbsp;';
 							}else{
 								$paged = 0;
 							}
-							echo '<a href="?page=lms-stats&tab=course&subtab='.$_GET['subtab'].'&paged='.($paged+1).'" class="button">'.__('Next','wplms').' &rsaquo;</a>';
+							echo '<a href="?page=lms-stats&tab=course&subtab='.esc_attr($_GET['subtab']).'&paged='.($paged+1).'" class="button">'.__('Next','wplms').' &rsaquo;</a>';
 						}
 						
 						?>
@@ -1054,11 +1054,11 @@ function lms_stats_student_content($subtab='overview'){
 	$paged=0;
 
 	if(!empty($_REQUEST['paged']) && is_numeric($_REQUEST['paged'])){
-		$paged=$_REQUEST['paged'];
+		$paged=esc_attr($_REQUEST['paged']);
 	}
 	$page_num=0;
 	if(isset($_GET['paged']) && is_numeric($_GET['paged']) && $_GET['paged'])
-			$page_num=($_GET['paged'])*$num;
+			$page_num=esc_attr($_GET['paged'])*$num;
 
 	$student_info = lms_student_info_data($page_num,$num);
 	
@@ -1115,11 +1115,11 @@ function lms_stats_student_content($subtab='overview'){
 						</ul>
 						<?php
 						if(isset($_GET['paged']) && $_GET['paged']){
-							echo '<a href="?page=lms-stats&tab=students&subtab=overview&paged='.($_GET['paged']-1).'" class="button">&lsaquo; '.__('Prev','wplms').'</a>';
+							echo '<a href="?page=lms-stats&tab=students&subtab=overview&paged='.esc_attr($_GET['paged']-1).'" class="button">&lsaquo; '.__('Prev','wplms').'</a>';
 						}
 						if($total == $num){
 							if(isset($_GET['paged']) && $_GET['paged']){
-								$paged =$_GET['paged'];
+								$paged =esc_attr($_GET['paged']);
 								echo '&nbsp;&nbsp;';
 							}else{
 								$paged = 0;
@@ -1549,36 +1549,37 @@ if(!class_exists('WPLMS_Admin_Reports')){
 
 	    function enqueue_script($screen){
 
-	    	if($screen->base == 'lms_page_lms-stats' && $_GET['tab'] == 'report'){
+	    	if($screen->base == 'lms_page_lms-stats' && !empty($_GET['tab']) ){
+				if(esc_attr($_GET['tab']) == 'report'){
+					$reports = array(
+						'settings'=>array(
+							'api_url'	=> home_url().'/wp-json/wplms/v1/'.$this->namespace,
+							'user_id'	=> get_current_user_id(),
+							'role'	 	=> (
+									current_user_can('manage_options')?'admin':
+									(
+										current_user_can('edit_posts')?'instructor':'general'
+									)
+								),
+							'security'	=> vibe_get_option('security'),
+						),
+						'translations'=>array(
+							'top_courses_title'=> _x('Top Courses by Completions','statistics','wplms'),
+							'top_completions_title'=> _x('Top Learner by Completions','statistics','wplms'),
+							'Completions'=> _x('Courses Completions','statistics','wplms')
 
-	    		$reports = array(
-	    			'settings'=>array(
-	    				'api_url'	=> home_url().'/wp-json/wplms/v1/'.$this->namespace,
-	    				'user_id'	=> get_current_user_id(),
-    					'role'	 	=> (
-								current_user_can('manage_options')?'admin':
-								(
-									current_user_can('edit_posts')?'instructor':'general'
-								)
-    						),
-    					'security'	=> vibe_get_option('security'),
-					),
-    				'translations'=>array(
-						'top_courses_title'=> _x('Top Courses by Completions','statistics','wplms'),
-						'top_completions_title'=> _x('Top Learner by Completions','statistics','wplms'),
-						'Completions'=> _x('Courses Completions','statistics','wplms')
+						),
+					);
 
-					),
-    			);
+					wp_enqueue_style('wplms_reports',plugins_url('reports/wplms_reports.css',__FILE__),array(),1);
 
-				wp_enqueue_style('wplms_reports',plugins_url('reports/wplms_reports.css',__FILE__),array(),1);
+					//dev
 
-    			//dev
-
-				wp_enqueue_script('wplms_reports','http://localhost:3000/static/js/bundle.js',array(),1,true);
-				wp_localize_script('wplms_reports','wplms_reports_settings',$reports);
-				//publish
-				//wp_enqueue_script('wplms_reports',plugins_url('reports/wplms_reports.min.js',__FILE__),array(),1,true);
+					wp_enqueue_script('wplms_reports','http://localhost:3000/static/js/bundle.js',array(),1,true);
+					wp_localize_script('wplms_reports','wplms_reports_settings',$reports);
+					//publish
+					//wp_enqueue_script('wplms_reports',plugins_url('reports/wplms_reports.min.js',__FILE__),array(),1,true);
+				}
 			}
 	    }
 

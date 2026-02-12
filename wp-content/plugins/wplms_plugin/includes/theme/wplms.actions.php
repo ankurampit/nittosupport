@@ -169,9 +169,15 @@ class WPLMS_Plugin_Actions{
 
     	if(is_singular('certificate') && is_wplms_4_0()){
     		wp_nonce_field('certificate_security','certificate_security');
-    		if(!empty($_GET) && !empty($_GET['u'])){
-    			echo '<input type="hidden" name="certificate-user" value="'.$_GET['u'].'">';
-    			echo '<input type="hidden" name="certificate-course" value="'.$_GET['c'].'">';
+    		if(!empty($_GET) && !empty($_GET['u']) 
+				&& is_numeric($_GET['u']) && is_numeric($_GET['c'])
+				&& get_post_type('c') == 'certificate' ){
+					$user = get_user_by('id', $_GET['u']);
+					if($user){
+						echo '<input type="hidden" name="certificate-user" value="'.$_GET['u'].'">';
+						echo '<input type="hidden" name="certificate-course" value="'.$_GET['c'].'">';
+					}
+					
     		}
     		if(function_exists('vibe_get_option') && !empty(vibe_get_option('offload_scripts')) || 1){
     			wp_enqueue_script('html2canvas-js',plugins_url('../../assets/js/html2canvas.min.js',__FILE__),array('wp-element'),WPLMS_PLUGIN_VERSION,true);

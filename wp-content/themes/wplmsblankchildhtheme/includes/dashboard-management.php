@@ -22,7 +22,7 @@ function user_permission_page_html()
         'field_employee'  => 'Field Employee',
         'inside_employee' => 'Inside Employee',
         'normal_user'     => 'Normal User',
-        'super_user'      => 'Super User',
+        'um_super-user'      => 'Super User',
         'administrator'   => 'Administrator'
     ];
 
@@ -106,6 +106,14 @@ function user_permission_page_html()
 
 function can_user_access($role_slug, $permissions, $permission_key)
 {
+    return isset($permissions[$role_slug][$permission_key])
+        && $permissions[$role_slug][$permission_key] == 1;
+}
+
+function can_user_accessss($slug, $permissions, $permission_key)
+{
+    echo "Hello";
+    $role_slug = reset($slug);
     return isset($permissions[$role_slug][$permission_key])
         && $permissions[$role_slug][$permission_key] == 1;
 }

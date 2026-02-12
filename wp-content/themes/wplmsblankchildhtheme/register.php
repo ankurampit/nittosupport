@@ -6,6 +6,8 @@
  */
 
 get_header('header.php');
+
+$groups = get_all_user_groups();
 ?>
 
 <section class="container">
@@ -13,7 +15,34 @@ get_header('header.php');
         <div class="row">
             <div class="col-md-12">
                 <h2>Registration</h2>
-                <div class="error loginerror"></div>
+                <?php
+                $error_message = '';
+
+                if (isset($_GET['login'])) {
+                    switch ($_GET['login']) {
+                        case 'invalid_request':
+                            $error_message = 'Invalid request. Please try again.';
+                            break;
+
+                        case 'empty':
+                            $error_message = 'Email and password are required.';
+                            break;
+
+                        case 'email_not_found':
+                            $error_message = 'No account found with this email address.';
+                            break;
+
+                        case 'failed':
+                            $error_message = 'Incorrect password. Please try again.';
+                            break;
+                    }
+                }
+                if (!empty($error_message)) :
+                ?>
+                    <div class="error loginerror">
+                        <?php echo esc_html($error_message); ?>
+                    </div>
+                <?php endif; ?>
                 <div class="regdTxt">
                     <p>Thanks for starting the registration process. Be sure to fill in all the information.</p>
                     <p>Once submitted you will receive and email confirming your request. If you request advanced access your identity will be verified prior to this access being given.</p>
@@ -147,33 +176,9 @@ get_header('header.php');
                             <p>Group</p>
                             <select class="form-control" name="Usergroup" id="Usergroup">
                                 <option value="">Group</option>
-                                <optgroup label="Tire&nbsp;Dealers">
-                                    <option value="9">Independent&nbsp;tire&nbsp;dealers</option>
-                                    <option value="26">Kal Tire</option>
-                                    <option value="8">Tire&nbsp;discounter group</option>
-                                </optgroup>
-                                <optgroup label="Auto Dealership">
-                                    <option value="16">Audi/Volkswagen</option>
-                                    <option value="10">Chevrolet/GM</option>
-                                    <option value="15">Chrysler</option>
-                                    <option value="11">Ford</option>
-                                    <option value="13">Honda/Acura</option>
-                                    <option value="25">Hyundai</option>
-                                    <option value="19">Kia</option>
-                                    <option value="17">Mazda</option>
-                                    <option value="14">Mitsubishi</option>
-                                    <option value="18">Nissan/Infiniti</option>
-                                    <option value="29">Subaru</option>
-                                    <option value="12">Toyota/Lexus</option>
-                                </optgroup>
-                                <optgroup label="Misc">
-                                    <option value="20">Advertising agency</option>
-                                    <option value="21">Media – print-video-radio</option>
-                                    <option value="22">Miscellaneous</option>
-                                </optgroup>
-                                <optgroup label="Admin">
-                                    <option value="24">Nitto Emploee</option>
-                                </optgroup>
+                                <?php foreach ($groups as $group) : ?>
+                                    <option value="<?php echo esc_attr($group->ID); ?>"><?php echo esc_html($group->Groupname); ?></option>
+                                <?php endforeach; ?>
                             </select>
                         </div>
                     </div>

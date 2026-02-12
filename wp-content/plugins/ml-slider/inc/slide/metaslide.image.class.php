@@ -561,8 +561,7 @@ class MetaImageSlide extends MetaSlide
             )
         );
 
-        $ms_slider = new MetaSliderPlugin();
-        $global_settings = $ms_slider->get_global_settings();
+        $global_settings = metaslider_global_settings();
         if (
             !isset($global_settings['mobileSettings']) ||
             (isset($global_settings['mobileSettings']) && true == $global_settings['mobileSettings'])
@@ -734,25 +733,8 @@ class MetaImageSlide extends MetaSlide
         );
 
         // Remove unsafe html but let users that rely on this to override
-        if (apply_filters('metaslider_filter_unsafe_html', true, $slide, $this->slider->ID, $this->settings) && $slide['caption']) {
-            try {
-                if (!class_exists('HTMLPurifier')) {
-                    require_once(METASLIDER_PATH . 'lib/htmlpurifier/library/HTMLPurifier.auto.php');
-                }
-                $config = HTMLPurifier_Config::createDefault();
-                // How to filter:
-                // add_filter('metaslider_html_purifier_config', function($config) {
-                //     $config->set('HTML.Allowed', 'a[href|target]');
-                //     $config->set('Attr.AllowedFrameTargets', array('_blank'));
-                //     return $config;
-                // });
-                $config = apply_filters('metaslider_html_purifier_config', $config, $slide, $this->slider->ID, $this->settings);
-                $purifier = new HTMLPurifier($config);
-                $slide['caption'] = $purifier->purify($slide['caption']);
-            } catch (Exception $e) {
-                // If something goes wrong then escape
-                $slide['caption'] = htmlspecialchars(do_shortcode($caption), ENT_NOQUOTES, 'UTF-8');
-            }
+        if ( apply_filters( 'metaslider_filter_unsafe_html', true, $slide, $this->slider->ID, $this->settings ) && ! empty( $slide['caption'] ) ) {
+            $slide['caption'] = metaslider_filter_unsafe_html( $slide['caption'], $slide, $this->slider->ID, $this->settings );
         }
 
         // fix slide URLs
@@ -877,6 +859,7 @@ class MetaImageSlide extends MetaSlide
                 'class' => "slide-{$this->slide->ID} ms-image {$mobile_class}",
                 'aria-roledescription' => "slide",
                 'data-date' => $this->slide->post_date,
+                'data-filename' => isset($slide['thumb'] ) ? wp_basename($slide['thumb']) : "",
                 'data-slide-type' => $this->identifier
             ), $slide, $this->slider->ID);
 

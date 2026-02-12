@@ -20,7 +20,7 @@ class wplms_dash_contact_users extends WP_Widget {
 
     
       add_filter('vibebp_member_dashboard_widgets',array($this,'add_custom_script'));
-    }
+    } 
     
     function add_custom_script($args){
       $args[]='wplms_dash_contact_users';
@@ -28,11 +28,12 @@ class wplms_dash_contact_users extends WP_Widget {
     }
         
     function enqueue_script(){
-        if(bp_current_component() == 'dashboard' || apply_filters('vibebp_enqueue_profile_script',false)){
-            wp_enqueue_script( 'contact_users', WPLMS_PLUGIN_URL.'/assets/js/contact_user.js' ,array('wp-element','wp-data'),WPLMS_PLUGIN_VERSION,true);
+        if(bp_current_component() == 'dashboard' || apply_filters('vibebp_enqueue_profile_script',false) || (function_exists('vibebp_get_setting') && is_page(vibebp_get_setting('bp_single_page')))){
+          
+            wp_enqueue_script( 'wplms_contact_users', WPLMS_PLUGIN_URL.'/assets/js/contact_user.js' ,array('wp-element','wp-data'),WPLMS_PLUGIN_VERSION,true);
             wp_enqueue_style('wplms_dashboard_css',WPLMS_PLUGIN_URL.'/assets/css/dashboard.css',array(),WPLMS_PLUGIN_VERSION);
             
-            wp_localize_script('contact_users','contact_users',array(
+            wp_localize_script('wplms_contact_users','contact_users',array(
               'settings'=>array(),
               'api'=>rest_url(BP_COURSE_API_NAMESPACE.'/dashboard/widget/contact_users'),
               

@@ -187,11 +187,11 @@ class VibeBP_Field_Types{
                                 }
                             }
                         } else {
-                             wp_die(_x('File could not be uploaded!','error message','wplms')) ;
+                             wp_die(_x('File could not be uploaded!','error message','vibebp')) ;
                             
                         } 
                     } else {
-                         wp_die(_x('File could not be uploaded!','error message','wplms')) ;
+                         wp_die(_x('File could not be uploaded!','error message','vibebp')) ;
                     } 
                 }
             }
@@ -264,6 +264,7 @@ class VibeBP_Field_Types{
                     $allowed_size = bp_xprofile_get_meta( $field_id, 'field', 'vibebp_upload_size', true );
 
                     if($allowed_size < (($file['size']/1024)/1024)){
+                        // Translators: %s is file size.
                         $bp->signup->errors['field_' . $field_id] = sprintf(_x('Allowed file size is %s','','vibebp'),$allowed_size.'MB');
                     }
                     $allowed_types = bp_xprofile_get_meta( $field_id, 'field', 'vibebp_upload_types', true );

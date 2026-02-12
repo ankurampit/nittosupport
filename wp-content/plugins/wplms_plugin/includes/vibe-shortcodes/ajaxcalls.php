@@ -44,18 +44,27 @@ class Vibe_Shortcodes_Ajax_Calls{
     }
 
     function vibe_ajax_popup(){ 
-        $id = stripslashes($_GET['id']);
-        if(!is_numeric($id))
+        $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+        if(!empty($id))
             die();
 
-        $class = get_post_meta($id,'vibe_popup_class',true);
-        $width = get_post_meta($id,'vibe_popup_width',true);
-        $height = get_post_meta($id,'vibe_popup_height',true);
+        $npopup = get_page($id);
+
+        if ( ! $npopup || $npopup->post_type !== 'popups' ) {
+            die();
+        }
+       
+        $class  = sanitize_html_class( get_post_meta( $id, 'vibe_popup_class', true ) );
+        $width  = intval( get_post_meta( $id, 'vibe_popup_width', true ) );
+        $height = intval( get_post_meta( $id, 'vibe_popup_height', true ) );
+        $custom_css = wp_strip_all_tags( get_post_meta( $id, 'vibe_custom_css', true ) );
+
 
         $npopup = get_page($id);
         $post_content=apply_filters('the_content', $npopup->post_content);
+        $post_content = wp_kses_post( do_shortcode( $post_content ) );
         echo '<div class="popup_content '.$class.'" style="display:inline-block;width:'.$width.'px;max-height:'.$height.'px;">';
-        echo '<style>.mfp-ajax-holder .mfp-content{max-width:'.$width.'px;} '.get_post_meta($id,'vibe_custom_css',true).'</style>';
+        echo '<style>.mfp-ajax-holder .mfp-content{max-width:'.$width.'px;} '.$custom_css.'</style>';
         echo do_shortcode($post_content).'</div>';
         die();
     }
@@ -153,9 +162,15 @@ class Vibe_Shortcodes_Ajax_Calls{
     }
 
     function vibe_grid_scroll(){ 
-        $atts = json_decode(stripslashes($_POST['args']),true);
+        
+
+        //$atts = json_decode(stripslashes($_POST['args']),true);
+        $atts_raw = isset($_POST['args']) ? wp_unslash($_POST['args']) : '{}';
+        $atts = json_decode($atts_raw, true);
+        $atts = array_map('sanitize_text_field', $atts);
+
         $output ='';
-        $paged = stripslashes($_POST['page']);
+        $paged = isset($_POST['page']) ? intval($_POST['page']) : 1;
         $paged++;
             
         if(!isset($atts['post_ids']) || (is_array($atts['post_ids']) && count($atts['post_ids'])) > 0){
@@ -262,12 +277,21 @@ class Vibe_Shortcodes_Ajax_Calls{
             }
         }
         
+        $allowed_post_types = ['post', 'page','course', 'page','quiz','wplms-assignments','question','popups','textimonial','news','unit'];
+        if (!in_array($atts['post_type'], $allowed_post_types, true)) {
+            $atts['post_type'] = 'post';
+        }
+
         $query_args =  apply_filters('wplms_grid_course_filters',$query_args);
 
         query_posts($query_args);
         while ( have_posts() ) : the_post();
         global $post;
-        $output .= '<li '.(isset($atts['grid_columns'])?'class="'.$atts['grid_columns'].'"':'').' '.$style.'>';
+
+        $class = isset($atts['grid_columns']) ? esc_attr($atts['grid_columns']) : '';
+        $style = isset($atts['masonry']) && $atts['masonry'] ? 'style="width:' . esc_attr($atts['column_width']) . 'px;"' : '';
+        $output .= '<li class="' . $class . '" ' . $style . '>';
+        //$output .= '<li '.(isset($atts['grid_columns'])?'class="'.$atts['grid_columns'].'"':'').' '.$style.'>';
         $output .= thumbnail_generator($post,$atts['featured_style'],$atts['grid_columns'],$atts['grid_excerpt_length'],$atts['grid_link'],$atts['grid_lightbox']);
         $output .= '</li>';
         
@@ -275,7 +299,7 @@ class Vibe_Shortcodes_Ajax_Calls{
         wp_reset_query();
         wp_reset_postdata();
         
-        echo $output;
+        echo wp_kses_post($output);
         }else{
             echo '0';
         }

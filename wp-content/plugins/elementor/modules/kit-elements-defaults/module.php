@@ -6,9 +6,10 @@ use Elementor\Core\Base\Module as BaseModule;
 use Elementor\Modules\KitElementsDefaults\Data\Controller;
 use Elementor\Plugin;
 use Elementor\Modules\KitElementsDefaults\ImportExport\Import_Export;
+use Elementor\Modules\KitElementsDefaults\ImportExportCustomization\Import_Export_Customization;
 
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
+	exit; // Exit if accessed directly.
 }
 
 class Module extends BaseModule {
@@ -27,10 +28,13 @@ class Module extends BaseModule {
 				'elementor-common',
 				'elementor-editor-modules',
 				'elementor-editor-document',
+				'wp-i18n',
 			],
 			ELEMENTOR_VERSION,
 			true
 		);
+
+		wp_set_script_translations( 'elementor-kit-elements-defaults-editor', 'elementor' );
 	}
 
 	public function __construct() {
@@ -46,6 +50,7 @@ class Module extends BaseModule {
 
 		if ( is_admin() ) {
 			( new Import_Export() )->register();
+			( new Import_Export_Customization() )->register();
 		}
 	}
 }

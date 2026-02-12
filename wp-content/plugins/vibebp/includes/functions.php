@@ -474,6 +474,7 @@ function vibebp_process_notification($notification){
 				}
 				
 				$text=array(
+					// Translators: %s is the name of the person who invited the user to chat.
 					'message'=>sprintf(_x('%s invited you to chat.','notification','vibebp'),$name),
 					'actions'=>array(
 						array('label'=>__('Accept','vibebp'),'key'=>'accept','event'=>$notification['type'],'message'=>__('Chat Invite accepted','vibebp')),
@@ -487,6 +488,7 @@ function vibebp_process_notification($notification){
 				}else{
 					$name = _x('Guest','notification','vibebp');
 				}
+				// Translators: %s is the name of the person who invited the user to chat.
 				$text=sprintf(_x('%s is now online.','notification','vibebp'),$name);
 			break;
 		}

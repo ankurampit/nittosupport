@@ -1,7 +1,8 @@
 <?php
 $args = [
-    'post_type'      => 'bulletins',
-    'posts_per_page' => -1,
+    'post_type'      => 'bulletinboards',
+    'posts_per_page' => 7,
+    'order'          => 'DESC',
 ];
 
 $bulletin_query = new WP_Query($args);

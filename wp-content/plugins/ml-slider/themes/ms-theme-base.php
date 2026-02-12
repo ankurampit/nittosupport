@@ -96,11 +96,11 @@ class MetaSlider_Theme_Base
     {
         foreach ($this->assets as $asset) {
             if ('css' == $asset['type']) {
-                wp_enqueue_style('metaslider_' . $this->id . '_theme_styles', METASLIDER_THEMES_URL . $this->id . $asset['file'], isset($asset['dependencies']) ? $asset['dependencies'] : array(), $this->version);
+                wp_enqueue_style('metaslider_' . $this->id . '_theme_styles', METASLIDER_THEMES_URL . $this->id . $asset['file'], isset($asset['dependencies']) ? $asset['dependencies'] : array(), METASLIDER_VERSION);
             }
 
             if ('js' == $asset['type']) {
-                wp_enqueue_script('metaslider_' . $this->id . '_theme_script', METASLIDER_THEMES_URL . $this->id . $asset['file'], isset($asset['dependencies']) ? $asset['dependencies'] : array(), $this->version, isset($asset['in_footer']) ? $asset['in_footer'] : true);
+                wp_enqueue_script('metaslider_' . $this->id . '_theme_script', METASLIDER_THEMES_URL . $this->id . $asset['file'], isset($asset['dependencies']) ? $asset['dependencies'] : array(), METASLIDER_VERSION, isset($asset['in_footer']) ? $asset['in_footer'] : true);
             }
         }
     }
@@ -387,8 +387,12 @@ return $options;
             return $html;
         }
 
+        $width = absint( $settings['width'] ) ?? 0;
+
+        $style = $width ? "max-width: {$width}px;" : "";
+
         $new_html = array();
-        $new_html[] = '<div id="metaslider_container_box_' . $slider_id . '" class="metaslider-container-box">';
+        $new_html[] = '<div id="metaslider_container_box_' . $slider_id . '" class="metaslider-container-box" style="' . esc_attr( $style ) . '">';
         $new_html[] = $html;
         $new_html[] = '</div>';
 

@@ -2568,7 +2568,7 @@ if ( ! class_exists( 'BP_Course_Rest_Course_Controller' ) ) {
 				$course = array(
 					'id'=>get_the_ID(),
 					'name'=>get_the_title(),
-					'featured_image'=>get_the_post_thumbnail_url(get_the_ID(),'medium'),
+					'featured_image'=>$this->get_course_featured_image(get_the_ID()),
 					'courseCat'	=> wp_get_object_terms(get_the_title(),'course-cat',['fields'=>'ids']),
 					'author'=>get_the_author_meta('ID'),
 					'url'=>get_permalink(),
@@ -2672,7 +2672,7 @@ if ( ! class_exists( 'BP_Course_Rest_Course_Controller' ) ) {
 			}
 			wp_reset_postdata();
 			
-			return new WP_REST_Response( array('status'=>1,'courses'=>$courses,'total'=>$total), 200 );
+			return new WP_REST_Response( array('status'=>1,'courses'=>apply_filters('wplms_all_courses',$courses,$this->user->id),'total'=>$total), 200 );
 		}
 
 		function process_directory_args($args){

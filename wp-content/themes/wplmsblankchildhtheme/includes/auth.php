@@ -26,6 +26,10 @@ function handle_custom_user_registration()
     $fax           = sanitize_text_field($_POST['fax'] ?? '');
     $usergroup     = sanitize_text_field($_POST['Usergroup'] ?? '');
     $language      = sanitize_text_field($_POST['lngprefer'] ?? 'en');
+    $delaraccess  = sanitize_text_field($_POST['delaraccess'] ?? '');
+    $salespromo  = sanitize_text_field($_POST['Esalespromo'] ?? '');
+    $new_product_information = sanitize_text_field($_POST['Etireinfo'] ?? '');
+    $surveys = sanitize_text_field($_POST['Esurveys'] ?? '');
 
     if (empty($firstname) || empty($lastname) || empty($email) || empty($password)) {
         wp_die('Please fill all required fields.');
@@ -54,6 +58,14 @@ function handle_custom_user_registration()
 
     $user_id = wp_insert_user($userdata);
 
+    if ($delaraccess == 1) {
+        send_advance_user_approval_email($user_id);
+        update_user_meta($user_id, 'dealer_access', 1);
+    } else {
+        update_user_meta($user_id, 'dealer_access', 0);
+    }
+
+
     if (is_wp_error($user_id)) {
         wp_die('User creation failed: ' . $user_id->get_error_message());
     }
@@ -67,6 +79,9 @@ function handle_custom_user_registration()
     update_user_meta($user_id, 'fax', $fax);
     update_user_meta($user_id, 'usergroup', $usergroup);
     update_user_meta($user_id, 'language_preference', $language);
+    update_user_meta($user_id, 'sales_promo_opt_in', $salespromo);
+    update_user_meta($user_id, 'new_product_information_opt_in', $new_product_information);
+    update_user_meta($user_id, 'surveys_opt_in', $surveys);
 
     wp_safe_redirect(home_url());
     exit;
@@ -161,21 +176,79 @@ function handle_custom_user_login()
     exit;
 }
 
-// function custom_login_redirect_logic()
-// {
-//     // Get current URL path
-//     $current_url = esc_url(home_url(add_query_arg(NULL, NULL)));
-//     $home_url    = home_url('/');
-//     $dashboard_url = home_url('/dashboard/');
 
-//     if (is_user_logged_in() && (is_front_page() || is_home())) {
-//         wp_redirect($dashboard_url);
-//         exit;
-//     }
+function send_advance_user_approval_email($user_id)
+{
 
-//     if (!is_user_logged_in() && is_page('dashboard')) {
-//         wp_redirect($home_url);
-//         exit;
-//     }
-// }
-// add_action('template_redirect', 'custom_login_redirect_logic');
+    $network_admin_email = get_site_option('admin_email');
+    $approve_url = home_url('/advance-user-approval') . '?action=approve&user_id=' . $user_id;
+    $delete_url = home_url('/advance-user-approval') . '?action=reject&user_id=' . $user_id;
+    $admin_email = $network_admin_email;
+
+    $subject = 'Approval Required: Advance User Access Request';
+
+    $message = '
+    <html>
+    <body style="font-family: Arial, sans-serif; line-height:1.6;">
+        <p>Hello Admin,</p>
+
+        <p>A new <strong>Advance User Access Request</strong> has been submitted and is pending your approval.</p>
+
+        <p>Please review the request and take action:</p>
+
+        <p style="margin:20px 0;">
+            <a href="' . esc_url($approve_url) . '" 
+               style="background-color:#28a745;color:#ffffff;padding:10px 18px;
+               text-decoration:none;border-radius:4px;margin-right:10px;display:inline-block;">
+                Approve
+            </a>
+
+            <a href="' . esc_url($delete_url) . '" 
+               style="background-color:#dc3545;color:#ffffff;padding:10px 18px;
+               text-decoration:none;border-radius:4px;display:inline-block;">
+                Delete
+            </a>
+        </p>
+
+        <p>If no action is taken, the request will remain pending.</p>
+
+        <p>Best regards,<br>
+        <strong>System Administrator</strong></p>
+    </body>
+    </html>';
+
+    $headers = array(
+        'Content-Type: text/html; charset=UTF-8'
+    );
+
+    wp_mail($admin_email, $subject, $message, $headers);
+}
+
+
+function custom_login_redirect_logic()
+{
+    // Get current URL path
+    $current_url = esc_url(home_url(add_query_arg(NULL, NULL)));
+    $home_url    = home_url('/');
+    $dashboard_url = home_url('/dashboard/');
+
+    if (is_user_logged_in() && (is_front_page() || is_home())) {
+        wp_redirect($dashboard_url);
+        exit;
+    }
+
+    if (!is_user_logged_in() && is_page('dashboard')) {
+        wp_redirect($home_url);
+        exit;
+    }
+}
+add_action('template_redirect', 'custom_login_redirect_logic');
+
+function get_all_user_groups()
+{
+    global $wpdb;
+    $table_name = 'usergroup';
+
+    $results = $wpdb->get_results("SELECT * FROM $table_name");
+    return $results;
+}
