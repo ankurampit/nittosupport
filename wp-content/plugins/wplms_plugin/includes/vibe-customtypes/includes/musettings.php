@@ -23,7 +23,7 @@ class lms_settings{
 	}
 
 	public function vibe_lms_settings() {
-	    $tab = isset( $_GET['tab'] ) ? $_GET['tab'] : 'general';
+	    $tab = !empty( $_GET['tab'] ) ? esc_attr($_GET['tab']) : 'general';
 		$this->lms_settings_tabs($tab); 
 		$this->get_lms_settings($tab);
 	}
@@ -181,13 +181,13 @@ class lms_settings{
 			if(empty($_GET['sub']) && empty($current)){
 				$current = $k;
 			}else if(!empty($_GET['sub']) && empty($current)){
-				$current = $_GET['sub'];
+				$current = esc_attr($_GET['sub']);
 			}
 			echo '<li><a href="?page=lms-settings&tab=api&sub='.$k.'" '.(($k == $current)?'class="current"':'').'>'.$value.'</a>  &#124; </li>';
 		}
 		echo '</ul><hr class="clear"/>';
 		if(!isset($_GET['sub'])){$_GET['sub']='';}
-		switch($_GET['sub']){
+		switch(esc_attr($_GET['sub'])){
 			case 'apps':
 				$this->lms_apps();
 			break;
@@ -346,7 +346,7 @@ class lms_settings{
 					}
 					
 					
-					if(!empty($_POST['enable_welcome_email']) && !empty($_GET['tab']) && $_GET['tab'] == 'emails'){
+					if(!empty($_POST['enable_welcome_email']) && !empty($_GET['tab']) && esc_attr($_GET['tab']) == 'emails'){
 
 						update_option('wplms_bp_emails',0);
 					}
@@ -390,7 +390,7 @@ class lms_settings{
 			if(empty($_GET['sub']) && empty($current)){
 				$current = $k;
 			}else if(!empty($_GET['sub']) && empty($current)){
-				$current = $_GET['sub'];
+				$current = esc_attr($_GET['sub']);
 			}
 			echo '<li><a href="?page=lms-settings&tab=general&sub='.$k.'" '.(($k == $current)?'class="current"':'').'>'.$value.'</a>  &#124; </li>';
 		}
@@ -1430,14 +1430,14 @@ class lms_settings{
 		echo '<h3>'.__('LMS Functions [ For Ad-Hoc Management]','wplms').'</h3>';
 		echo '<p>'.__('Import LMS functions can be managed from here.','wplms').'</p>';
 
-		$template_array = apply_filters('wplms_lms_commission_tabs',array(
+		$template_array = apply_filters('wplms_lms_function_tabs',array(
 			'sync'=> __('Sync Areas','wplms'),
 			'adhoc'=> __('Ad Hoc','wplms'),
 			));
 		if(empty($_GET['sub'])){$_GET['sub']='sync';}
 		echo '<ul class="subsubsub">';
 		foreach($template_array as $k=>$value){
-			echo '<li><a href="?page=lms-settings&tab=functions&sub='.$k.'" '.((!empty($_GET['sub']) && $k == $_GET['sub'])?'class="current"':'').'>'.$value.'</a> '.(($k=='template')?'':' &#124; ').' </li>';
+			echo '<li><a href="?page=lms-settings&tab=functions&sub='.$k.'" '.((!empty($_GET['sub']) && $k == esc_attr($_GET['sub']))?'class="current"':'').'>'.$value.'</a> '.(($k=='template')?'':' &#124; ').' </li>';
 		}
 		echo '</ul><div class="clear"><hr/>';
 		
@@ -1749,12 +1749,12 @@ class lms_settings{
 
 	// Functioning ===== of SETTINGS
 	function lms_resolve_adhoc_function(){
-		if ( !isset($_POST['_vibe_admin_adhoc']) || !wp_verify_nonce($_POST['_vibe_admin_adhoc'],'vibe_admin_adhoc') )
+		if ( !isset($_POST['_vibe_admin_adhoc']) || !wp_verify_nonce($_POST['_vibe_admin_adhoc'],'vibe_admin_adhoc') || !current_user_can('manage_options'))
 		 return;
 		else{
 			do_action('wplms_admin_custom_admin_process');
 			if(isset($_POST['set_field'])){
-				$id=$_POST['id'];
+				$id=intval($_POST['id']);
 				$field_name=$_POST['field_name'];
 				$field_value=$_POST['field_value'];
 				if(isset($id)){
@@ -1767,7 +1767,7 @@ class lms_settings{
 				}
 			}
 			if(isset($_POST['set_field_for_student'])){
-				$student_id=$_POST['student_id'];
+				$student_id=intval($_POST['student_id']);
 				$field_name=$_POST['field_name_student'];
 				$field_value=$_POST['field_value_student'];
 				if(strpos($field_value,'|')){
@@ -1785,7 +1785,7 @@ class lms_settings{
 			}
 
 			if(isset($_POST['set_field_for_option'])){
-				$option_name=$_POST['option_name'];
+				$option_name=esc_attr($_POST['option_name']);
 				$option_value=$_POST['option_value'];
 				if(strpos($option_value,'|')){
 					$option_value=explode('|',$option_value);
@@ -1803,7 +1803,7 @@ class lms_settings{
 
 			//pakode
 			if(isset($_POST['set_field_for_post'])){
-				$id=$_POST['post_id'];
+				$id=intval($_POST['post_id']);
 				$field_name=$_POST['post_field_name'];
 				$field_value=$_POST['post_field_value'];
 				if(isset($id)){
@@ -1879,13 +1879,13 @@ class lms_settings{
 			if(empty($_GET['sub']) && empty($current)){
 				$current = $k;
 			}else if(!empty($_GET['sub']) && empty($current)){
-				$current = $_GET['sub'];
+				$current = esc_attr($_GET['sub']);
 			}
 			echo '<li><a href="?page=lms-settings&tab=live&sub='.$k.'" '.(($k == $current)?'class="current"':'').'>'.$value.'</a>  &#124; </li>';
 		}
 		echo '</ul><hr class="clear"/>';
 		if(!isset($_GET['sub'])){$_GET['sub']='';}
-		switch($_GET['sub']){
+		switch(esc_attr($_GET['sub'])){
 			case 'addons':
 				$this->live_addons();
 			break;
@@ -1929,7 +1929,7 @@ class lms_settings{
 					'link' => 'https://wplms.io/downloads/wplms-push-notifications/',
 					'extra'=>array('Touch Point','Personalised & Group Notifications', 'Reminders'),
 					'activated'=> (is_plugin_active('wplms-push-notifications/wplms-push-notifications.php')?true:false),
-					'price'=>'Buy $19',
+					'price'=>'Buy $29',
 					'class'=>'featured'
 				),
 				'wplms_phone_auth' =>array(
@@ -2377,13 +2377,13 @@ class lms_settings{
 			));
 		echo '<ul class="subsubsub">';
 		foreach($template_array as $k=>$value){
-			echo '<li><a href="?page=lms-settings&tab=emails&sub='.$k.'" '.((isset($_GET['sub']) && $k == $_GET['sub'])?'class="current"':'').'>'.$value.'</a> '.(($k=='template')?'':' &#124; ').' </li>';
+			echo '<li><a href="?page=lms-settings&tab=emails&sub='.$k.'" '.((isset($_GET['sub']) && $k == esc_attr($_GET['sub']))?'class="current"':'').'>'.$value.'</a> '.(($k=='template')?'':' &#124; ').' </li>';
 		}
 		echo '</ul>';
 		if(!isset($_GET['sub'])){
 			$_GET['sub'] =' ';
 		}
-		switch($_GET['sub']){
+		switch(esc_attr($_GET['sub'])){
 			case 'schedule':
 				$this->email_schedule();
 			break;
@@ -5301,7 +5301,7 @@ class wplms_miscellaneous_settings{
 	}
 
 	function user_wallets($get){
-		if($get['sub'] == 'wallet'){
+		if($get['sub'] == 'wallet' && current_user_can('manage_options')){
 			echo '<h3>'.__('User Wallets','wplms').'</h3>';
 			echo '<p>'.__('Manage user wallets for your APP','wplms').'</p>';
 			global $wpdb;
@@ -5327,8 +5327,12 @@ class wplms_miscellaneous_settings{
 					
 				)
 			);
-			if(isset($_GET['wplms_api_wallet_userid'])){
-				$wplms_api_wallet_userid = $_GET['wplms_api_wallet_userid'];
+			$wplms_api_wallet_userid=0;
+			if(isset($_GET['wplms_api_wallet_userid']) && is_numeric($_GET['wplms_api_wallet_userid'])){
+				$user = get_user_by('id', esc_attr($_GET['wplms_api_wallet_userid']));
+				if($user){
+					$wplms_api_wallet_userid = esc_attr($_GET['wplms_api_wallet_userid']);
+				}
 			}
 			$customPagHTML     = "";
 			$query             = apply_filters('wplms_usermeta_direct_query',"SELECT * from {$wpdb->usermeta} WHERE meta_key = 'wallet'");
@@ -5338,17 +5342,17 @@ class wplms_miscellaneous_settings{
 					$user_ids = implode(',', $wplms_api_wallet_userid);
 					$total_query .= 'AND user_id IN ('.$user_ids.')';
 					
-				}else{
+				}else if( $wplms_api_wallet_userid ){
 					
 					$user_ids = $wplms_api_wallet_userid;
 					$total_query .= 'AND user_id = '.$user_ids;
 				}
 			}
 
-
+		
 			$total             = $wpdb->get_var( $total_query );
 			$items_per_page = apply_filters('wplms_api_wallet_pagination_count',10);
-			$page             = isset( $_GET['w_page'] ) ? abs( (int) $_GET['w_page'] ) : 1;
+			$page             = isset( $_GET['w_page'] ) ? abs( (int) esc_attr($_GET['w_page'] )) : 1;
 			$offset         = ( $page * $items_per_page ) - $items_per_page;
 
 			$add_where = '';
@@ -5358,15 +5362,15 @@ class wplms_miscellaneous_settings{
 					$user_ids = implode(',', $wplms_api_wallet_userid);
 					$add_where .= 'AND user_id IN ('.$user_ids.')';
 					
-				}else{
+				}else if( $wplms_api_wallet_userid ){
 					
 					$user_ids = $wplms_api_wallet_userid;
 					$add_where .= 'AND user_id = '.$user_ids;
 				}
 			}
 
-			if(isset($_GET['wplms_api_wallet_orderby'])){
-				$wplms_api_wallet_orderby = sanitize_text_field($_GET['wplms_api_wallet_orderby']);
+			if(isset($_GET['wplms_api_wallet_orderby']) && esc_attr($_GET['wplms_api_wallet_orderby']) == 'ASC'){
+				$wplms_api_wallet_orderby = 'ASC';
 			}else{
 				$wplms_api_wallet_orderby = 'DESC';
 			}
@@ -5475,17 +5479,24 @@ class wplms_miscellaneous_settings{
 			</style>
 			<form id="wallet_username_orderby_form" method="get" action="?<?php echo $_SERVER['QUERY_STRING']; ?>">
 				<?php
-				
-					foreach($_GET as $key => $value){
-						if(!in_array($key,array('wplms_api_wallet_userid[]','wplms_api_wallet_orderby','w_page'))){
-							echo '<input type="hidden" name="'.$key.'" value="'.$value.'" />';
+					foreach ($_GET as $key => $value) {
+						// Skip specific GET parameters
+						if (in_array($key, ['wplms_api_wallet_userid', 'wplms_api_wallet_orderby', 'w_page'])) {
+							if (is_array($value)) {
+								foreach ($value as $v) {
+									echo '<input type="hidden" name="' . esc_attr($key) . '[]" value="' . sanitize_text_field($v) . '" />';
+								}
+							} else {
+								echo '<input type="hidden" name="' . esc_attr($key) . '" value="' . sanitize_text_field($value) . '" />';
+							}
 						}
 					}
+
 				?>
 				<?php echo $clients_pagination; ?>
 				<select name="wplms_api_wallet_userid[]" id="wplms_api_wallet_userid" class="selectusers_clients" data-placeholder="<?php echo __('Enter Student Usernames/Emails, separated by comma','wplms');?>" multiple>
 					<?php
-					$user_ids = $_GET['wplms_api_wallet_userid'];
+					$user_ids = esc_attr($_GET['wplms_api_wallet_userid']);
 	                if(!empty($user_ids) ){
 	                	if(is_array($user_ids)){
 	                		foreach ($user_ids as $userid) {
@@ -5504,7 +5515,7 @@ class wplms_miscellaneous_settings{
 					<?php
 
 					foreach ($order_options as $key => $value) {
-						echo '<option value="'.$key.'" '.((!empty($_GET['wplms_api_wallet_orderby']) && $key==$_GET['wplms_api_wallet_orderby'])?'selected="selected"':'').'>'.$value.'</option>';
+						echo '<option value="'.$key.'" '.((!empty($_GET['wplms_api_wallet_orderby']) && $key==esc_attr($_GET['wplms_api_wallet_orderby']))?'selected="selected"':'').'>'.$value.'</option>';
 					}
 					?>
 				</select>

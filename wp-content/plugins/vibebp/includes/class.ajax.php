@@ -218,7 +218,7 @@ class VibeBP_Ajax{
 
     function vibebp_register_user(){
         if ( !isset($_POST['security']) || !wp_verify_nonce($_POST['security'],'bp_new_signup') || !isset($_POST['settings'])){
-            echo '<div class="message">'.__('Security check Failed. Contact Administrator.','wplms').'</div>';
+            echo '<div class="message">'.__('Security check Failed. Contact Administrator.','vibebp').'</div>';
             die();
         }
         $flag = 0;
@@ -228,18 +228,18 @@ class VibeBP_Ajax{
         }
         $name = sanitize_text_field($_POST['name']);
         if(empty($name)){
-            echo '<div class="message_wrap error"><div class="message">'._x('Invalid Submission, name missing','error message when name missing','wplms').'<span></span></div></div>';
+            echo '<div class="message_wrap error"><div class="message">'._x('Invalid Submission, name missing','error message when name missing','vibebp').'<span></span></div></div>';
                 die();
         }
         $member_type = '';
         $vibebp_user_bp_group = '';
         $form_settings = apply_filters('vibebp_registration_form_settings',array(
-                'hide_username' =>  __('Auto generate username from email','wplms'),
-                'password_meter' =>  __('Show password meter','wplms'),
-                'show_group_label' =>  __('Show Field group labels','wplms'),
-                'google_captcha' => __('Google Captcha','wplms'),
-                'auto_login'=> __('Register & Login simultaneously','wplms'),
-                'skip_mail' =>  __('Skip Mail verification','wplms'),
+                'hide_username' =>  __('Auto generate username from email','vibebp'),
+                'password_meter' =>  __('Show password meter','vibebp'),
+                'show_group_label' =>  __('Show Field group labels','vibebp'),
+                'google_captcha' => __('Google Captcha','vibebp'),
+                'auto_login'=> __('Register & Login simultaneously','vibebp'),
+                'skip_mail' =>  __('Skip Mail verification','vibebp'),
                 'default_role'=>'',
                 'member_type'=>'',
                 'vibebp_user_bp_group'=>'',
@@ -344,7 +344,7 @@ class VibeBP_Ajax{
                                         $save_settings[$setting->id]=$setting->value;
                                         $vibebp_user_bp_group = $setting->value;
                                     }else{
-                                        echo '<div class="message_wrap"><div class="message error">'._x('Invalid Group selection','error message when group is not valid','wplms').'<span></span></div></div>';
+                                        echo '<div class="message_wrap"><div class="message error">'._x('Invalid Group selection','error message when group is not valid','vibebp').'<span></span></div></div>';
                                         die();
                                     }
                                     
@@ -376,13 +376,13 @@ class VibeBP_Ajax{
         */
         $check_filter = filter_var($user_args['user_email'], FILTER_VALIDATE_EMAIL); // PHP 5.3
         if(empty($user_args['user_email']) || empty($user_args['user_pass']) || empty($check_filter)){
-            echo '<div class="message_wrap"><div class="message error">'._x('Invalid Email/Password !','error message when registration form is empty','wplms').'<span></span></div></div>';
+            echo '<div class="message_wrap"><div class="message error">'._x('Invalid Email/Password !','error message when registration form is empty','vibebp').'<span></span></div></div>';
             die();
         }
 
         //Check if user exists
         if(!isset($user_args['user_email']) || email_exists($user_args['user_email'])){
-            echo '<div class="message_wrap"><div class="message error">'._x('Email already registered.','error message','wplms').'<span></span></div></div>';
+            echo '<div class="message_wrap"><div class="message error">'._x('Email already registered.','error message','vibebp').'<span></span></div></div>';
             die();
         }
 
@@ -391,11 +391,11 @@ class VibeBP_Ajax{
 
             $user_args['user_login'] = $user_args['user_email'];
             if(email_exists($user_args['user_login'])){
-                echo '<div class="message_wrap"><div class="message error">'._x('Username already registered.','error message','wplms').'<span></span></div></div>';
+                echo '<div class="message_wrap"><div class="message error">'._x('Username already registered.','error message','vibebp').'<span></span></div></div>';
                 die();
             }
         }elseif (username_exists($user_args['user_login'])){
-            echo '<div class="message_wrap"><div class="message error">'._x('Username already registered.','error message','wplms').'<span></span></div></div>';
+            echo '<div class="message_wrap"><div class="message error">'._x('Username already registered.','error message','vibebp').'<span></span></div></div>';
             die();
         }
         if(!empty($reg_form_settings['settings']['google_captcha']) ){
@@ -414,22 +414,24 @@ class VibeBP_Ajax{
 	                ]
 	            ));
 	            $apiBody     = json_decode( wp_remote_retrieve_body( $res ),true );
-	            if(is_array($apiBody) && $apiBody['success']){
-	                return new WP_REST_Response(array('status'=>0,'message'=>__('Captcha did not match.','vibebp'),'err'=>(empty($apiBody['error-codes'])?'':$apiBody['error-codes'])), 200);
+	            if(!(is_array($apiBody) && $apiBody['success'])){
+	            	echo '<div class="message_wrap"><div class="message error">'.__('Invalid Captcha field','vibebp').'</div></div>';
+            		 die();
+	                //return new WP_REST_Response(array('status'=>0,'message'=>__('Captcha did not match.','vibebp'),'err'=>(empty($apiBody['error-codes'])?'':$apiBody['error-codes'])), 200);
 	            }
 	        }
 
-            $index = $this->find_setting_index('g-recaptcha-response',$settings);
-            if($index<0){
-                echo '<div class="message_wrap"><div class="message error">'.__('Invalid Captcha field','wplms').'</div></div>';
-                die();
-            }else{
-                $response = $objRecaptcha->verifyResponse($_SERVER['REMOTE_ADDR'], $settings[$index]->value);
-                if(!isset($response->success) || 1 != $response->success){
-                    echo '<div class="message_wrap"><div class="message error">'.__('Invalid Captcha field','wplms').'</div></div>';
-                    die();
-                }
-            }
+            // $index = $this->find_setting_index('g-recaptcha-response',$settings);
+            // if($index<0){
+            //     echo '<div class="message_wrap"><div class="message error">'.__('Invalid Captcha field','vibebp').'</div></div>';
+            //     die();
+            // }else{
+            //     $response = $objRecaptcha->verifyResponse($_SERVER['REMOTE_ADDR'], $settings[$index]->value);
+            //     if(!isset($response->success) || 1 != $response->success){
+            //         echo '<div class="message_wrap"><div class="message error">'.__('Invalid Captcha field','vibebp').'</div></div>';
+            //         die();
+            //     }
+            // }
             
         }
         
@@ -467,18 +469,18 @@ class VibeBP_Ajax{
                     if ( xprofile_check_is_required_field( $field_id ) && empty($user_fields[$field_id]['value'])){
                         if($field->type!=='upload'){
 
-                         $error_message[$field->id] = array('field_id'=>$field->id,'message'=>sprintf(__('%s is a required field', 'wplms' ),$field->name));
+                         $error_message[$field->id] = array('field_id'=>$field->id,'message'=>sprintf(__('%s is a required field', 'vibebp' ),$field->name));
                         }else{
                             if ( empty($_FILES['file_field_'.$field_id])){
-                                 $error_message[$field_id] = array('field_id'=>$field->id,'message'=>sprintf(__('%s is a required field', 'wplms' ),$field->name));
+                                 $error_message[$field_id] = array('field_id'=>$field->id,'message'=>sprintf(__('%s is a required field', 'vibebp' ),$field->name));
                             }
                         }
                     }else{
                         if (  !empty($user_fields[$field_id]['value']) && ! $field->type_obj->is_valid( $user_fields[$field_id]['value'] ) ) {
                             if(empty($error_message[$field->id])){
-                                $error_message[]= array('field_id'=>$field->id,'message'=>sprintf(__('%s is not of type %s','wplms'),$field->name,$field->type));
+                                $error_message[]= array('field_id'=>$field->id,'message'=>sprintf(__('%s is not of type %s','vibebp'),$field->name,$field->type));
                             }else{
-                                $error_message[$field->id]['message'] .= ' , '.sprintf(__('%s is not of type %s','wplms'),$field->name,$field->type);
+                                $error_message[$field->id]['message'] .= ' , '.sprintf(__('%s is not of type %s','vibebp'),$field->name,$field->type);
                             }
                         }
                     }
@@ -503,7 +505,7 @@ class VibeBP_Ajax{
 
                 if ( xprofile_check_is_required_field( $ffield ) && empty($file)){
                        
-                     $error_message[$ffield] = array('field_id'=>$ffield,'message'=>sprintf(__('%s is a required field', 'wplms' ),$field->name));
+                     $error_message[$ffield] = array('field_id'=>$ffield,'message'=>sprintf(__('%s is a required field', 'vibebp' ),$field->name));
                 }
                 $movefile = wp_handle_upload( $uploadedfile, $upload_overrides );
                 if ( $movefile && ! isset( $movefile['error'] ) ) {
@@ -528,7 +530,7 @@ class VibeBP_Ajax{
                         }
                     }
                 } else {
-                     echo '<div class="message_wrap"><div class="message error">'._x('File could not be uploaded!','error message','wplms').'<span></span></div></div>';
+                     echo '<div class="message_wrap"><div class="message error">'._x('File could not be uploaded!','error message','vibebp').'<span></span></div></div>';
                     die();
                 } 
             }  
@@ -603,7 +605,7 @@ class VibeBP_Ajax{
                 }
 
 
-                echo '<div class="message success"><div class="message_content">'.__('Congratulations ! you have been successfully registered !','wplms').'<span></span></div></div>';
+                echo '<div class="message success"><div class="message_content">'.__('Congratulations ! you have been successfully registered !','vibebp').'<span></span></div></div>';
             }else{
                 echo '<div class="message_wrap"><div class="message error">'.$user_id->get_error_message().'<span></span></div></div>';
             }
@@ -637,7 +639,7 @@ class VibeBP_Ajax{
                 if (  is_wp_error( $user_id ) ) {
                     echo '<div class="message_wrap"><div class="message error">'.$user_id->get_error_message().'<span></span></div></div>';
                 }else{
-                    echo '<div class="message success"><div class="message_content">'.__('Congratulations ! you have been successfully registered, Please check your email to activate the account','wplms').'<span></span></div></div>';
+                    echo '<div class="message success"><div class="message_content">'.__('Congratulations ! you have been successfully registered, Please check your email to activate the account','vibebp').'<span></span></div></div>';
                 }
             }else{
                 if(!empty($user_fields)){
@@ -674,7 +676,7 @@ class VibeBP_Ajax{
                      if(function_exists('groups_join_group') && !empty($vibebp_user_bp_group) && is_numeric($vibebp_user_bp_group)){
                         groups_join_group($vibebp_user_bp_group, $user_id );
                     }
-                    echo '<div class="message success"><div class="message_content">'.__('Congratulations ! you have been successfully registered, Please check your email to activate the account','wplms').'<span></span></div></div>';
+                    echo '<div class="message success"><div class="message_content">'.__('Congratulations ! you have been successfully registered, Please check your email to activate the account','vibebp').'<span></span></div></div>';
 
                 }else{
                     echo '<div class="message_wrap"><div class="message error">'.$user_id->get_error_message().'<span></span></div></div>';

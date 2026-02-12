@@ -379,7 +379,7 @@ class VibeBp_Auto_Update{
 
 			/* If error on retriving the data from repo */
 			if ( is_wp_error( $request ) ) {
-				$res = new WP_Error( 'plugins_api_failed', '<p>' . __( 'An Unexpected HTTP Error occurred during the API request.', 'wplms' ) . '</p><p><a href="?" onclick="document.location.reload(); return false;">' . __( 'Try again', 'wplms' ) . '</a></p>', $request->get_error_message() );
+				$res = new WP_Error( 'plugins_api_failed', '<p>' . __( 'An Unexpected HTTP Error occurred during the API request.', 'vibebp' ) . '</p><p><a href="?" onclick="document.location.reload(); return false;">' . __( 'Try again', 'vibebp' ) . '</a></p>', $request->get_error_message() );
 			}
 
 			/* If no error, construct the data */
@@ -420,7 +420,7 @@ class VibeBp_Auto_Update{
 
 				/* If data is empty or not an object */
 				else{
-					$res = new WP_Error( 'plugins_api_failed', __( 'An unknown error occurred', 'wplms' ), wp_remote_retrieve_body( $request ) );
+					$res = new WP_Error( 'plugins_api_failed', __( 'An unknown error occurred', 'vibebp' ), wp_remote_retrieve_body( $request ) );
 				
 				}
 			}
@@ -456,8 +456,8 @@ class VibeBp_Auto_Update{
 				$activate = activate_plugin( trailingslashit( WP_PLUGIN_DIR ) . $plugin_base );
 
 				/* Update message */
-				$fail = __( 'The plugin has been updated, but could not be reactivated. Please reactivate it manually.', 'wplms' );
-				$success = __( 'Plugin reactivated successfully. ', 'wplms' );
+				$fail = __( 'The plugin has been updated, but could not be reactivated. Please reactivate it manually.', 'vibebp' );
+				$success = __( 'Plugin reactivated successfully. ', 'vibebp' );
 				echo is_wp_error( $activate ) ? $fail : $success;
 			}
 		}
@@ -479,7 +479,7 @@ class VibeBp_Auto_Update{
 		$widget_id = 'ahp_' . $updater_data['slug'] . '_activation_key';
 
 		/* Widget name */
-		$widget_name = $updater_data['name'] . __( ' Plugin Updates', 'wplms' );
+		$widget_name = $updater_data['name'] . __( ' Plugin Updates', 'vibebp' );
 
 		/* role check, in default install only administrator have this cap */
 		if ( current_user_can( 'update_plugins' ) ) {
@@ -518,38 +518,38 @@ class VibeBp_Auto_Update{
 
 				/* username */
 				$username = isset( $widget_option['username'] ) ? $widget_option['username'] : '';
-				echo '<p>'. __( 'Username: ', 'wplms' ) . '<code>' . $username . '</code></p>';
+				echo '<p>'. __( 'Username: ', 'vibebp' ) . '<code>' . $username . '</code></p>';
 
 				/* activation key input */
 				$key = isset( $widget_option['key'] ) ? $widget_option['key'] : '' ;
-				echo '<p>'. __( 'Email: ', 'wplms' ) . '<code>' . $key . '</code></p>';
+				echo '<p>'. __( 'Email: ', 'vibebp' ) . '<code>' . $key . '</code></p>';
 			}
 			else{
 
 				/* activation key input */
 				$key = isset( $widget_option['key'] ) ? $widget_option['key'] : '' ;
-				echo '<p>'. __( 'Key: ', 'wplms' ) . '<code>' . $key . '</code></p>';
+				echo '<p>'. __( 'Key: ', 'vibebp' ) . '<code>' . $key . '</code></p>';
 			}
 
 
 			/* if key status is valid */
 			if ( $widget_option['status'] == 'valid' ){
-				_e( '<p>Your plugin update is <span style="color:green">active</span></p>', 'wplms' );
+				_e( 'Your plugin update is active', 'vibebp' );
 			}
 			/* if key is not valid */
 			elseif( $widget_option['status'] == 'invalid' ){
-				_e( '<p>Your input is <span style="color:red">not valid</span>, automatic updates is <span style="color:red">not active</span>.</p>', 'wplms' );
-				echo '<p><a href="' . $edit_url . '" class="button-primary">' . __( 'Edit Key', 'wplms' ) . '</a></p>';
+				_e( 'Your input is not valid, automatic updates is not active', 'vibebp' );
+				echo '<p><a href="' . $edit_url . '" class="button-primary">' . __( 'Edit Key', 'vibebp' ) . '</a></p>';
 			}
 			/* else */
 			else{
-				_e( '<p>Unable to validate update activation.</p>', 'wplms' );
-				echo '<p><a href="' . $edit_url . '" class="button-primary">' . __( 'Try again', 'wplms' ) . '</a></p>';
+				_e( 'Unable to validate update activation.', 'vibebp' );
+				echo '<p><a href="' . $edit_url . '" class="button-primary">' . __( 'Try again', 'vibebp' ) . '</a></p>';
 			}
 		}
 		/* if activation key is not yet set/empty */
 		else{
-			echo '<p><a href="' . $edit_url . '" class="button-primary">' . __( 'Add Purchase Code', 'wplms' ) . '</a></p>';
+			echo '<p><a href="' . $edit_url . '" class="button-primary">' . __( 'Add Purchase Code', 'vibebp' ) . '</a></p>';
 		}
 	}
 
@@ -636,13 +636,13 @@ class VibeBp_Auto_Update{
 		<?php if ( true === $updater_data['role'] ) { // members only update ?>
 
 		<p>
-			<label for="<?php echo $widget_id; ?>-username"><?php _e( 'User name', 'wplms' ); ?></label>
+			<label for="<?php echo $widget_id; ?>-username"><?php _e( 'User name', 'vibebp' ); ?></label>
 		</p>
 		<p>
 			<input id="<?php echo $widget_id; ?>-username" name="<?php echo $widget_id; ?>[username]" type="text" value="<?php echo $username_option;?>"/>
 		</p>
 		<p>
-			<label for="<?php echo $widget_id; ?>-key"><?php _e( 'Email', 'wplms' ); ?></label>
+			<label for="<?php echo $widget_id; ?>-key"><?php _e( 'Email', 'vibebp' ); ?></label>
 		</p>
 		<p>
 			<input id="<?php echo $widget_id; ?>-key" class="regular-text" name="<?php echo $widget_id; ?>[key]" type="text" value="<?php echo $key_option;?>"/>
@@ -651,7 +651,7 @@ class VibeBp_Auto_Update{
 		<?php } else { // activation keys ?>
 
 		<p>
-			<label for="<?php echo $widget_id; ?>-key"><?php _e( 'Themeforest/CodeCanyon Purchase Key ( for Auto-Updates )', 'wplms' ); ?></label>
+			<label for="<?php echo $widget_id; ?>-key"><?php _e( 'Themeforest/CodeCanyon Purchase Key ( for Auto-Updates )', 'vibebp' ); ?></label>
 		</p>
 		<p>
 			<input id="<?php echo $widget_id; ?>-key" class="regular-text" name="<?php echo $widget_id; ?>[key]" type="text" value="<?php echo $key_option;?>"/>

@@ -1,4 +1,20 @@
+* 1.9.9.8
+* 1.9.9.8
+* hide show component in grid fix
+* Minified scripts
+* 1.9.9.8
+* new cart
+* sanitize selectcpt
+* Login improvemenets
+* loggedin menu menu click outside
+* translation fixes
+* Google recaptcha fix
+* validate email entered
+* 1.9.9.7.8
+* Elementor color bug fix
+* changelog
 * 1.9.9.7.7
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * vuln fix for e6a5e33e-59c2-40ae-baed-00e7995794e3?pin=JIHTBoT5FuUECJJL
 * vuln fix for e6a5e33e-59c2-40ae-baed-00e7995794e3?pin=JIHTBoT5FuUECJJL
 * vuln fix for 668b33b4-2b45-4cf9-b957-da943471702e?pin=kYY65bps63zl4TEa
@@ -19,6 +35,7 @@
 * user role not assigning on signup fix
 * 1.9.9.7.2
 * package lock change install regenerater runtime
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * singinpopup register fix
 * regenerated login
 * handle upload
@@ -32,6 +49,7 @@
 * email not migrating fix
 * signin fix
 * match question vibe_question_answer is an array
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into saas-exporter
 * do not cache xapi
 * fix for course featured image
 * media export
@@ -79,6 +97,7 @@
 * build files
 * php err fix
 * cart fixes
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * php err fix
 * 1.9.9.5.2
 * 1.9.9.5.2
@@ -109,6 +128,7 @@
 * avatar api fix
 * groupname
 * build file
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * groups issue fix
 * show minimise sidebar in all cases
 * edge case avatars API was hit
@@ -117,9 +137,11 @@
 * err in csv members upload
 * bug after firebase account creation
 * captcha not working fix
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * email login trim
 * editor for math
 * bp 12 compability fixes
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * login issues
 * members map api key issue
 * space between name and comma
@@ -131,6 +153,7 @@
 * cartjs price  fix
 * 1.9.9
 * edit course error fix or php error fix when firebase stale requests updated
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * external process tus upload user id in filter
 * WC Events sync on cart page
 * php err fix
@@ -151,6 +174,7 @@
 * include coinstructors in speed accelerator
 * php err fix
 * loginjs error fix
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * check
 * Sorter check
 * default return warning message
@@ -158,6 +182,7 @@
 * select drop down background color fix in app
 * spelling correction
 * build file
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * bulk action and all member member type creation fixes
 * fixes in csv import for member creation
 * 1.9.8.8
@@ -172,6 +197,7 @@
 * vibe_search shortcode
 * editor for extenal calls
 * Revert "plyrjs updated"
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * dashboard widget fixes
 * default component for third party themes
 * carousel block fixes
@@ -222,6 +248,7 @@
 * login rtl css fixes
 * editor fixes
 * grid_minimise
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * plyr mark not working fix
 * editor min
 * wallet class
@@ -254,6 +281,7 @@
 * filter to add firebase
 * sw bug fixes
 * mified
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * member action button guten fix
 * field fix
 * editor changes for forms
@@ -266,6 +294,7 @@
 * esc_attr
 * firebase general
 * app general
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * 'vibebp/loader.php' for appointments
 * 1.9.8.4.1
 * setting change fix
@@ -360,6 +389,7 @@
 * simple theme
 * only for pages
 * 1.9.8
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * filter name change
 * 1.9.8
 * microlearning element fixes
@@ -397,6 +427,7 @@
 * gallery fix
 * transaltion err fixx
 * pdf not rendering bug fix
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * upload type field check
 * Tours not working fixes
 * search not working without full name in all members panel fix
@@ -424,6 +455,7 @@
 * cart icon show only WC detection
 * Drag to refresh changed to icon
 * minor styling fixes
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * php err fix
 * search and embed in text editor
 * editorJS setup
@@ -459,6 +491,7 @@
 * stop hidden groups
 * Location field fixes
 * fatal error fix
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * refrsh count on member add
 * group forum
 * minor fixes
@@ -471,6 +504,7 @@
 * custom Group fields resetting feilds & name fix
 * whatsapp
 * custom div fix
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * dashboard empty fix
 * do not show blank notifications
 * remove notification
@@ -510,11 +544,14 @@
 * profile fields not saving properly fix
 * function exists check
 * repeatable field issue fix
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * activity controller fix
 * css location field fix
 * pdf view js height fix
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * hidden group not showing to user to self
 * profile subnav controller
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * vibebp installer update
 * webpack update for node 9
 * custom registration form fx
@@ -542,6 +579,7 @@
 * tutorly check
 * function exists check
 * layouts fix
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * build files
 * double content in theme
 * Elementor header builder / avada etc
@@ -557,6 +595,7 @@
 * Linkedin Login
 * Firebase autheticated used setup when login from WP admin
 * fixes to notifications count.
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * profile field value not appearing properly fix
 * minox fix
 * translations updated
@@ -587,6 +626,7 @@
 * translation fix
 * profile completeness bug fix
 * invite status and video in group desc not working fix
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * messaging js upated
 * 1.9.0.1
 * vibebp save settings
@@ -607,6 +647,7 @@
 * groupdata
 * gruop detail fixes
 * group tab conflict fix
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * hide profile field checking visibility settings
 * console.log removed
 * comma and space between name corrected.
@@ -645,6 +686,7 @@
 * group fields shortcode
 * group fields fix
 * member card not loading issue fix
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * login build files
 * Group fields
 * remove redundant
@@ -652,6 +694,7 @@
 * fields not showing in create gorup
 * yesno field fix
 * error fix in custom fields groups front end
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * build files
 * custom fields in groups
 * max width on sleect
@@ -673,6 +716,7 @@
 * fix fields issue in member type registration
 * php error fix
 * changelog
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * php error fix
 * prnt
 * 1.8.8.5
@@ -681,6 +725,7 @@
 * minor fixes
 * slide improvements and gallery support in profile field shortcode
 * login issue when firebase dont authenticate
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * member directory card fix
 * 1.8.8.4
 * activation template
@@ -722,6 +767,7 @@
 * to display flag on profiles
 * for flag formatting
 * important fix
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * plyr mask feature
 * wall
 * compiled
@@ -729,9 +775,11 @@
 * menu icon function
 * profile field shortcode
 * fix for invite codes
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * invitation code ux changes
 * upload_attachment bug fix
 * menu icon function
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * balance products continues loading fix
 * translation files updated
 * 1.8.7.2
@@ -740,6 +788,7 @@
 * bug fix
 * field names for better import of fields
 * import meta descriptions
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * login fix when firebase auth does not work
 * slider fixes
 * 1.8.7.1
@@ -747,6 +796,7 @@
 * inst media privacy not working fix
 * php error fix
 * php error fix in tus upload
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * fix for wall post
 * notice fixes
 * fixes
@@ -759,12 +809,14 @@
 * attachments in messages
 * css fixes
 * cart fixes
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * instructor content privacy fix
 * followers fixes
 * 6.0 beta tested
 * invite code validation
 * invitation code feature added
 * field description
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * one session per user
 * setupwizard to pick external css for necessary installation
 * fetch location after filter to set the language for multilingual plugins
@@ -780,10 +832,12 @@
 * waiting for did_filter to be added in wp_core
 * 1.8.6.1
 * swiper to vibebp-swiper
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * country field options return
 * cartJS changes
 * coursel ID updated
 * list style fix
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * php error fix
 * cart items
 * cart api and blocks
@@ -810,6 +864,7 @@
 * profile not loading fix
 * elementor error fix
 * php error fix
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * admin to show all groups
 * some fixes
 * carousel gutenberg
@@ -825,6 +880,7 @@
 * v3 google captcha in vibbp for standard bp registration form
 * fixes to carousel
 * save light_dark in localstorage
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * php error fix
 * important fix
 * wall component remove
@@ -845,6 +901,7 @@
 * mobile align
 * wallet init
 * 1.8.4
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * member_car public permission for course inst card
 * fixes
 * 1.8.3
@@ -855,6 +912,7 @@
 * fixes
 * pdf embed in mobile try 1
 * firebase notifications removed
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * abortcontroller in avatar
 * carousels
 * progressbar in scrollbar
@@ -876,16 +934,19 @@
 * wall post completed with post permissions
 * token checks for actions
 * user wall init
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * some cs changes for reactions overview
 * change log
 * registration fixes
 * build file
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * update reaction overview on reaction
 * fallback in permissions
 * register cause
 * client_id to be passed in all fields
 * reactions overview and details
 * build file
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * media comments and popup in wall
 * 1.8.2
 * thorottle field save controller fix
@@ -913,12 +974,14 @@
 * check in array
 * fix last acitivty user field
 * prepare for activity block in future
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * activity reactions
 * remove console
 * giphy styling fixes and consistency
 * giphy in editor
 * spaced style in gutenberg profile fields
 * block fixes for gutenberg
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * giphy added
 * fixes in gallery to support non-images
 * gallery and types
@@ -976,6 +1039,7 @@
 * avatar bugs
 * allow search with partial names , emails
 * messages api stale request update for deleted messages
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * messages fixes
 * default switch in WP admin
 * node & npm updated
@@ -998,6 +1062,7 @@
 * build file
 * remove firebase modules
 * periodic sync for post data retry
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * profile sync fix with buddypress profile
 * all groups page error fix
 * Tabs & Editor fixes
@@ -1009,6 +1074,7 @@
 * profile field fix
 * profile.js build
 * getpost?force
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * apple login icon added
 * Revert "1.6.4.2"
 * 1.6.4.2
@@ -1030,15 +1096,18 @@
 * admin to show in members
 * join/leave button all groups popup
 * logout on invalidate token
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * groups dir in pwa changes
 * shift profile script
 * multiple changes & fixes
 * 1.6.4.1
 * css .content conflict issue fix
 * build files
+* Merge remote-tracking branch 'origin/develop' into develop
 * 5 minutes setting in token duration for ultra security
 * reset password only for non-admins
 * classroom enable check added
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * groups dir changes
 * token not regenrating fix
 * scripts updated
@@ -1064,11 +1133,13 @@
 * active sessions fixes
 * login fixes
 * editor form search added
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * unified widgets call for dashboard
 * escape like
 * max-width removed on login image
 * os name in my sessions in settings
 * build file
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * my login sessions
 * minor editor changes
 * improved can access
@@ -1087,10 +1158,12 @@
 * group can access api added
 * user_id warning fix
 * register props added
+* user register async added
 * user register async fixed
 * unable to add members filter
 * groups add member showing while member is being added fix
 * php 8 error fix
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * sw changes for export
 * css fixes
 * translation POT updated
@@ -1101,6 +1174,7 @@
 * activities reloading on thier own fix
 * csv to users register added
 * csv parse init
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * editor fixed for content change
 * directory blocks make work live in elementor editor
 * filter name change
@@ -1116,6 +1190,7 @@
 * pass proper props for loading / editing profiles
 * math multi-trigger fix
 * warnings in activity
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * onChange edit in tours
 * css fixes
 * 1.6.2
@@ -1123,10 +1198,13 @@
 * Tours import
 * build files
 * math & styling fixes
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * added animation in tour title
 * provision to change storename dynamically in service worker
 * check for field details if field is actually present
 * cache members details added
+* develop merged
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * css fixes
 * bug fix & css fix
 * build flles
@@ -1138,6 +1216,7 @@
 * member page added
 * tags taxonomy component init
 * added tous json file and capabilities setting in tour
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * fixes for wpml addon
 * added tour live search
 * tour importer
@@ -1161,15 +1240,19 @@
 * 1.6.1
 * php 8 error fix
 * login screen fix for millieseconds
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * dasbboard drag drop and scroll issue fix
 * temp login screen fixed
 * media modal plyr loading
 * build added
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * fetch issue in dashboard
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * shop component for tours
 * default component fixed
 * new message post args added
 * editor in messaging added
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * check for profile component
 * removed unused
 * build added
@@ -1187,11 +1270,13 @@
 * tours steps added
 * current step check added
 * tours state updated as global
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * pro widgets not loading on layouts fix
 * post types for regex added
 * vibebp_the_content added
 * the content latex parse check added
 * notice & warning fixes
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * regex check for mathjax init
 * bug : Time since should be returned
 * icon class changed to icon style
@@ -1200,9 +1285,11 @@
 * php 8 fixes
 * instructor privacy for media added
 * fetch_media search and sort not working fix
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * app display mode setting added
 * drive label and member class
 * empty check on attachment
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * php 8 fix
 * drive icon for drive files added
 * removed unused
@@ -1218,14 +1305,17 @@
 * tours fixes
 * field selection added
 * table creation added
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * php 8 fix
 * columns field creation added
 * profile field type table init
 * Tours component
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * groups directory added in gutenberg
 * vibebp app template for sites which do not ahve anay template
 * login stuck at firebase fail fix
 * groups directory fix
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * group layout php 8 fixes
 * 1.6.0.5
 * empty check on value
@@ -1257,6 +1347,7 @@
 * notice on Cache first service not works with sync
 * set false xnonce if not set
 * stale_Requests fix
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * resetting stale_requests on regenerate sw
 * login css fix
 * translations updated
@@ -1274,6 +1365,7 @@
 * new structure for titles and other things in cache
 * notifications sync
 * overflow bug fix
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * friend sync
 * fixes to mobile heading in components
 * menu fixes in mobile view
@@ -1288,6 +1380,7 @@
 * some more fix
 * cache_request fix
 * change stale_request logic to save url encoded
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * notification for live reload
 * 1.6.0
 * build login
@@ -1295,6 +1388,7 @@
 * notificaiton for stale data added
 * userloaded event fixes
 * stale message fix
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * updating groups stale requests on member added
 * draggability dashboards
 * max height on slick
@@ -1310,6 +1404,7 @@
 * avatar fetching cache
 * vibbep handlers
 * firebase admin_token transient fix
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * service worker check wp-json with vibe, wplms,vbp
 * bug fix in stale request handler
 * service worker with firebase realtime updating.
@@ -1335,6 +1430,7 @@
 * safari icon fix
 * dispatch component
 * load only one time on a page
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * add cache first check
 * vibebp_media_tab event dispatch fixed
 * async curls
@@ -1400,6 +1496,7 @@
 * merge
 * slick theme
 * draggable drag to refresh
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * cache first setting in json data
 * flatpicker langauge selection enque disabled
 * svg in single -line fixed
@@ -1411,10 +1508,13 @@
 * css fixes memorygame
 * card stack added
 * css fixes
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * ppt,docs,xlsx,memory game css updated
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * plyrjs updated v3.6.8
 * Update member_types.php
 * Update member_types.php
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * Update member_types.php
 * Filter string for translation added
 * Default member type selection
@@ -1425,6 +1525,7 @@
 * service worker Cache first
 * strong password restriction
 * escaping upload_media_stream url from servicer worker
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * $is_html4 warning
 * slick profile skin
 * message clear enter key press fixed
@@ -1434,6 +1535,7 @@
 * customizer controls
 * servicer worker error fixes
 * 1.5.8
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * dashboard width change and reset button
 * compiled js
 * trigger Editor events on login pages
@@ -1459,6 +1561,7 @@
 * follow removed from friends member block
 * fixing Pwa icon issue in notification bar
 * popup in gallery
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * video and gallery fields added
 * verify false after event dispatch . Split second delay leads to login display.
 * video filed added with youtube vimeo support
@@ -1496,7 +1599,9 @@
 * traslations updated
 * 1.5.5
 * hotspots
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * safari backface css added
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * chnage profile photo not appearing when bp single page is active issue fix
 * remove back and front at same time added
 * lock updated
@@ -1510,13 +1615,17 @@
 * email going wrong in js resulting in wrong validation of email fix
 * vibebp_upload_capability filter to allow upload to custom capability
 * who can upload setting added
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * file not uploading with same name fix
 * editor fixes
 * Improved grid size and css for flashcards.
 * SVG added for shortcodes
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
+* Merge branch 'scratch-card' of https://github.com/MrVibe/vibebp into develop
 * editor css highlight fix
 * text alignment attempt
 * fixes
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * php 8 warning fixes
 * textarea new line not working fix
 * reload,img height fixed
@@ -1532,6 +1641,7 @@
 * box show on edit added
 * translation fixed
 * hotspot added
+* develope changes merge into scratch card
 * html support fixed
 * Generate content structure added
 * GenerateContent component added
@@ -1543,6 +1653,7 @@
 * css fixes
 * Using cocoen js for image reveal
 * conflicts resolved with singleprofile
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into singleview
 * messages error fix
 * scratch occure on diffrent image fixed
 * scratch card css fixed
@@ -1581,16 +1692,19 @@
 * revert previous commit and scope to root settings vibebp
 * login.js loading even when global login is not enabled
 * PHP 8 warning fix
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * php8 warning
 * gitigonore
 * 1.5.3.4
 * 1.5.3.3
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * editor fixes cant type fix
 * 1.5.3.1
 * editor text not appearing issue fix
 * check for login text
 * check empty member type
 * Divi showing shortcodes
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * 1.5.3
 * 1.5.3
 * is_singular unit check
@@ -1604,6 +1718,7 @@
 * add widget id as class to uniquely identify
 * chat option should not be visible to youself
 * profile build file
+* no message
 * enable disable notification
 * profile completeness
 * offline status in button
@@ -1616,6 +1731,7 @@
 * service worker hook to write custom code
 * multiselect field in profile edit
 * 1.5.1
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * service worker font files issue fix
 * notices
 * wpml bug we’re fixing
@@ -1650,6 +1766,7 @@
 * validate token from function
 * loggedin profile in no wplms
 * sub tab value
+* Merge branch 'gutenberg' of https://github.com/MrVibe/vibebp into develop
 * blocks rebuild
 * migration of vibebp member type group type to buddypress
 * groups block done
@@ -1659,6 +1776,7 @@
 * field block
 * field block and avatar blocks
 * got blocks starting on bulma with css errors
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * dependancies
 * 1.4.9.2
 * dashboard version removed
@@ -1674,6 +1792,7 @@
 * remove on confirmation
 * delte activity fix
 * editor changes
+* Merge branch 'tryingout_editorsucks' into develop
 * fixes
 * toolbarxs
 * editor
@@ -1713,6 +1832,7 @@
 * fixes
 * setting in elementor to load popup js
 * css changes
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into singleview
 * 1.4.7.1
 * group invitations
 * Email label missing in login
@@ -1828,6 +1948,7 @@
 * update translations
 * select color aschemes
 * PWA generate_apps
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * fix for admin referrer in setup wizard
 * manifest moved to site root
 * version 1.4
@@ -1888,6 +2009,7 @@
 * member card showing other user info fix
 * checkbox field filter fix in members directory
 * wp_filter_no_html_kses to wp_filter_nohtml_kses fix
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * removing console
 * price of addons
 * fixed
@@ -1931,6 +2053,7 @@
 * menuID incorrect passed
 * phone auth provision
 * merge fixes
+* Merge branch 'a' into develop
 * fixes in live chat
 * disbale live on site front end fix
 * live chat working
@@ -2126,6 +2249,7 @@
 * translations updated
 * version1.0
 * autoupdate complete
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * rtl header z index issue fix
 * font end buttons
 * overflowvisible on pusher
@@ -2136,6 +2260,7 @@
 * translatiosn updated
 * profile and css compiled
 * function eixsts check
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * rtl mobile css
 * group card fix
 * do not set pages automatically for existing wplms
@@ -2146,6 +2271,7 @@
 * notice fixes
 * translations
 * setup
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * mobile css changes
 * complete
 * setup wizard menu fix
@@ -2184,6 +2310,7 @@
 * groups notifications activitiy issue fixes
 * message styling fixes
 * external upload
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * start unstar message added, activity labels removed
 * bug fixes
 * bug fixes
@@ -2257,6 +2384,7 @@
 * console removed
 * style applied to editor
 * note added in editor
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * error  fixed
 * css changes
 * appearing modal
@@ -2301,6 +2429,7 @@
 * inline editor
 * editor changes
 * math
+* Merge branch 'develop' into d
 * d
 * editor
 * updated git ignore
@@ -2333,6 +2462,7 @@
 * assign label added in user page
 * label support added
 * helpdesk extracted
+* Merge branch 'helpdesk' into develop
 * bbpress removed
 * extracted helpdesk into a new plugin
 * kb extracted into plugin
@@ -2390,6 +2520,7 @@
 * firebase login fixed
 * followers
 * firebase login
+* Merge branch 'develop' of https://github.com/MrVibe/vibebp into develop
 * plguin description & other bugs
 * followers
 * followers init
@@ -2478,6 +2609,7 @@
 * added toolbar and typography controls over
 * icon changes and blocks removed
 * field style
+* Merge branch 'blocks-merge' of https://github.com/MrVibe/vibebp into develop
 * gitignore
 * merging
 * some fixes

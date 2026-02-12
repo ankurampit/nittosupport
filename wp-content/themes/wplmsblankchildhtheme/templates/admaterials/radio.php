@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Template Name: Print Ads
+ * Template Name: Radio
  * Template Post Type: page
  */
 

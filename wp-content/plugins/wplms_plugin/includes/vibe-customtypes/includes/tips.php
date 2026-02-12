@@ -2799,7 +2799,7 @@ class WPLMS_tips{
 					'home' => $url,
 					'profile' => bp_core_get_user_domain($user->ID),
 					'mycourses' => $link.'#component='.BP_COURSE_SLUG,
-					'instructing_courses' => $link.'#component=manage_courses',
+					'instructing_courses' => $link.'#component=course&action=manage_courses',
 					'dashboard' => $link.'#component=dashboard',
 					'same' => '',
 					));

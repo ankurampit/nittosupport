@@ -4044,18 +4044,22 @@ Class Vibe_Define_Shortcodes{
 
     function vibe_fillblank( $atts, $content = null ) {
         global $post; 
-        $user_id=get_current_user_id();
-        $answers=get_comments(array(
-          'post_id' => $post->ID,
-          'status' => 'approve',
-          'user_id' => $user_id
-          ));
-
         $content =' ';
-        if(isset($answers) && is_array($answers) && count($answers)){
-            $answer = reset($answers);
-            $content = $answer->comment_content;
+        if($post){
+            $user_id=get_current_user_id();
+            $answers=get_comments(array(
+            'post_id' => $post->ID,
+            'status' => 'approve',
+            'user_id' => $user_id
+            ));
+
+            
+            if(isset($answers) && is_array($answers) && count($answers)){
+                $answer = reset($answers);
+                $content = $answer->comment_content;
+            }
         }
+        
         if((function_exists('bp_is_user') && bp_is_user()) || (function_exists('bp_is_member') && bp_is_member()))
             return '____________';
 
@@ -4546,7 +4550,7 @@ Class Vibe_Define_Shortcodes{
         
         $html ='<form role="search" method="get" class="'.$style.'" action="'.home_url( '/' ).'">
             <input type="hidden" name="post_type" value="'.BP_COURSE_SLUG.'" />
-            <input type="text" value="'.(isset($_GET['s'])?$_GET['s']:'').'" name="s" id="s" placeholder="'.__('Type Keywords..','wplms').'" />
+            <input type="text" value="'.(isset($_GET['s'])?esc_attr($_GET['s']):'').'" name="s" id="s" placeholder="'.__('Type Keywords..','wplms').'" />
             <input type="submit" id="searchsubmit" value="'.__('Search','wplms').'" />
             </form>';
         return $html;

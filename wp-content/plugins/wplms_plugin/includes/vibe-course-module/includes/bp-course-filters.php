@@ -687,7 +687,7 @@ class bp_course_filters{
       	}
 
       	if(!$cflag){
-          	$stop = array('icon'=>'vicon-lock','error_code'=>'precourse','error_message'=>_x('Please complete all the pre-requisite courses first','','wplms'));
+          	$stop = array('icon'=>'vicon-lock','error_code'=>'precourse','error_message'=>sprintf(_x('Please complete the pre-requisite course : "%s"','pre-requisite','wplms'),get_the_title($preid)));
       	}
 
     	return $stop;
@@ -1027,9 +1027,9 @@ class bp_course_filters{
 					$.cookie('bp-activity-course', <?php echo get_the_ID(); ?>, { expires: 1 ,path: '/'});
 					<?php
 					if(!empty($_REQUEST['student'])){ 
-						$appended .='&user_id='.$_REQUEST['student'];
+						$appended .='&user_id='.esc_attr($_REQUEST['student']);
 						?>
-						$.cookie('bp-activity-student', <?php echo $_REQUEST['student']; ?>, { expires: 1 ,path: '/'});
+						$.cookie('bp-activity-student', <?php echo esc_attr($_REQUEST['student']); ?>, { expires: 1 ,path: '/'});
 						<?php
 					}
 					?>
@@ -1283,8 +1283,12 @@ class bp_course_filters{
 
 				//Get first unit in previous section
 				for($i=$k1;$i<=$k2;$i++){
-					if(is_numeric($curriculum[$i]) && bp_course_get_post_type($curriculum[$i]) == 'unit') 
-						break;
+					if(is_numeric($curriculum[$i])){
+						$ptype = bp_course_get_post_type($curriculum[$i]);
+						if($ptype == 'unit' || $ptype == 'quiz'){
+							break;
+						}
+					}
 				}
 
 				if($i == $k2){

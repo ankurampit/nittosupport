@@ -54,7 +54,7 @@ eventually be removed/refactored */
 .metaslider.wrap div.error {
     clear: both
 }
-.metaslider .left input[type=text],
+.metaslider .left input[type=text]:not(.tox-input-wrapper input),
 .metaslider .left textarea {
     border: 1px solid #8c8f94;
     border-radius: 4px;
@@ -244,6 +244,7 @@ eventually be removed/refactored */
 }
 .metaslider .ms-switch-button label input[disabled] + span {
     cursor: not-allowed;
+    opacity: 0.5;
 }
 .metaslider .ms-switch-button label span {
     position: absolute;
@@ -333,6 +334,11 @@ eventually be removed/refactored */
 .metaslider .left table tr.slide input.url {
     width: 100%;
     min-width: 200px;
+}
+
+.metaslider .left table tr.slide input[type="text"].video_url,
+.metaslider .left table tr.slide input[type="text"].track_url {
+    border-radius: 0;
 }
 
 .branch-3-5 .metaslider .left table tr.slide .tabs-content .new_window,
@@ -693,13 +699,13 @@ eventually be removed/refactored */
     width: 125px;
 }
 
-.metaslider .tabs-content .row input {
+.metaslider .tabs-content .row input:not(.tox-input-wrapper input) {
     margin-right: 5px;
     margin-bottom: 0px;
     margin-left: 0px;
 }
 
-.metaslider .tabs-content .row input[type="text"] {
+.metaslider .tabs-content .row input[type="text"]:not(.tox-input-wrapper input) {
     width: 100%;
 }
 
@@ -1119,6 +1125,10 @@ input[type="radio"] {
             }
         }
     }
+}
+.tox .tox-number-input input {
+    margin: 0 !important;
+    min-height: 28px;
 }
 
  /* Spin an svg */
@@ -1639,7 +1649,7 @@ input.no_last_pass {
 #slideshows-list {
     margin: 10px;
 }
-.metaslider [class*="tipsy-tooltip"].dashicons:not(.is-pro-setting) {
+.metaslider [class*="tipsy-tooltip"].dashicons:not(.is-pro-setting):not(.is-free-setting) {
 	opacity: 0.5;
 	font-size: 1rem;
 	line-height: 30px;
@@ -1756,8 +1766,24 @@ input.no_last_pass {
   color: #50575e;
 }
 
-.mobile-checkbox-wrap > input[type="checkbox"]:checked + span {
-	color: #dd6923;
+.mobile-checkbox-wrap > input[type="checkbox"]:checked + span:before {
+	opacity: 0.6;
+}
+
+.mobile-checkbox-wrap > input[type="checkbox"]:checked + span:after {
+  background: #d63638;
+  border-radius: 50%;
+  color: #fff;
+  content: "\f530";
+  font-family: dashicons;
+  height: 20px;
+  line-height: 18px;
+  position: absolute;
+  right: 1px;
+  text-align: center;
+  top: 1px;
+  width: 20px;
+  font-size: 17px;
 }
 
 .mobile_setting_enabled svg {
@@ -1772,30 +1798,15 @@ input.no_last_pass {
 }
 
 /* Settngs & Help Page */
-#mobile-settings button,
-#dashboard-settings button {
+.ms-settings-row > .ms-settings-col:not(:last-child) button {
 	display: none !important;
-}
-#mobile-settings div.col:last-child button,
-#dashboard-settings div.col:last-child button {
-	display: inline-block !important;
-}
-#mobile-settings .row,
-#dashboard-settings .row {
-	display: flex;
-}
-#mobile-settings .col,
-#dashboard-settings .col {
-	display: flex;
-	flex-direction: row;
-	align-items: flex-start;
 }
 #mobile-settings .dashicons {
 	color: #606060;
 	font-size: 35px;
-	height: 35px;
+	height: 30px;
 	padding: 0;
-	width: 45px;
+	width: 30px;
 }
 #mobile-settings form input {
 	width: 60px !important;
@@ -2178,20 +2189,57 @@ td .dot.available {
 	display: none;
 }
 
-.metaslider .is-pro-setting {
+.media-frame-menu > .media-menu > button.media-menu-item:after {
+    border-radius: 10px;
+    display: inline-block;
+    padding: 1px 7px 3px;
+    margin-left: 5px;
+    font-size: 0.9em;
+    line-height: 1.3em;
+    font-weight: bold;
+}
+
+.media-frame-menu > .media-menu > button.media-menu-item:not(#menu-item-insert):after {
+    background: #feb123;
+    color: #333;
+    content: "Pro";
+}
+
+.media-frame-menu > .media-menu > button.media-menu-item:is(#menu-item-insert)::after {
+    background: #ddd;
+    color: #333;
+    content: "Free";
+}
+
+.metaslider .is-pro-setting,
+.metaslider .is-free-setting {
     width: 30px;
     opacity: 1;
-    color: #333;
     font-size: 1rem;
     line-height: 1.2rem;
 }
 
-.metaslider .ms-settings-table .is-pro-setting {
+.metaslider .is-pro-setting {
+    color: #333;
+}
+
+.metaslider .is-free-setting {
+    color: #fff;
+}
+
+.metaslider .ms-settings-table .is-pro-setting,
+.metaslider .ms-settings-table .is-free-setting {
     font-size: 1rem;
 	line-height: 30px;
 }
 
-.metaslider .ms-settings-table .checkbox .is-pro-setting {
+.metaslider .ms-settings-table tr.number .is-pro-setting,
+.metaslider .ms-settings-table tr.number .is-free-setting {
+	line-height: 20px;
+}
+
+.metaslider .ms-settings-table .checkbox .is-pro-setting,
+.metaslider .ms-settings-table .checkbox .is-free-setting {
 	line-height: 22px;
 }
 
@@ -2199,14 +2247,27 @@ td .dot.available {
     color: #333;
 }
 
-.metaslider .is-pro-setting:focus {
+.metaslider .is-free-setting:hover {
+    color: #fff;
+}
+
+.metaslider .is-pro-setting:focus,
+.metaslider .is-free-setting:focus {
     box-shadow: none;
+}
+
+.metaslider .is-pro-setting:before,
+.metaslider .is-free-setting:before {
+    padding: 4px;
+    border-radius: 50%;
 }
 
 .metaslider .is-pro-setting:before {
     background: #feb123;
-    padding: 4px;
-    border-radius: 50%;
+}
+
+.metaslider .is-free-setting:before {
+    background: #007cba;
 }
 
 .metaslider-ui .metaslider-slides-container .slide.slide-is-hidden td > *:not(.metaslider-ui-controls) {
@@ -2226,6 +2287,37 @@ td .dot.available {
 #ms-save.ms-toolbar-button:not(.disabled):focus,
 #ms-save.ms-toolbar-button:not(.disabled):active {
     background: #006ba1 !important;
+}
+
+/* Ad notice for settings sidebar */
+.ms-ad-notice {
+    padding: 10px 14px;
+    background: #fff;
+    border: 1px solid #c3c4c7;
+    border-left-width: 1px;
+    border-left-color: rgb(195, 196, 199);
+    border-left-color: #dd6923;
+    border-left-width: 4px;
+}
+.ms-ad-button {
+	color: #fff;
+	background: #dd6923;
+	padding: 8px 15px;
+	border-radius: 5px;
+	text-decoration: none;
+	display: inline-block;
+	border: none;
+}
+.ms-settings-box-inner .ms-ad-button {
+	margin-top: 5px;
+}
+.ms-ad-button:hover,
+.ms-ad-button:focus,
+.ms-ad-button:active {
+	color: #fff;
+	background: #29375b;
+	text-decoration: none;
+	border: none;
 }
 
 @media only screen and (min-width : 320px) {

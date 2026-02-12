@@ -29,27 +29,35 @@ foreach (glob(get_stylesheet_directory() . '/includes/*.php') as $file) {
     require_once $file;
 }
 
-
-/**
- * Auto-load all page templates from /templates/admaterials/ folder
- */
 add_filter('theme_page_templates', function ($templates) {
-    $template_dir = get_stylesheet_directory() . '/templates/admaterials/';
 
-    // Get all PHP files inside admaterials folder
-    foreach (glob($template_dir . '*.php') as $file) {
-        $file_name = basename($file);
+    $base_dir = get_stylesheet_directory() . '/templates/';
+    $subfolders = ['admaterials', 'management'];
 
-        // Read the Template Name from inside the file
-        $contents = file_get_contents($file);
-        if (preg_match('/Template Name:\s*(.+)/', $contents, $match)) {
-            $template_name = trim($match[1]);
-            $templates['templates/admaterials/' . $file_name] = $template_name;
+    foreach ($subfolders as $folder) {
+        $template_dir = $base_dir . $folder . '/';
+
+        if (!is_dir($template_dir)) {
+            continue;
+        }
+
+        foreach (glob($template_dir . '*.php') as $file) {
+            $file_name = basename($file);
+
+            // Read template header
+            $contents = file_get_contents($file);
+            if (preg_match('/Template Name:\s*(.+)/', $contents, $match)) {
+                $template_name = trim($match[1]);
+
+                // Register template with correct relative path
+                $templates["templates/{$folder}/{$file_name}"] = $template_name;
+            }
         }
     }
 
     return $templates;
 });
+
 
 
 /**

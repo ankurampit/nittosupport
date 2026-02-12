@@ -223,9 +223,6 @@ if ( ! class_exists( 'ACF_Media' ) ) :
 			if (is_array($errors) && ! empty($errors)) {
 				$response['acf_errors'] = implode('<br />', $errors);
 			}
-
-
-			// Return.
 			return $response;
 		}
 

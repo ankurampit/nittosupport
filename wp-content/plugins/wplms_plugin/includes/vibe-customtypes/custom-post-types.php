@@ -589,7 +589,7 @@ add_action( 'init', 'register_lms',5 );
 add_action( 'init', 'register_testimonials' );
 add_action( 'init', 'register_popups' );
 
-if(!function_exists('vibe_get_option') && !defined('WPLMS_VERSION')){ // Defining GET OPTION function
+if(!function_exists('vibe_get_option') ){ // Defining GET OPTION function
 	function vibe_get_option($field,$compare = NULL){
 		if(defined('THEME_SHORT_NAME')){
 			$option=get_option(THEME_SHORT_NAME);

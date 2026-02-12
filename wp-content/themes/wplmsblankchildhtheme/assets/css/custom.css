@@ -58,3 +58,82 @@
 .login-input-button{
     margin: 0px;
 }
+
+
+/* User Management Page Styles */
+
+.top-bar {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.links {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.links a {
+    color: #8b0000; /* Maroon color */
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.btn-add {
+    background-color: #800000;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 2px;
+}
+
+/* Table Controls */
+.table-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.search-box input {
+    border: 1px solid #ccc;
+    padding: 4px;
+    border-radius: 3px;
+}
+
+/* Table Styling */
+.table-wrapper {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #ddd;
+}
+
+th {
+    text-align: left;
+    padding: 10px;
+    border: 1px solid #ccc;
+    font-size: 13px;
+    background-color: #f9f9f9;
+    position: relative;
+    white-space: nowrap;
+}
+
+th i {
+    color: #ccc;
+    float: right;
+    margin-left: 5px;
+    margin-top: 3px;
+}
+
+td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}

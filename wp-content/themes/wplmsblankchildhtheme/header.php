@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo TITLE; ?></title>
+    <title>Nittosupport</title>
 
     <?php wp_head(); ?>
 </head>
@@ -20,7 +20,7 @@
 <link href="<?php echo get_stylesheet_directory_uri() . '/assets/css/custom.css' ?>" rel="stylesheet">
 <link href="<?php echo get_stylesheet_directory_uri() . '/assets/css/admaterials.css' ?>" rel="stylesheet">
 <link href="<?php echo get_stylesheet_directory_uri() . '/assets/css/responsive.css' ?>" rel="stylesheet">
-<link rel="icon" href="https://nittosupport.ca/admin_theme/images/favicon.ico" type="image/x-icon">
+<link rel="icon" href="<?php echo get_stylesheet_directory_uri() . '/assets/img/favicon.ico'; ?>" type="image/x-icon">
 
 <body>
     <header class="headerWide">
@@ -84,6 +84,8 @@
 
     <div class="innerSlider">
         <section id="myCarousel" class="carousel">
-            <?php echo do_shortcode('[metaslider id="90"]'); ?>
+            <?php
+            echo do_shortcode('[metaslider id="11672"]');
+            ?>
         </section>
     </div>

@@ -1219,7 +1219,7 @@ if ( ! class_exists( 'BP_Course_New_Rest_User_Controller' ) ) {
 			if(empty($image)){
 	            $image = vibe_get_option('default_course_avatar');
 	            if(empty($image)){
-	                //$image = VIBE_URL.'/assets/images/avatar.jpg';
+	                $image = VIBE_URL.'/assets/images/avatar.jpg';
 	            }
 	        }
 
@@ -2877,7 +2877,7 @@ if ( ! class_exists( 'BP_Course_New_Rest_User_Controller' ) ) {
 			}
 
 			$user_id = $this->user_id;
-			$item_id = $request['id'];
+			$item_id = esc_attr($request['id']);
 
 			$retakes=apply_filters('wplms_quiz_retake_count',get_post_meta($item_id,'vibe_quiz_retakes',true),$item_id,get_post_meta($item_id,'vibe_quiz_course',true),$user_id);
 			
@@ -4977,7 +4977,7 @@ if ( ! class_exists( 'BP_Course_New_Rest_User_Controller' ) ) {
 	    	if(!empty($results)){
 	    		foreach($results as $result){
 	    			$return['users'][]=apply_filters('wplms_api_search_users_in_chat',array(
-	    				'name'=> bp_core_get_user_displayname($result['ID']),
+	    				'name'=> bp_core_get_user_displayname(esc_attr($result['ID'])),
 	    				'id'=> intval($result['ID']),
 	    				'image'=> bp_core_fetch_avatar(array('item_id' => $result['ID'],'type'=>'thumb', 'html' => false)),
 	    				'type'=> (user_can(intval($result['ID']),'manage_options')?_x('Administrator','Chat search result user type','wplms'):(user_can($result['ID'],'edit_posts')?_x('Instructor','Chat search result user type','wplms'):_x('Student','Chat search result user type','wplms')))

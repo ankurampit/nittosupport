@@ -2707,6 +2707,8 @@ if ( ! class_exists( 'BP_Course_Rest_Instructor_Controller' ) ) {
 	          					$attachment_id = $wpdb-> get_var($wpdb-> prepare("SELECT ID FROM {$wpdb->posts} WHERE post_type = 'attachment' AND post_name = %s AND post_parent = %d AND post_author = %d", $certificate_name, $course_id, $user_id));
 	          					if (is_numeric($attachment_id)) {
 	          						wp_delete_attachment($attachment_id);
+	          						$certificate_path = get_attached_file( $attachment_id );
+	          						wp_delete_file($certificate_path);
 	          					}
 	          				}
 	          				$certificates = array_values($certificates);

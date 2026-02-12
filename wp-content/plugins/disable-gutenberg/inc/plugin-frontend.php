@@ -28,6 +28,14 @@ function disable_gutenberg_wp_enqueue_scripts() {
 		remove_action('wp_enqueue_scripts', 'wp_enqueue_global_styles');
 		remove_action('wp_body_open', 'wp_global_styles_render_svg_filters');
 		
+		// global-styles-inline-css
+		remove_action('wp_enqueue_scripts', 'wp_enqueue_global_styles');
+		remove_action('wp_footer', 'wp_enqueue_global_styles', 1);
+		
+		// core-block-supports-inline-css
+		wp_dequeue_style('core-block-supports');
+		add_action('wp_footer', function() { wp_dequeue_style('core-block-supports'); }, 5);
+		
 	}
 	
 }

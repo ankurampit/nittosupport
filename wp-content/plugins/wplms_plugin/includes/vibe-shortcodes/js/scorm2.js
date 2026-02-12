@@ -995,9 +995,6 @@ document.addEventListener("unit_content_loaded", (e)=>{
     this.localStorageObject={
         persist: function(name,data,lifetime)
         {    
-            //make api call to save all the data here 
-            
-
             localStorage[name] = data;
         },
         retrieve:function(name)
@@ -3153,7 +3150,7 @@ function load_scorm_lms_api(){
   let src = document.getElementsByTagName("iframe")[0].getAttribute('data-src');
   var skey = src;
 
-  var value = localStorage.getItem(skey);
+  
   if(!isEmpty(window.scorm_wplms_data)){
     document.getElementsByTagName("iframe")[0].setAttribute('src',src);
     Utils.launchSCO();
@@ -3170,7 +3167,33 @@ function fetchWPLMSSCORMData(){
     var skey = src;
 
     var value = localStorage.getItem(skey);
+
+    if(!value){
+        value={
+          "cmi.core._children": "student_id,student_name,lesson_status,lesson_location,lesson_mode,score,credit,entry,exit,session_time,total_time",
+          "cmi.core.score._children": "raw",
+          "cmi.core.student_id": (!isEmpty(window.scorm_wplms_data))?scorm_wplms_data.user_email:'SAMPLE0001',
+          "cmi.core.student_name": (!isEmpty(window.scorm_wplms_data))?scorm_wplms_data.user_name:'SAMPLE0001',
+          "cmi.core.lesson_status": "incomplete",
+          "cmi.core.score.raw": "",
+          "cmi.core.lesson_location": "",
+          "cmi.suspend_data": "",
+          "cmi.core.session_time": "0000:00:00.00",
+          "cmi.core.credit": "credit",
+          "cmi.core.entry": "ab-initio",
+          "cmi.core.lesson_mode": "normal",
+          "cmi.core.exit": "suspend",
+          "cmi.core.total_time": "00:00:00.00",
+        }
+    }else{
+        if(isJSONString(value)){
+            value = JSON.parse(value);    
+        }
+    }
+
     if(!isEmpty(value) && !isEmpty(window.scorm_wplms_data)){
+
+
       var nonce = window.scorm_wplms_data.security_nonce,
       xhr = new XMLHttpRequest();
       xhr.open('POST', window.wplms_course_data.api_url+'/scorm/scormdata/get?force');
@@ -3181,7 +3204,7 @@ function fetchWPLMSSCORMData(){
               //means data set
               if(data && data.status && data.data){
                 value['cmi.suspend_data'] = data.data;
-                localStorage.setItem(skey,value);
+                localStorage.setItem(skey,JSON.stringify(value));   
                 resolve();
               }else{
                 localStorage.removeItem(skey);
@@ -3212,8 +3235,38 @@ fetchWPLMSSCORMData().then(function(){
 });  
 
 
+function isJSONString(str) {
 
 
+  if (typeof str !== "string") return false;
+  try {
+    const parsed = JSON.parse(str);
+    // Valid JSON is either an object or an array
+    return typeof parsed === "object" && parsed !== null;
+  } catch (e) {
+    return false;
+  }
+}
+
+function deepParseJSON(obj) {
+  if (typeof obj === "string") {
+    try {
+      const parsed = JSON.parse(obj);
+      return deepParseJSON(parsed); // keep going deeper if needed
+    } catch (e) {
+      return obj; // not a JSON string
+    }
+  } else if (Array.isArray(obj)) {
+    return obj.map(item => deepParseJSON(item));
+  } else if (typeof obj === "object" && obj !== null) {
+    const result = {};
+    for (const key in obj) {
+      result[key] = deepParseJSON(obj[key]);
+    }
+    return result;
+  }
+  return obj;
+}
 function isEmpty(obj){
     if (obj == null) return true;
     if(typeof obj == 'number' && obj != 0) return false;
@@ -3239,6 +3292,8 @@ function wplms_send_xhr(type,headers,data,url){
       }
       xhr.onload = function() {
           if (xhr.status === 200 && xhr.responseText !== nonce) {
+
+
               let resp = JSON.parse(xhr.responseText);
               //means data set
               resolve(resp);

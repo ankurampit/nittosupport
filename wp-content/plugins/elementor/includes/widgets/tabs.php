@@ -74,8 +74,30 @@ class Widget_Tabs extends Widget_Base {
 		return [ 'tabs', 'accordion', 'toggle' ];
 	}
 
+	protected function is_dynamic_content(): bool {
+		return false;
+	}
+
+	/**
+	 * Get style dependencies.
+	 *
+	 * Retrieve the list of style dependencies the widget requires.
+	 *
+	 * @since 3.24.0
+	 * @access public
+	 *
+	 * @return array Widget style dependencies.
+	 */
+	public function get_style_depends(): array {
+		return [ 'widget-tabs' ];
+	}
+
 	public function show_in_panel(): bool {
-		return ! Plugin::$instance->experiments->is_feature_active( 'nested-elements' );
+		return ! Plugin::$instance->experiments->is_feature_active( 'nested-elements', true );
+	}
+
+	public function has_widget_inner_wrapper(): bool {
+		return ! Plugin::$instance->experiments->is_feature_active( 'e_optimized_markup' );
 	}
 
 	/**
@@ -160,12 +182,19 @@ class Widget_Tabs extends Widget_Base {
 			'type',
 			[
 				'label' => esc_html__( 'Position', 'elementor' ),
-				'type' => Controls_Manager::SELECT,
+				'type' => Controls_Manager::CHOOSE,
 				'default' => 'horizontal',
 				'options' => [
-					'horizontal' => esc_html__( 'Horizontal', 'elementor' ),
-					'vertical' => esc_html__( 'Vertical', 'elementor' ),
+					'vertical' => [
+						'title' => esc_html__( 'Vertical', 'elementor' ),
+						'icon' => 'eicon-h-align-left',
+					],
+					'horizontal' => [
+						'title' => esc_html__( 'Horizontal', 'elementor' ),
+						'icon' => 'eicon-v-align-top',
+					],
 				],
+				'classes' => 'elementor-control-start-end',
 				'prefix_class' => 'elementor-tabs-view-',
 				'separator' => 'before',
 			]
@@ -394,18 +423,23 @@ class Widget_Tabs extends Widget_Base {
 				'label' => esc_html__( 'Alignment', 'elementor' ),
 				'type' => Controls_Manager::CHOOSE,
 				'options' => [
-					'left' => [
-						'title' => esc_html__( 'Left', 'elementor' ),
+					'start' => [
+						'title' => esc_html__( 'Start', 'elementor' ),
 						'icon' => 'eicon-text-align-left',
 					],
 					'center' => [
 						'title' => esc_html__( 'Center', 'elementor' ),
 						'icon' => 'eicon-text-align-center',
 					],
-					'right' => [
-						'title' => esc_html__( 'Right', 'elementor' ),
+					'end' => [
+						'title' => esc_html__( 'End', 'elementor' ),
 						'icon' => 'eicon-text-align-right',
 					],
+				],
+				'classes' => 'elementor-control-start-end',
+				'selectors_dictionary' => [
+					'left' => is_rtl() ? 'end' : 'start',
+					'right' => is_rtl() ? 'start' : 'end',
 				],
 				'selectors' => [
 					'{{WRAPPER}} .elementor-tab-title' => 'text-align: {{VALUE}};',

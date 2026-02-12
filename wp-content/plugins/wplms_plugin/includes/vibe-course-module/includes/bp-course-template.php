@@ -263,7 +263,7 @@ Class BP_Course_Template{
 		}
 
 		$page_num = 0;
-		if(!empty($_REQUEST['items_page'])){$page_num=$_REQUEST['items_page']-1;}
+		if(!empty($_REQUEST['items_page'])){$page_num=esc_attr($_REQUEST['items_page'])-1;}
 		global $wpdb;
 		$cquery = apply_filters('wplms_usermeta_direct_query',$wpdb->prepare("SELECT SQL_CALC_FOUND_ROWS DISTINCT user_id FROM {$wpdb->usermeta} WHERE meta_key = %s ORDER BY meta_value ASC LIMIT %d, %d",'course_status'.$course_id,($page_num*$loop_number),$loop_number));
 		$course_meta = $wpdb->get_results( $cquery, ARRAY_A);
@@ -612,9 +612,9 @@ function bp_course_has_items( $args = '' ) {
 
 			if ( empty( $r['search_terms'] ) ) {
 				if ( isset( $_REQUEST['course-filter-box'] ) && !empty( $_REQUEST['course-filter-box'] ) )
-					$r['search_terms'] = $_REQUEST['course-filter-box'];
+					$r['search_terms'] = esc_attr($_REQUEST['course-filter-box']);
 				elseif ( isset( $_REQUEST['s'] ) && !empty( $_REQUEST['s'] ))
-					$r['search_terms'] = $_REQUEST['s'];
+					$r['search_terms'] = esc_attr($_REQUEST['s']);
 				else
 					$r['search_terms'] = '';
 			}
@@ -724,7 +724,7 @@ function bp_course_has_items( $args = '' ) {
 			}
 
 			if(isset( $_REQUEST['items_page'] ) && !empty( $_REQUEST['items_page'])){
-				$r['paged'] = $_REQUEST['items_page'];
+				$r['paged'] = esc_attr($_REQUEST['items_page']);
 			}
 
 			// User filtering

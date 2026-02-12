@@ -1584,8 +1584,13 @@ class WPLMS_Create_Course_Api{
 
     function selectcpt($request){
 
-        $cpt= $request->get_param('cpt');
+        $cpt = sanitize_text_field($request->get_param('cpt'));
         $body = json_decode($request->get_body());
+        $return = array();
+        if ($body && isset($body->search)) {
+            $search = sanitize_text_field($body->search);
+        }
+        
         $return = array();
         if($cpt=='assignment'){
             $cpt = 'wplms-assignment';
@@ -1615,7 +1620,7 @@ class WPLMS_Create_Course_Api{
                 $args = array(
                     'post_type'=>$cpt,
                     'posts_per_page'=>99,
-                    's'=>$body->search,
+                    's'=>$search,
                 );
                 
 

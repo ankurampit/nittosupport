@@ -8,15 +8,13 @@
 get_header('header.php');
 
 $current_user = wp_get_current_user();
-$user_role = $current_user->roles[0] ?? '';
-
+$user_role = $current_user->roles ?? '';
+$user_role = reset($user_role);
 $permissions = get_option('user_permission_matrix', []);
-
 if (!isset($permissions[$user_role])) {
     $permissions[$user_role] = [];
 }
 ?>
-
 <!-- Content start -->
 <section class="container">
 
@@ -27,25 +25,10 @@ if (!isset($permissions[$user_role])) {
             </div>
             <div class="mobileFeaturedView">
                 <div class="col-md-3">
-                    <div class="featuredBox">
-                        <h2>Featured</h2>
 
-                        <ul>
-                            <li>
-                                <a href="javascript:{}"
-                                    onclick="document.getElementById(&#39;my_form_promo_frtd&#39;).submit(); return false;"><img
-                                        src="./Welcome to Nitto Support Site_files/mug5301_-_black.jpg" alt=""></a>
-                                <h5><a href="javascript:{}"
-                                        onclick="document.getElementById(&#39;my_form_promo_frtd&#39;).submit(); return false;">The
-                                        Plymouth 16 oz. Mug</a></h5>
-                                <p>The Plymouth 16 Oz. Mug with Nitto Ti..</p>
-                                <a href="javascript:{}"
-                                    onclick="document.getElementById(&#39;my_form_promo_frtd&#39;).submit(); return false;"
-                                    class="fdetail">Details</a>
-                            </li>
-                        </ul>
-                    </div>
-
+                    <!-- Featured Box  -->
+                    <?php echo get_template_part('templates/template-part/featured-box'); ?>
+                    <!-- Featured Box -->
 
 
                     <form method="POST" action="https://promo.nittosupport.ca/webservices/login.php"
@@ -127,11 +110,11 @@ if (!isset($permissions[$user_role])) {
                             <li>
                                 <div class="dash-items"
                                     style="background-image: url('https://nittosupport.ca/assets/uploads/dashboardmenustyle_images/1547594567_Management_icon2.jpg');">
-                                    <a href="https://nittosupport.ca/management/index">
+                                    <a href="<?php echo home_url() . '/user-management' ?>">
                                         <h5>Management</h5>
                                         <p>Super user management tools</p>
                                     </a>
-                                    <a href="https://nittosupport.ca/management/index" class="getstart">Get started</a>
+                                    <a href="<?php echo home_url() . '/user-management' ?>" class="getstart">Get started</a>
                                 </div>
                             </li>
                         <?php endif; ?>

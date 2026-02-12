@@ -2,6 +2,8 @@
 namespace Elementor\Core\RoleManager;
 
 use Elementor\Core\Admin\Menu\Admin_Menu_Manager;
+use Elementor\Core\Utils\Promotions\Filtered_Promotions_Manager;
+use Elementor\Modules\EditorOne\Classes\Menu_Data_Provider;
 use Elementor\Plugin;
 use Elementor\Settings;
 use Elementor\Settings_Page;
@@ -28,7 +30,7 @@ class Role_Manager extends Settings_Page {
 		return get_option( 'elementor_' . self::ROLE_MANAGER_OPTION_NAME, [] );
 	}
 
-	private function get_role_manager_advanced_options() {
+	public function get_role_manager_advanced_options() {
 		return get_option( 'elementor_' . self::ROLE_MANAGER_ADVANCED, [] );
 	}
 
@@ -109,21 +111,23 @@ class Role_Manager extends Settings_Page {
 		<div class="wrap">
 			<h1 class="wp-heading-inline"><?php echo esc_html( $this->get_page_title() ); ?></h1>
 
-			<div id="elementor-role-manager">
-				<h3><?php echo esc_html__( 'Manage What Your Users Can Edit In Elementor', 'elementor' ); ?></h3>
-				<form id="elementor-settings-form" method="post" action="options.php">
-					<?php
-					settings_fields( static::PAGE_ID );
-					echo '<div class="elementor-settings-form-page elementor-active">';
-					foreach ( get_editable_roles() as $role_slug => $role_data ) {
-						if ( 'administrator' === $role_slug ) {
-							continue;
+			<div>
+				<div id="elementor-role-manager">
+					<h3><?php echo esc_html__( 'Manage What Your Users Can Edit In Elementor', 'elementor' ); ?></h3>
+					<form id="elementor-settings-form" method="post" action="options.php">
+						<?php
+						settings_fields( static::PAGE_ID );
+						echo '<div class="elementor-settings-form-page elementor-active">';
+						foreach ( get_editable_roles() as $role_slug => $role_data ) {
+							if ( 'administrator' === $role_slug ) {
+								continue;
+							}
+							$this->display_role_controls( $role_slug, $role_data );
 						}
-						$this->display_role_controls( $role_slug, $role_data );
-					}
-					submit_button();
-					?>
-				</form>
+						submit_button( __( 'Save Changes', 'elementor' ), 'primary', 'submit', true, [ 'data-id' => 'elementor-role-manager-button-save-changes' ] );
+						?>
+					</form>
+				</div>
 			</div>
 		</div><!-- /.wrap -->
 		<?php
@@ -142,12 +146,18 @@ class Role_Manager extends Settings_Page {
 			$excluded_options = $this->get_role_manager_options();
 		}
 
+		$is_editor_one_enabled = Plugin::$instance->experiments->is_feature_active( 'e_editor_one' );
+		$row_classes = 'elementor-role-row ' . esc_attr( $role_slug );
+		if ( $is_editor_one_enabled ) {
+			$row_classes .= ' e-editor-one';
+		}
+
 		?>
-		<div class="elementor-role-row <?php echo esc_attr( $role_slug ); ?>">
+		<div class="<?php echo esc_attr( $row_classes ); ?>">
 			<div class="elementor-role-label">
 				<span class="elementor-role-name"><?php echo esc_html( translate_user_role( $role_data['name'] ) ); ?></span>
 				<span data-excluded-label="<?php esc_attr_e( 'Role Excluded', 'elementor' ); ?>" class="elementor-role-excluded-indicator"></span>
-				<span class="elementor-role-toggle"><span class="dashicons dashicons-arrow-down"></span></span>
+				<span class="elementor-role-toggle" data-id="<?php echo esc_attr( $role_slug ); ?>-toggle"><span class="dashicons dashicons-arrow-down"></span></span>
 			</div>
 			<div class="elementor-role-controls hidden">
 				<div class="elementor-role-control">
@@ -156,7 +166,7 @@ class Role_Manager extends Settings_Page {
 						<?php echo esc_html__( 'No access to editor', 'elementor' ); ?>
 					</label>
 				</div>
-				<div>
+				<div class="elementor-role-controls-advanced">
 					<?php
 					/**
 					 * Role restrictions controls.
@@ -190,24 +200,57 @@ class Role_Manager extends Settings_Page {
 		?>
 		<div class="elementor-role-control">
 			<label for="<?php echo esc_attr( $id ); ?>">
-				<input type="checkbox" name="<?php echo esc_attr( $name ); ?>" id="<?php echo esc_attr( $id ); ?>" value="<?php echo esc_attr( $value ); ?>" <?php checked( in_array( $value, $checked ), true ); ?>>
+				<input type="checkbox" name="<?php echo esc_attr( $name ); ?>" id="<?php echo esc_attr( $id ); ?>" value="<?php echo esc_attr( $value ); ?>" <?php checked( in_array( $value, $checked, true ), true ); ?>>
 				<?php echo esc_html__( 'Enable the option to upload JSON files', 'elementor' ); ?>
 			</label>
 			<p class="elementor-role-control-warning"><strong><?php echo esc_html__( 'Heads up', 'elementor' ); ?>:</strong> <?php echo esc_html__( 'Giving broad access to upload JSON files can pose a security risk to your website because such files may contain malicious scripts, etc.', 'elementor' ); ?></p>
 		</div>
 		<?php
 	}
+
+	public function add_custom_html_enable_control( $role_slug ) {
+		$value = 'custom-html';
+		$id = self::ROLE_MANAGER_ADVANCED . '_' . $role_slug . '_' . $value;
+		$name = 'elementor_' . self::ROLE_MANAGER_ADVANCED . '[' . $role_slug . '][]';
+
+		$advanced_options = $this->get_user_advanced_options();
+		$checked = isset( $advanced_options[ $role_slug ] ) ? $advanced_options[ $role_slug ] : [];
+		?>
+		<div class="elementor-role-control">
+			<label for="<?php echo esc_attr( $id ); ?>">
+				<input type="checkbox" name="<?php echo esc_attr( $name ); ?>" id="<?php echo esc_attr( $id ); ?>" value="<?php echo esc_attr( $value ); ?>" <?php checked( in_array( $value, $checked, true ), true ); ?>>
+				<?php echo esc_html__( 'Enable the option to use the HTML widget', 'elementor' ); ?>
+			</label>
+			<p class="elementor-role-control-warning"><strong><?php echo esc_html__( 'Heads up', 'elementor' ); ?>:</strong> <?php echo esc_html__( 'Giving broad access to edit the HTML widget can pose a security risk to your website because it enables users to run malicious scripts, etc.', 'elementor' ); ?></p>
+		</div>
+		<?php
+	}
+
 	/**
 	 * @since 2.0.0
 	 * @access public
 	 */
 	public function get_go_pro_link_html() {
+		$promotion = $this->get_go_pro_link_content();
+
 		?>
 		<div class="elementor-role-go-pro">
-			<div class="elementor-role-go-pro__desc"><?php echo esc_html__( 'Want to give access only to content?', 'elementor' ); ?></div>
-			<div class="elementor-role-go-pro__link"><a class="elementor-button go-pro" target="_blank" href="https://go.elementor.com/go-pro-role-manager/"><?php echo esc_html__( 'Upgrade', 'elementor' ); ?></a></div>
+			<div class="elementor-role-go-pro__desc"><?php echo esc_html( $promotion['description'] ); ?></div>
+			<div class="elementor-role-go-pro__link"><a class="elementor-button go-pro" target="_blank" href="<?php echo esc_url( $promotion['upgrade_url'] ); ?>"><?php echo esc_html( $promotion['upgrade_text'] ); ?></a></div>
 		</div>
 		<?php
+	}
+
+	public function get_go_pro_link_content() {
+		$upgrade_url = 'https://go.elementor.com/go-pro-role-manager/';
+
+		$promotion = [
+			'description' => esc_html__( 'Want to give access only to content?', 'elementor' ),
+			'upgrade_url' => esc_url( $upgrade_url ),
+			'upgrade_text' => esc_html__( 'Upgrade', 'elementor' ),
+		];
+
+		return Filtered_Promotions_Manager::get_filtered_promotion_data( $promotion, 'elementor/role/custom_promotion', 'upgrade_url' );
 	}
 
 	/**
@@ -273,6 +316,14 @@ class Role_Manager extends Settings_Page {
 		return true;
 	}
 
+	private function register_editor_one_menu( Menu_Data_Provider $menu_data_provider ) {
+		$menu_data_provider->register_menu( new Editor_One_Role_Manager_Menu() );
+	}
+
+	private function is_editor_one_active(): bool {
+		return (bool) Plugin::instance()->modules_manager->get_modules( 'editor-one' );
+	}
+
 	/**
 	 * @since 2.0.0
 	 * @access public
@@ -280,13 +331,20 @@ class Role_Manager extends Settings_Page {
 	public function __construct() {
 		parent::__construct();
 
-		if ( ! Plugin::$instance->experiments->is_feature_active( 'admin_menu_rearrangement' ) ) {
-			add_action( 'elementor/admin/menu/register', function ( Admin_Menu_Manager $admin_menu ) {
+		add_action( 'elementor/admin/menu/register', function ( Admin_Menu_Manager $admin_menu ) {
+			if ( ! $this->is_editor_one_active() ) {
 				$this->register_admin_menu( $admin_menu );
-			}, Settings::ADMIN_MENU_PRIORITY + 10 );
-		}
+			}
+		}, Settings::ADMIN_MENU_PRIORITY + 10 );
+
+		add_action( 'elementor/editor-one/menu/register', function ( Menu_Data_Provider $menu_data_provider ) {
+			$this->register_editor_one_menu( $menu_data_provider );
+		} );
 
 		add_action( 'elementor/role/restrictions/controls', [ $this, 'add_json_enable_control' ] );
+		add_action( 'elementor/role/restrictions/controls', [ $this, 'add_custom_html_enable_control' ] );
 		add_action( 'elementor/role/restrictions/controls', [ $this, 'get_go_pro_link_html' ] );
+
+		add_filter( 'elementor/editor/user/restrictions', [ $this, 'get_role_manager_advanced_options' ] );
 	}
 }

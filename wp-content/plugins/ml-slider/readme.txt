@@ -2,9 +2,9 @@
 Contributors: andergmartins, htmgarcia, publishpress, stevejburge, rochdesigns
 Tags: slider, video slider, image slider, carousel slider, gallery
 Requires at least: 5.0
-Stable tag: 3.102.0
+Stable tag: 3.105.0
 Requires PHP: 7.0
-Tested up to: 6.8
+Tested up to: 6.9
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -319,6 +319,61 @@ Yes, you can build Elementor slides and Beaver Builder slideshows. You can creat
 
 The format is based on [Keep a Changelog recommendations](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
+
+= [3.105.0] - Jan 27, 2026 =
+
+* ADDED: Full width options, #1686;
+* ADDED: Make a new "Lightbox" panel in the right sidebar, #1938, #1959;
+* ADDED: Folder slide type landing page, #1949;
+* ADDED: Install/activate MetaSlider Ligthtbox on click, #1957;
+* ADDED: Pro labels to slide types landing pages, #1930;
+* ADDED: Color to the Upgrade menu link, #1958;
+* FIXED: Detect non valid id in slideshow edit screen, #1697;
+* FIXED: Hide "Slide Direction" when Carousel mode is enabled, #1703;
+* FIXED: Visual indicator when hidding elements for device options, #1921;
+* FIXED: "Loop Carousel Continuously" doesn't work with "Reverse", #1940;
+* FIXED: Blend Theme: Links/Buttons on Caption not entirely clickable, #1727;
+* FIXED: Hide center align when carousel mode is enabled, #1743;
+* CHANGED: Some panels start open and others don't, #1952;
+* CHANGED: Slides to Advance text, #1953;
+* CHANGED: Italian, Spanish and French translation updates, #1843;
+* CHANGED: Upgrade add-on for Theme editor vs Pro themes, #1716;
+* CHANGED: Reorder slide types and add free label, #1943;
+* CHANGED: Update tooltip text for link url, #1741;
+* CHANGED: Update legacy libraries text, #1649;
+
+= [3.104.0] - Dec 16, 2025 =
+
+* ADDED: Underline, strikethrough, removeformat and line height options to caption, #1911;
+* ADDED: Promote MetaSlider Lightbox, #1906;
+* ADDED: aria-label to Play/pause, #1915;
+* ADDED: Alphabetical as an option for "Slide Order", #1751;
+* FIXED: If container is enabled, move max-width to container div, #1914;
+* FIXED: metaslider_global_settings() is missing check for multisite, #1923;
+* FIXED: sprintf is not defined, #1919;
+* FIXED: Loop Carousel Continuously breaks preview, #1918;
+* FIXED: Responsive for multi column layout options in settings page, #1902;
+* FIXED: When user interacts (Next/Prev, focus, swipe): switch to aria-live="polite", #1916;
+* CHANGED: Italian, Spanish and French translation updates, #1905;
+* CHANGED: Description for Device settings, #1907;
+* CHANGED: New location for device options, #1616;
+* CHANGED: Use metaslider_global_settings() always, #1924;
+* REMOVED: The privacy notice, #1926;
+
+= [3.103.0] - Nov 20, 2025 =
+
+* ADDED: Font size support to TinyMCE, #1884;
+* ADDED: Setting to enable overflow for body, #1792;
+* ADDED: Disable the whole slideshow edit screen when saving changes, #1564;
+* ADDED: Promo ad for Flush cache setting, #1897;
+* FIXED: is_plugin_active() is undefined, #1888, #1859;
+* FIXED: Bug in bulk upload, #1861;
+* FIXED: Navigation still shows when products are only three, #1885;
+* FIXED: Settings can be undefined for slideshow created through quickstart, #1776;
+* CHANGED: Italian, Spanish and French translation updates, #1883;
+* CHANGED: Improve import/export, #1886;
+* CHANGED: Optimize metaslider_filter_unsafe_html for reuse in pro, #1894;
+* CHANGED: Replace ver=1.0.0 from theme's CSS and JS with the actual plugin version, #1378;
 
 = [3.102.0] - Oct 16, 2025 =
 

@@ -951,7 +951,16 @@ class bp_course_notifications{
 		$subject = sprintf(__('Student submitted course %s','wplms'),$this->get_the_title($course_id));
 		$message = sprintf(__('Student %s submitted the course : %s','wplms'),$this->bp_core_get_userlink($user_id),'<a href="'.$this->get_permalink($course_id).'">'.$this->get_the_title($course_id).'</a>');
 		if(count($to))			
-			bp_course_wp_mail($to,$subject,$message,array('action'=>'instructor_course_submit','item_id'=>$course_id,'tokens'=>array('course.name'=>$this->get_the_title($course_id),'course.titlelink'=>'<a href="'.$this->get_permalink($course_id).'">'.$this->get_the_title($course_id).'</a>','student.userlink'=>$this->bp_core_get_userlink($user_id),'student.name'=>$this->bp_core_get_user_displayname($user_id))));
+			bp_course_wp_mail($to,$subject,$message,
+				array(
+					'action'=>'instructor_course_submit',
+					'item_id'=>$course_id,
+					'tokens'=>array(
+						'course.name'=>$this->get_the_title($course_id),
+						'course.titlelink'=>'<a href="'.$this->get_permalink($course_id).'">'.$this->get_the_title($course_id).'</a>','student.userlink'=>$this->bp_core_get_userlink($user_id),
+						'student.name'=>$this->bp_core_get_user_displayname($user_id))
+				)
+			);
 	}
 
 	/* ====== WHEN STUDENT RESETS A COURSE ====== */

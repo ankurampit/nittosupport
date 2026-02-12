@@ -1159,7 +1159,8 @@ class VibeBP_Register{
                     'cookiepath'=>COOKIEPATH
                 ],
                 'translations'=>[
-                    'cart'=>__('Cart','vibebp'),
+                    'cart'=>__('Review your Cart','vibebp'),
+                    "removeItem"=>__('Remove','vibebp'),
                     'view_cart'=>__('View Cart','vibebp'),
                     'continue_shopping'=>__('Continue Shopping','vibebp'),
                     'cart_no_items'=>__('No items in cart.','vibebp'),

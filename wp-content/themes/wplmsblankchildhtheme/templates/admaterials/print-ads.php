@@ -163,7 +163,6 @@ require_once get_stylesheet_directory() . '/templates/admaterials/top-navigation
                                         </a>
                                     </div>
 
-
                                     <!-- <div class="action-icons" title="Translate (not implemented)">
                                         <i class="fa fa-language"></i>
                                     </div> -->

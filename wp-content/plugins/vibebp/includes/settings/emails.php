@@ -28,9 +28,10 @@ class VibeBP_Email_Templates{
         
 		$emails = array(
 			'vibebp_forgot_password'=>array(
-	            'description'=> __('Forgot password ','vibe'),
-	            'subject' =>  __(' Password Reset','vibe'),
-	            'message' =>  __('Someone requested that the password be reset for the following account: ','vibe') . "\r\n\r\n". network_home_url( '/' ) . "\r\n\r\n". sprintf(__('Username: %s','vibe'), '{{user.username}}') . "\r\n\r\n".__('If this was a mistake, just ignore this email and nothing will happen.','vibe') . "\r\n\r\n".sprintf(__('To reset your password, visit the following address: %s','vibe'),'{{{user.forgotpasswordlink}}}') . "\r\n\r\n",
+	            'description'=> __('Forgot password ','vibebp'),
+	            'subject' =>  __(' Password Reset','vibebp'),
+                // Translators: %s is username
+	            'message' =>  __('Someone requested that the password be reset for the following account: ','vibebp') . "\r\n\r\n". network_home_url( '/' ) . "\r\n\r\n". sprintf(__('Username: %s','vibebp'), '{{user.username}}') . "\r\n\r\n".__('If this was a mistake, just ignore this email and nothing will happen.','vibebp') . "\r\n\r\n".sprintf(__('To reset your password, visit the following address: %s','vibebp'),'{{{user.forgotpasswordlink}}}') . "\r\n\r\n",
 	        ),
 		);
 

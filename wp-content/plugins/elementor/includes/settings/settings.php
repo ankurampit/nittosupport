@@ -2,11 +2,15 @@
 namespace Elementor;
 
 use Elementor\Core\Admin\Menu\Admin_Menu_Manager;
+use Elementor\Core\Files\Fonts\Google_Font;
 use Elementor\Includes\Settings\AdminMenuItems\Admin_Menu_Item;
 use Elementor\Includes\Settings\AdminMenuItems\Get_Help_Menu_Item;
-use Elementor\Includes\Settings\AdminMenuItems\Getting_Started_Menu_Item;
 use Elementor\Modules\Promotions\Module as Promotions_Module;
 use Elementor\TemplateLibrary\Source_Local;
+use Elementor\Modules\Home\Module as Home_Module;
+use Elementor\Modules\EditorOne\Classes\Menu_Data_Provider;
+use Elementor\Includes\Settings\AdminMenuItems\Editor_One_Home_Menu;
+use Elementor\Includes\Settings\AdminMenuItems\Editor_One_Settings_Menu;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -57,7 +61,18 @@ class Settings extends Settings_Page {
 	 */
 	const TAB_ADVANCED = 'advanced';
 
+	/**
+	 * Settings page performance tab slug.
+	 */
+	const TAB_PERFORMANCE = 'performance';
+
 	const ADMIN_MENU_PRIORITY = 10;
+
+	const MENU_CAPABILITY_MANAGE_OPTIONS = 'manage_options';
+
+	const MENU_CAPABILITY_EDIT_POSTS = 'edit_posts';
+
+	public Home_Module $home_module;
 
 	/**
 	 * Register admin menu.
@@ -74,19 +89,36 @@ class Settings extends Settings_Page {
 
 		$menu[] = [ '', 'read', 'separator-elementor', '', 'wp-menu-separator elementor' ]; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
 
-		if ( ! current_user_can( 'manage_options' ) ) {
+		$required_capability = $this->get_menu_capability();
+
+		if ( ! current_user_can( $required_capability ) ) {
 			return;
 		}
 
 		add_menu_page(
 			esc_html__( 'Elementor', 'elementor' ),
 			esc_html__( 'Elementor', 'elementor' ),
-			'manage_options',
+			$required_capability,
 			self::PAGE_ID,
-			[ $this, 'display_settings_page' ],
+			[
+				$this,
+				$this->home_module->is_experiment_active() ? 'display_home_screen' : 'display_settings_page',
+			],
 			'',
 			'58.5'
 		);
+
+		if ( $this->home_module->is_experiment_active() ) {
+			add_action( 'elementor/admin/menu/register', function( Admin_Menu_Manager $admin_menu ) {
+				if ( ! $this->is_editor_one_active() ) {
+					$admin_menu->register( 'elementor-settings', new Admin_Menu_Item( $this ) );
+				}
+			}, 0 );
+		}
+	}
+
+	public function display_home_screen() {
+		echo '<div id="e-home-screen"></div>';
 	}
 
 	/**
@@ -137,8 +169,25 @@ class Settings extends Settings_Page {
 	 * @access private
 	 */
 	private function register_knowledge_base_menu( Admin_Menu_Manager $admin_menu ) {
-		$admin_menu->register( 'elementor-getting-started', new Getting_Started_Menu_Item() );
-		$admin_menu->register( 'go_knowledge_base_site', new Get_Help_Menu_Item() );
+		if ( ! Plugin::instance()->modules_manager->get_modules( 'editor-one' ) ) {
+			$admin_menu->register( 'go_knowledge_base_site', new Get_Help_Menu_Item() );
+		}
+	}
+
+	private function register_editor_one_settings_menu( Menu_Data_Provider $menu_data_provider ) {
+		$menu_data_provider->register_menu( new Editor_One_Settings_Menu() );
+	}
+
+	private function register_editor_one_home_menu( Menu_Data_Provider $menu_data_provider ) {
+		$menu_data_provider->register_menu( new Editor_One_Home_Menu() );
+	}
+
+	private function is_editor_one_active(): bool {
+		return (bool) Plugin::instance()->modules_manager->get_modules( 'editor-one' );
+	}
+
+	private function get_menu_capability(): string {
+		return $this->is_editor_one_active() ? self::MENU_CAPABILITY_EDIT_POSTS : self::MENU_CAPABILITY_MANAGE_OPTIONS;
 	}
 
 	/**
@@ -189,7 +238,11 @@ class Settings extends Settings_Page {
 	 * @access public
 	 */
 	public function admin_menu_change_name() {
-		Utils::change_submenu_first_item_label( 'elementor', esc_html__( 'Settings', 'elementor' ) );
+		$menu_name = $this->home_module->is_experiment_active()
+			? esc_html__( 'Home', 'elementor' )
+			: esc_html__( 'Settings', 'elementor' );
+
+		Utils::change_submenu_first_item_label( 'elementor', $menu_name );
 	}
 
 	/**
@@ -226,6 +279,13 @@ class Settings extends Settings_Page {
 				'label' => esc_html__( 'General', 'elementor' ),
 				'sections' => [
 					'general' => [
+						'label' => esc_html__( 'General', 'elementor' ),
+						'callback' => function() {
+							printf(
+								'<p>%s</p><br><hr><br>',
+								esc_html__( 'Tailor how Elementor enhances your site, from post types to other functions.', 'elementor' )
+							);
+						},
 						'fields' => [
 							self::UPDATE_TIME_FIELD => [
 								'full_field_id' => self::UPDATE_TIME_FIELD,
@@ -296,20 +356,14 @@ class Settings extends Settings_Page {
 				'label' => esc_html__( 'Advanced', 'elementor' ),
 				'sections' => [
 					'advanced' => [
+						'label' => esc_html__( 'Advanced', 'elementor' ),
+						'callback' => function() {
+							printf(
+								'<p>%s</p><br><hr><br>',
+								esc_html__( 'Personalize the way Elementor works on your website by choosing the advanced features and how they operate.', 'elementor' )
+							);
+						},
 						'fields' => [
-							'css_print_method' => [
-								'label' => esc_html__( 'CSS Print Method', 'elementor' ),
-								'field_args' => [
-									'class' => 'elementor_css_print_method',
-									'type' => 'select',
-									'std' => 'external',
-									'options' => [
-										'external' => esc_html__( 'External File', 'elementor' ),
-										'internal' => esc_html__( 'Internal Embedding', 'elementor' ),
-									],
-									'desc' => '<div class="elementor-css-print-method-description" data-value="external" style="display: none">' . esc_html__( 'Use external CSS files for all generated stylesheets. Choose this setting for better performance (recommended).', 'elementor' ) . '</div><div class="elementor-css-print-method-description" data-value="internal" style="display: none">' . esc_html__( 'Use internal CSS that is embedded in the head of the page. For troubleshooting server configuration conflicts and managing development environments.', 'elementor' ) . '</div>',
-								],
-							],
 							'editor_break_lines' => [
 								'label' => esc_html__( 'Switch Editor Loader Method', 'elementor' ),
 								'field_args' => [
@@ -344,6 +398,7 @@ class Settings extends Settings_Page {
 										'0' => esc_html__( 'Disable', 'elementor' ),
 									],
 									'desc' => sprintf(
+										/* translators: 1: Link opening tag, 2: Link closing tag */
 										esc_html__( 'Disable this option if you want to prevent Google Fonts from being loaded. This setting is recommended when loading fonts from a different source (plugin, theme or %1$scustom fonts%2$s).', 'elementor' ),
 										'<a href="' . admin_url( 'admin.php?page=elementor_custom_fonts' ) . '">',
 										'</a>'
@@ -362,7 +417,93 @@ class Settings extends Settings_Page {
 										'fallback' => esc_html__( 'Fallback', 'elementor' ),
 										'optional' => esc_html__( 'Optional', 'elementor' ),
 									],
-									'desc' => esc_html__( 'Font-display property defines how font files are loaded and displayed by the browser.', 'elementor' ) . '<br>' . esc_html__( 'Set the way Google Fonts are being loaded by selecting the font-display property (Default: Auto).', 'elementor' ),
+									'desc' => esc_html__( 'Font-display property defines how font files are loaded and displayed by the browser.', 'elementor' ) . '<br>' . esc_html__( 'Set the way Google Fonts are being loaded by selecting the font-display property (Recommended: Swap).', 'elementor' ),
+								],
+							],
+						],
+					],
+				],
+			],
+			self::TAB_PERFORMANCE => [
+				'label' => esc_html__( 'Performance', 'elementor' ),
+				'sections' => [
+					'performance' => [
+						'label' => esc_html__( 'Performance', 'elementor' ),
+						'callback' => function() {
+							printf(
+								'<p>%s</p><br><hr><br>',
+								esc_html__( 'Improve loading times on your site by selecting the optimization tools that best fit your requirements.', 'elementor' )
+							);
+						},
+						'fields' => [
+							'css_print_method' => [
+								'label' => esc_html__( 'CSS Print Method', 'elementor' ),
+								'field_args' => [
+									'class' => 'elementor_css_print_method',
+									'type' => 'select',
+									'std' => 'external',
+									'options' => [
+										'external' => esc_html__( 'External File', 'elementor' ),
+										'internal' => esc_html__( 'Internal Embedding', 'elementor' ),
+									],
+									'desc' => sprintf(
+										/* translators: %s: <head> tag. */
+										esc_html__( 'Internal Embedding places all CSS in the %s which works great for troubleshooting, while External File uses external CSS file for better performance (recommended).', 'elementor' ),
+										'<code>&lt;head&gt;</code>',
+									),
+								],
+							],
+							'optimized_image_loading' => [
+								'label' => esc_html__( 'Optimized Image Loading', 'elementor' ),
+								'field_args' => [
+									'type' => 'select',
+									'std' => '1',
+									'options' => [
+										'1' => esc_html__( 'Enable', 'elementor' ),
+										'0' => esc_html__( 'Disable', 'elementor' ),
+									],
+									'desc' => sprintf(
+										/* translators: 1: fetchpriority attribute, 2: lazy loading attribute. */
+										esc_html__( 'Improve performance by applying %1$s on LCP image and %2$s on images below the fold.', 'elementor' ),
+										'<code>fetchpriority="high"</code>',
+										'<code>loading="lazy"</code>'
+									),
+								],
+							],
+							'optimized_gutenberg_loading' => [
+								'label' => esc_html__( 'Optimized Gutenberg Loading', 'elementor' ),
+								'field_args' => [
+									'type' => 'select',
+									'std' => '1',
+									'options' => [
+										'1' => esc_html__( 'Enable', 'elementor' ),
+										'0' => esc_html__( 'Disable', 'elementor' ),
+									],
+									'desc' => esc_html__( 'Reduce unnecessary render-blocking loads by dequeuing unused Gutenberg block editor scripts and styles.', 'elementor' ),
+								],
+							],
+							'lazy_load_background_images' => [
+								'label' => esc_html__( 'Lazy Load Background Images', 'elementor' ),
+								'field_args' => [
+									'type' => 'select',
+									'std' => '1',
+									'options' => [
+										'1' => esc_html__( 'Enable', 'elementor' ),
+										'0' => esc_html__( 'Disable', 'elementor' ),
+									],
+									'desc' => esc_html__( 'Improve initial page load performance by lazy loading all background images except the first one.', 'elementor' ),
+								],
+							],
+							'local_google_fonts' => [
+								'label' => esc_html__( 'Load Google Fonts Locally', 'elementor' ),
+								'field_args' => [
+									'type' => 'select',
+									'std' => '0',
+									'options' => [
+										'1' => esc_html__( 'Enable', 'elementor' ),
+										'0' => esc_html__( 'Disable', 'elementor' ),
+									],
+									'desc' => esc_html__( 'Load Google fonts locally to benefit from faster performance and ensure GDPR compliance. Fonts will be served from your own server instead of Google’s. Only the very first load (in the editor and on the front end) may take slightly longer.', 'elementor' ),
 								],
 							],
 						],
@@ -383,10 +524,6 @@ class Settings extends Settings_Page {
 	 * @return string Settings page title.
 	 */
 	protected function get_page_title() {
-		if ( Plugin::$instance->experiments->is_feature_active( 'admin_menu_rearrangement' ) ) {
-			return esc_html__( 'Settings', 'elementor' );
-		}
-
 		return esc_html__( 'Elementor', 'elementor' );
 	}
 
@@ -396,7 +533,6 @@ class Settings extends Settings_Page {
 	 */
 	private function maybe_remove_all_admin_notices() {
 		$elementor_pages = [
-			'elementor-getting-started',
 			'elementor-system-info',
 			'e-form-submissions',
 			'elementor_custom_fonts',
@@ -438,21 +574,28 @@ class Settings extends Settings_Page {
 	public function __construct() {
 		parent::__construct();
 
+		$this->home_module = new Home_Module();
+
 		add_action( 'admin_init', [ $this, 'on_admin_init' ] );
 		add_filter( 'elementor/generator_tag/settings', [ $this, 'add_generator_tag_settings' ] );
 
-		if ( ! Plugin::$instance->experiments->is_feature_active( 'admin_menu_rearrangement' ) ) {
-			add_action( 'admin_menu', [ $this, 'register_admin_menu' ], 20 );
+		add_action( 'admin_menu', [ $this, 'register_admin_menu' ], 20 );
 
-			add_action( 'elementor/admin/menu/register', function ( Admin_Menu_Manager $admin_menu ) {
-				$this->register_knowledge_base_menu( $admin_menu );
-			}, Promotions_Module::ADMIN_MENU_PRIORITY - 1 );
+		add_action( 'elementor/editor-one/menu/register', function ( Menu_Data_Provider $menu_data_provider ) {
+			if ( $this->home_module->is_experiment_active() ) {
+				$this->register_editor_one_settings_menu( $menu_data_provider );
+				$this->register_editor_one_home_menu( $menu_data_provider );
+			}
+		} );
 
-			add_action( 'admin_menu', [ $this, 'admin_menu_change_name' ], 200 );
+		add_action( 'elementor/admin/menu/register', function ( Admin_Menu_Manager $admin_menu ) {
+			$this->register_knowledge_base_menu( $admin_menu );
+		}, Promotions_Module::ADMIN_MENU_PRIORITY - 1 );
 
-			add_filter( 'custom_menu_order', '__return_true' );
-			add_filter( 'menu_order', [ $this, 'menu_order' ] );
-		}
+		add_action( 'admin_menu', [ $this, 'admin_menu_change_name' ], 200 );
+
+		add_filter( 'custom_menu_order', '__return_true' );
+		add_filter( 'menu_order', [ $this, 'menu_order' ] );
 
 		$clear_cache_callback = [ Plugin::$instance->files_manager, 'clear_cache' ];
 
@@ -461,11 +604,14 @@ class Settings extends Settings_Page {
 			'elementor_disable_color_schemes',
 			'elementor_disable_typography_schemes',
 			'elementor_css_print_method',
+			'elementor_local_google_fonts',
 		];
 
 		foreach ( $css_settings as $option_name ) {
 			add_action( "add_option_{$option_name}", $clear_cache_callback );
 			add_action( "update_option_{$option_name}", $clear_cache_callback );
 		}
+
+		add_action( 'update_option_elementor_font_display', [ Google_Font::class, 'clear_cache' ] );
 	}
 }

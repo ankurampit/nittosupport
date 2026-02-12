@@ -41,6 +41,8 @@ class WPLMS_Plugin_Init{
         add_action( 'bp_init', array($this,'activity_filter_options') );
         add_filter( 'bp_activity_set_course_scope_args', array($this,'filter_activity_scope'), 10, 2 );
         add_filter('bp_activity_custom_update',array($this,'bp_activity_course_update'),10,3);
+        //forgot password template
+        add_filter('vibebp_forgot_password', function($x) { return 'wplms_forgot_password'; });
     }
 
     function bp_activity_course_update($object,$item_id,$content){

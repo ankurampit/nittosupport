@@ -93,7 +93,7 @@
         $member_types = get_option($this->option);
         $forms = get_option('wplms_registration_forms');
         if(!empty($member_types)){
-            echo '<li><label class="field_name">'.__('Assign member type','vibe-customtypes').'</label><select name="member_type|'.$name.'"><option value="">'._x('None','member types','vibe-customtypes').'</option><option value="enable_user_member_types_select" '.((isset($forms[$name]['settings']['member_type']) && $forms[$name]['settings']['member_type'] == 'enable_user_member_types_select')?'selected':'').'>'._x('Enable User to select one','member types','vibe-customtypes').'</option>';
+            echo '<li><label class="field_name">'.__('Assign member type','vibebp').'</label><select name="member_type|'.$name.'"><option value="">'._x('None','member types','vibebp').'</option><option value="enable_user_member_types_select" '.((isset($forms[$name]['settings']['member_type']) && $forms[$name]['settings']['member_type'] == 'enable_user_member_types_select')?'selected':'').'>'._x('Enable User to select one','member types','vibebp').'</option>';
             foreach($member_types as  $key => $member_type){
                 echo '<option value="'.$member_type['id'].'" '.((isset($forms[$name]['settings']['member_type']) && $forms[$name]['settings']['member_type'] == $member_type['id'])?'selected':'').'>'.$member_type['sname'].'</option>';
             }
@@ -104,7 +104,7 @@
     function add_member_types_settings($tabs){
     	if(!isset($_GET['tab']) || $_GET['tab'] == 'general'){
     		
-	    	$tabs['member_types'] = _x('Member Types','configure Course menu in LMS - Settings','vibe-customtypes');
+	    	$tabs['member_types'] = _x('Member Types','configure Course menu in LMS - Settings','vibebp');
  		}
  		return $tabs;
     }
@@ -268,17 +268,17 @@
        ?>
         <section  id="member_types_wrapper">
 
-            <button @click="add" id="add" class="button button-primary"><?php echo _x('Add another','member types','vibe-customtypes');?></button>
+            <button @click="add" id="add" class="button button-primary"><?php echo _x('Add another','member types','vibebp');?></button>
           
             <ul v-sortable id="member_types_cont">
                 <li v-for="(listing,index) in listings" class="mt_listing">
                     <small class="dashicons dashicons-menu"></small>
                     <span>{{listing.sname}}</span>
                     <ul v-bind:class="{ show: listing.show_settings }" class="mt_listing_settings">
-                        <li><label><?php echo _x('Slug','','vibe-customtypes');?></label>{{listing.id}}</li>
-                        <li><label><?php echo _x('Singular Name','','vibe-customtypes');?></label><input type="text" name="slisting" placeholder="<?php echo _x('Member type singular name','','vibe-customtypes')?>" class="form-control" v-model="listing.sname" @keyup="check_data(listing,listing.sname)" ></li>
+                        <li><label><?php echo _x('Slug','','vibebp');?></label>{{listing.id}}</li>
+                        <li><label><?php echo _x('Singular Name','','vibebp');?></label><input type="text" name="slisting" placeholder="<?php echo _x('Member type singular name','','vibebp')?>" class="form-control" v-model="listing.sname" @keyup="check_data(listing,listing.sname)" ></li>
 
-                        <li><label><?php echo _x('Plural Name','','vibe-customtypes');?></label><input type="text" name="plisting" placeholder="<?php echo _x('Member type plural name','','vibe-customtypes')?>" class="form-control" v-model="listing.pname" @keyup="check_data(listing,listing.pname)"></li>
+                        <li><label><?php echo _x('Plural Name','','vibebp');?></label><input type="text" name="plisting" placeholder="<?php echo _x('Member type plural name','','vibebp')?>" class="form-control" v-model="listing.pname" @keyup="check_data(listing,listing.pname)"></li>
 
                         
                         <li class="ithaserror red" v-html="listing.error"></li>

@@ -39,7 +39,59 @@ if(!class_exists('WPLMS_PMPRO_Connect') ){
 
 
       add_filter('wplms_course_creation_tabs',array($this,'course_front_pmpro_setting'),12);
+
+      add_action('pmpro_save_membership_level',array($this,'update_membership'),10,1);
       //add_action('pmpro_membership_post_membership_expiry',array($this,'membership_expired'),10,2);
+    }
+
+
+    //Source : https://www.paidmembershipspro.com/query-active-members-by-user-meta-field/
+    function pmpro_get_level_active_users( $level, $output = OBJECT ) {
+      global $wpdb;
+     
+      $results = '';
+      $results = $wpdb->get_results(
+        $wpdb->prepare(
+          "SELECT user_id
+          FROM $wpdb->pmpro_memberships_users
+          WHERE membership_id = $level  AND status = 'active'",
+          $level
+        ),
+        $output
+      );
+      return $results;
+    }
+
+    function update_membership($membership_id){
+
+      if(!empty($membership_id)){
+        
+        //get all connected courses to the membership level
+        global $wpdb;
+        $membership_courses=$wpdb->get_results($wpdb->prepare("SELECT post_id as course_id  FROM {$wpdb->postmeta} WHERE meta_key ='%s' AND meta_value LIKE '%s'",'vibe_pmpro_membership','%"'.$membership_id.'"%'));
+
+        if(!empty($membership_courses)){
+          foreach($membership_courses as $membership_course){
+            $courses[]=$membership_course->course_id;
+          }
+        }
+
+        //Get all membership users
+        $users = $this->pmpro_get_level_active_users($membership_id);
+
+        if(!empty($courses) && !empty($users)){
+          $courses = array_unique($courses);
+          foreach($users as $user){
+            foreach($courses as $course_id){
+              if(!bp_course_is_member( $course_id,$user->user_id)){
+                print_r('#====> Found Coruse'.$course_id.' FOR USER => '.$user->user_id);
+                bp_course_add_user_to_course($user->user_id,$course_id);
+              }
+            }
+          }
+        }
+
+      }
     }
 
     function membership_expired($user_id,$membership_id){

@@ -87,7 +87,8 @@ class VibeBP_Wallet{
                 $activity_id = bp_activity_add( array( 
                     'user_id' => $user_id, 
                     'action' => 'credit', 
-                    'content' => sprintf(_x('Wallet credited with payment for "%s" with %s','wallet','vibebp'),get_the_title($product_id),$credits), 
+                    // Translators: %1s is the name of Product and %2s is wallet credits.
+                    'content' => sprintf(_x('Wallet credited with payment for "%1s" with %2s','wallet','vibebp'),get_the_title($product_id),$credits), 
                     'component' => 'wallet', 
                     'type' => 'credit', 
                 ));

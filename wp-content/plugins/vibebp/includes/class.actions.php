@@ -471,7 +471,7 @@ class VibeBP_Actions{
 			if(function_exists('pmpro_hasMembershipLevel')){
 				$slug = 'memberships';
 				bp_core_new_nav_item( array( 
-		            'name' => __('My Memberships', 'vibe' ), 
+		            'name' => __('My Memberships', 'vibebp' ), 
 		            'slug' => $slug , 
 		            'position' => 99,
 		            'item_css_id'     => $slug,
@@ -485,7 +485,7 @@ class VibeBP_Actions{
 				$link = trailingslashit( bp_loggedin_user_domain() . $slug );
 
 				bp_core_new_subnav_item( array(
-					'name'            => __('My Memberships', 'vibe' ), 
+					'name'            => __('My Memberships', 'vibebp' ), 
 					'slug'            => $slug,
 					'parent_slug'     => $slug,
 					'parent_url'      => $link,
@@ -496,7 +496,7 @@ class VibeBP_Actions{
 				) );
 
 				bp_core_new_subnav_item( array(
-					'name'            => __('Past invoices', 'vibe' ), 
+					'name'            => __('Past invoices', 'vibebp' ), 
 					'slug'            => 'invoices',
 					'parent_slug'     => $slug,
 					'parent_url'      => $link,
@@ -506,7 +506,7 @@ class VibeBP_Actions{
 					'no_access_url'   => home_url(),
 				) );
 				bp_core_new_subnav_item( array(
-					'name'            => __('My Account', 'vibe' ), 
+					'name'            => __('My Account', 'vibebp' ), 
 					'slug'            => 'account',
 					'parent_slug'     => $slug,
 					'parent_url'      => $link,
@@ -1048,7 +1048,8 @@ class VibeBP_Actions{
     		array(
     			'user_id' => $follower, 
     			'action' => _x('User Followed','','vibebp'), 
-    			'content' => sprintf(_x('%s followed %s','','vibebp'),bp_core_get_userlink($follower),bp_core_get_userlink($user_id)),
+    			// Translate both are names of user
+    			'content' => sprintf(_x('%1s followed %2s','','vibebp'),bp_core_get_userlink($follower),bp_core_get_userlink($user_id)),
     			'component' => 'buddypress', 
     			'type' => 'member_follow', 
     			'item_id' => $user_id, 
@@ -1063,7 +1064,8 @@ class VibeBP_Actions{
     		array(
     			'user_id' => $follower, 
     			'action' => _x('User Un-followed','','vibebp'), 
-    			'content' => sprintf(_x('%s un-followed %s','','vibebp'),bp_core_get_userlink($follower),bp_core_get_userlink($user_id)),
+    			// Translate %1s and %2s are names of users
+    			'content' => sprintf(_x('%1s un-followed %2s','','vibebp'),bp_core_get_userlink($follower),bp_core_get_userlink($user_id)),
     			'component' => 'buddypress', 
     			'type' => 'member_unfollow', 
     			'item_id' => $user_id, 
@@ -1077,7 +1079,8 @@ class VibeBP_Actions{
     	bp_activity_add( apply_filters('record_invite_code_activity',array( 
     		'user_id' => $user_id, 
     		'action' => _x('Regsitration using invitation code','','vibebp'), 
-    		'content' => sprintf(_x('%s registered using invite code %s','','vibebp'),bp_core_get_userlink($user_id),$invite_code), 
+    		// Translate names of users
+    		'content' => sprintf(_x('%1s registered using invite code %2s','','vibebp'),bp_core_get_userlink($user_id),$invite_code), 
     		'component' => 'vibebp', 
     		'type' => 'register', 
     		'hide_sitewide' => true ) 

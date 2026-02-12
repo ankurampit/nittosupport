@@ -106,7 +106,10 @@ class MetaSlider_Slideshow_Settings
             'thumb_height' => 100,
             'responsive_thumbs' => true,
             'thumb_min_width' => 100,
+            'thumb_layout' => 'grid',
             'fullWidth' => true,
+            'forceFullWidth' => false,
+            'fullWidthTarget' => 'body',
             'noConflict' => true,
             'mobileArrows_smartphone' => false,
             'mobileArrows_tablet' => false,
@@ -136,7 +139,8 @@ class MetaSlider_Slideshow_Settings
             'containerPadding_bottom' => 10,
             'containerPadding_left' => 10,
             'containerMargin_top' => 10,
-            'containerMargin_bottom' => 30
+            'containerMargin_bottom' => 30,
+            'navStep' => 1
         );
         $defaults = apply_filters('metaslider_default_parameters', $defaults);
         $overrides = get_option('metaslider_default_settings');
@@ -155,7 +159,7 @@ class MetaSlider_Slideshow_Settings
     public static function adjust_settings($settings)
     {
         // Convert submitted checkbox values from 'on' or 'off' to boolean values in string format (e.g. true becomes 'true')
-        $checkboxes = array('noConflict', 'fullWidth', 'hoverPause', 'reverse', 'printCss', 'printJs', 'smoothHeight', 'center', 'carouselMode', 'autoPlay', 'firstSlideFadeIn', 'responsive_thumbs', 'keyboard', 'touch', 'infiniteLoop',  'mobileArrows_smartphone', 'mobileArrows_tablet','mobileArrows_laptop', 'mobileArrows_desktop', 'mobileNavigation_smartphone', 'mobileNavigation_tablet', 'mobileNavigation_laptop', 'mobileNavigation_desktop', 'mobileSlideshow_smartphone', 'mobileSlideshow_tablet', 'mobileSlideshow_laptop', 'mobileSlideshow_desktop', 'ariaLive', 'tabIndex', 'pausePlay', 'showPlayText', 'ariaCurrent', 'progressBar', 'loading', 'lazyLoad', 'forceHeight', 'lightbox', 'container');
+        $checkboxes = array('noConflict', 'fullWidth', 'forceFullWidth', 'hoverPause', 'reverse', 'printCss', 'printJs', 'smoothHeight', 'center', 'carouselMode', 'autoPlay', 'firstSlideFadeIn', 'responsive_thumbs', 'keyboard', 'touch', 'infiniteLoop',  'mobileArrows_smartphone', 'mobileArrows_tablet','mobileArrows_laptop', 'mobileArrows_desktop', 'mobileNavigation_smartphone', 'mobileNavigation_tablet', 'mobileNavigation_laptop', 'mobileNavigation_desktop', 'mobileSlideshow_smartphone', 'mobileSlideshow_tablet', 'mobileSlideshow_laptop', 'mobileSlideshow_desktop', 'ariaLive', 'tabIndex', 'pausePlay', 'showPlayText', 'ariaCurrent', 'progressBar', 'loading', 'lazyLoad', 'forceHeight', 'lightbox', 'container');
 
         foreach ($checkboxes as $checkbox) {
             $settings[$checkbox] = (isset($settings[$checkbox]) && 'on' == $settings[$checkbox]) ? 'true' : 'false';
@@ -165,7 +169,7 @@ class MetaSlider_Slideshow_Settings
          * Reason is these settings have true/false + string options, so is better to handle all as strings
          * Keep original value if is different to 'on' and 'off'. 
          * We include actual booleans in $map just in case. */
-        $dropdowns = array('effect', 'cropMultiply', 'direction', 'easing', 'links', 'navigation', 'smartCrop', 'random', 'loop', 'layer_scaling');
+        $dropdowns = array('effect', 'cropMultiply', 'direction', 'easing', 'links', 'navigation', 'smartCrop', 'random', 'loop', 'layer_scaling', 'navStep');
 
         foreach ($dropdowns as $dropdown) {
             if (isset($settings[$dropdown])) {
