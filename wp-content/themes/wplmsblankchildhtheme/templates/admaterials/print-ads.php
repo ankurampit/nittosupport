@@ -54,7 +54,7 @@ require_once get_stylesheet_directory() . '/templates/admaterials/top-navigation
                     'post_id'      => $edit_post_id,
                     'field_groups' => ['group_6926bd61e41f4'],
                     'submit_value' => 'Update',
-                    'return'       => get_permalink($edit_post_id),
+                    'return'       => $current_page_url,
                     'uploader'     => 'wp',
                 ]);
                 ?>
@@ -94,14 +94,14 @@ require_once get_stylesheet_directory() . '/templates/admaterials/top-navigation
                             $post_id = get_the_ID();
 
                             $img_en   = get_post_meta($post_id, 'picture_jpeg_version_english', true);
-                            $img_fr   = get_post_meta($post_id, 'picture_jpeg_version_french_:', true);
-                            $title_en = get_post_meta($post_id, 'ad_name_english_:', true);
-                            $title_fr = get_post_meta($post_id, 'ad_name_french_:', true);
-                            $start    = get_post_meta($post_id, 'do_not_use_before_:', true);
-                            $end      = get_post_meta($post_id, 'do_not_use_after_:', true);
-                            $coop     = get_post_meta($post_id, 'coop_%_:', true);
-                            $note_en  = get_post_meta($post_id, 'do_not_use_before_title_english_:', true);
-                            $note_fr  = get_post_meta($post_id, 'do_not_use_before_title_french_:', true);
+                            $img_fr   = get_post_meta($post_id, 'picture_jpeg_version_french', true);
+                            $title_en = get_post_meta($post_id, 'ad_name_english', true);
+                            $title_fr = get_post_meta($post_id, 'ad_name_french', true);
+                            $start    = get_post_meta($post_id, 'do_not_use_before', true);
+                            $end      = get_post_meta($post_id, 'do_not_use_after', true);
+                            $coop     = get_post_meta($post_id, 'coop_%', true);
+                            $note_en  = get_post_meta($post_id, 'do_not_use_before_title_english', true);
+                            $note_fr  = get_post_meta($post_id, 'do_not_use_before_title_french', true);
 
 
                             if (is_numeric($img_en)) {
@@ -162,6 +162,7 @@ require_once get_stylesheet_directory() . '/templates/admaterials/top-navigation
                                             <i class="fa fa-trash"></i>
                                         </a>
                                     </div>
+
 
                                     <!-- <div class="action-icons" title="Translate (not implemented)">
                                         <i class="fa fa-language"></i>

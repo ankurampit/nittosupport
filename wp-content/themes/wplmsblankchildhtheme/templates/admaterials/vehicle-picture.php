@@ -5,9 +5,13 @@
  * Template Post Type: page
  */
 
-get_header('header.php');
+acf_form_head();
+wp_enqueue_media();
+get_header();
 
-
+$edit_post_id = isset($_GET['edit']) ? intval($_GET['edit']) : 0;
+$current_page_url = get_permalink();
+$page = "vehicle-picture";
 ?>
 
 <?php
@@ -18,116 +22,231 @@ require_once get_stylesheet_directory() . '/templates/admaterials/top-navigation
 <div class="main-table">
     <div class="table-header">
         <a class="header-ads">Vehicle Pictures</a>
-        <table class="advertsing-material-table">
-            <thead>
-                <tr class="table-head">
-                    <th class="tbl-heading">Picture</th>
-                    <th class="tbl-heading">Picture Description</th>
-                    <th class="tbl-heading">Action</th>
-                </tr>
-            </thead>
-            <tbody>
+        <button class="add-new-ad-button btn btn-primary" onclick="addNewAd('add_new')" id="print-ads-btn">Add New Vehicle Picture</button>
+        <button class="add-new-ad-button btn btn-primary" onclick="addNewAd('back')" id="back-btn" style="display:none;">Back</button>
+
+        <div class="clearfix" id="new-ad-form" style="display:none;">
+            <?php
+            add_filter('acf/load_field/name=material_term_slug', function ($field) {
+                $field['value'] = 'vehicle-picture';
+                return $field;
+            });
+
+            acf_form([
+                'post_id'      => 'new_post',
+                'new_post'     => [
+                    'post_type'   => 'materials',
+                    'post_status' => 'publish',
+                ],
+                'field_groups' => ['group_6926c5acd3f4e'],
+                'submit_value' => 'Create Vehicle Picture',
+                'return'       => $current_page_url,
+                'uploader'     => 'wp',
+            ]);
+            ?>
+        </div>
+
+        <?php if ($edit_post_id) : ?>
+
+            <div class="acf-edit-form" id="acf-edit-form">
                 <?php
-                $query = new WP_Query(array(
-                    'post_type'      => 'materials',
-                    'posts_per_page' => -1,
-                    'order'          => 'DESC',
-                    'tax_query'      => array(
-                        array(
-                            'taxonomy' => 'material_category',
-                            'field'    => 'slug',
-                            'terms'    => 'vehicle-picture'
-                        )
-                    )
-                ));
-
-                if ($query->have_posts()):
-                    while ($query->have_posts()):
-                        $query->the_post();
-
-                        $post_id = get_the_ID();
-
-                        $img_en   = get_post_meta($post_id, 'picture_version_1__version_1_image_', true);
-                        $img_fr   = get_post_meta($post_id, 'picture_version_2_version_2_image', true);
-                        $title_en = get_post_meta($post_id, 'picture_name_:', true);
-                        $start    = get_post_meta($post_id, 'do_not_use_before_:', true);
-                        $PictureType   = get_post_meta($post_id, 'picture_type_:', true);
-                        $PictureCategory   = get_post_meta($post_id, 'picture_category_:', true);
-
-
-                        if (is_numeric($img_en)) {
-                            $img_en = wp_get_attachment_url($img_en);
-                        }
-                        if (is_numeric($img_fr)) {
-                            $img_fr = wp_get_attachment_url($img_fr);
-                        }
-
-                        if (empty($img_en) && empty($img_fr) && empty($title_en)) {
-                            continue;
-                        }
+                acf_form([
+                    'post_id'      => $edit_post_id,
+                    'field_groups' => ['group_6926c5acd3f4e'],
+                    'submit_value' => 'Update',
+                    'return'       => $current_page_url,
+                    'uploader'     => 'wp',
+                ]);
                 ?>
-                        <tr class="table-body">
-                            <td class="table-img">
-                                <div class="img-wrapper">
+            </div>
 
-                                    
-                                    <?php if (!empty($img_en)) : ?>
-                                        <div class="img-box">
-                                            <img src="<?php echo esc_url($img_en); ?>" alt="English Image">
-                                        </div>
-                                    <?php else : ?>
-                                        <div class="img-box placeholder"></div>
-                                    <?php endif; ?>
+        <?php else : ?>
 
-                                    
-                                    <?php if (!empty($img_fr)) : ?>
-                                        <div class="img-box">
-                                            <img src="<?php echo esc_url($img_fr); ?>" alt="French Image">
-                                        </div>
-                                    <?php else : ?>
-                                        <div class="img-box placeholder"></div>
-                                    <?php endif; ?>
-
-                                </div>
-                            </td>
-
-                            <td>
-                                <p><strong>Title</strong>: <?php echo esc_html($title_en); ?></p>
-                                <p><strong>Start Date</strong>: <?php echo esc_html($start); ?></p>
-                                <p><strong>Picture Type</strong>: <?php echo esc_html($PictureType); ?></p>
-                                <p><strong>Picture Category</strong>: <?php echo esc_html($PictureCategory); ?></p>
-
-                            </td>
-
-                            <td>
-                                <div class="action-icons"><i class="fa fa-edit"></i></div>
-                                <div class="action-icons"><i class="fa fa-trash"></i></div>
-                                <div class="action-icons"><i class="fa fa-language"></i></div>
-                                <div class="action-icons"><i class="fa fa-eye"></i></div>
-                            </td>
-                        </tr>
+            <table class="advertising-material-table" id="print-ads-table">
+                <thead>
+                    <tr class="table-head">
+                        <th class="tbl-heading">Picture</th>
+                        <th class="tbl-heading">Picture Description</th>
+                        <th class="tbl-heading">Action</th>
+                    </tr>
+                </thead>
+                <tbody id="materials-sortable">
                     <?php
-                    endwhile;
-                else:
+                    $query = new WP_Query(array(
+                        'post_type'      => 'materials',
+                        'posts_per_page' => -1,
+                        'orderby'        => 'date',
+                        'order'          => 'DESC',
+                        'tax_query'      => array(
+                            array(
+                                'taxonomy' => 'material_category',
+                                'field'    => 'slug',
+                                'terms'    => 'vehicle-picture',
+                            ),
+                        ),
+                    ));
+
+                    if ($query->have_posts()) :
+                        while ($query->have_posts()) :
+                            $query->the_post();
+                            $post_id = get_the_ID();
+
+                            $img_en   = get_post_meta($post_id, 'picture_version_1_', true);
+                            $img_fr   = get_post_meta($post_id, 'picture_version_2', true);
+                            $title_en = get_post_meta($post_id, 'picture_name_:', true);
+                            $title_fr = get_post_meta($post_id, 'picture_type_:', true);
+                            $start    = get_post_meta($post_id, 'do_not_use_before_:', true);
+                            $note_en  = get_post_meta($post_id, 'picture_category_:', true);
+
+
+                            if (is_numeric($img_en)) {
+                                $img_en = wp_get_attachment_url($img_en);
+                            }
+                            if (is_numeric($img_fr)) {
+                                $img_fr = wp_get_attachment_url($img_fr);
+                            }
                     ?>
 
-                    <tr>
-                        <td colspan="5" style="text-align:center; opacity:0.7;">No Vehicle Picture found.</td>
-                    </tr>
+                            <tr class="table-body" draggable="true" data-post-id="<?php echo esc_attr($post_id); ?>">
+                                <td class=" table-img-1">
+                                    <?php if (!empty($img_en)) : ?>
+                                        <img class="img1" src="<?php echo esc_url($img_en); ?>" alt="<?php echo esc_attr($title_en ?: 'English Print Ad'); ?>">
+                                    <?php else : ?>
+                                        <span>No image</span>
+                                    <?php endif; ?>
 
-                <?php
-                endif;
-                wp_reset_postdata();
-                ?>
-            </tbody>
+                                    <?php if (!empty($img_fr)) : ?>
+                                        <img class="img2" src="<?php echo esc_url($img_fr); ?>" alt="<?php echo esc_attr($title_fr ?: 'French Print Ad'); ?>">
+                                    <?php else : ?>
+                                        <span>No image</span>
+                                    <?php endif; ?>
+                                </td>
 
-        </table>
+                                <td>
+                                    <p><strong>Title:</strong> <?php echo esc_html($title_en); ?></p>
+                                    <p><strong>Start Date:</strong> <?php echo esc_html($start); ?></p>
+                                    <p><strong>Picture Type:</strong> <?php echo esc_html($title_fr); ?></p>
+                                    <?php if ($note_en) : ?>
+                                        <p><strong>Picture Catgory:</strong> <?php echo esc_html($note_en); ?></p>
+                                    <?php endif; ?>
+                                </td>
+
+
+                                <td class="actions">
+                                    <?php if (current_user_can('edit_post', $post_id)) : ?>
+                                        <a class="action-icons" href="<?php echo esc_url(add_query_arg('edit', $post_id, $current_page_url)); ?>" title="Edit">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                    <?php endif; ?>
+
+                                    <div class="action-icons delete-action">
+                                        <a href="javascript:void(0);" onclick="openDeleteModal(<?php echo esc_js($post_id); ?>)"
+                                            title="Delete">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </div>
+
+
+                                    <!-- <div class="action-icons" title="Translate (not implemented)">
+                                        <i class="fa fa-language"></i>
+                                    </div> -->
+                                    <div class="action-icons" title="Preview (not implemented)">
+                                        <i class="fa fa-eye"></i>
+                                    </div>
+                                </td>
+                            </tr>
+
+                        <?php
+                        endwhile;
+                        wp_reset_postdata();
+                    else : ?>
+                        <tr>
+                            <td colspan="5" style="text-align:center; opacity:0.7;">No Print Ads found.</td>
+                        </tr>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+
+        <?php endif; ?>
+        <div id="delete-modal" class="delete-modal">
+            <div class="delete-modal-content">
+                <div class="delete-icon">
+                    <i class="fa fa-trash"></i>
+                </div>
+
+                <h3>Delete material?</h3>
+                <p>This action cannot be undone.</p>
+
+                <div class="delete-actions">
+                    <button
+                        id="cancel-delete"
+                        class="btn-secondary"
+                        onclick="closeDeleteModal()">
+                        Cancel
+                    </button>
+
+                    <button
+                        id="confirm-delete"
+                        class="btn-danger"
+                        onclick="confirmDelete()">
+                        Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
     </div>
+
+    <script>
+        let postIdToDelete = null;
+
+        function openDeleteModal(postId) {
+            postIdToDelete = postId;
+            document.getElementById('delete-modal').classList.add('active');
+        }
+
+        function closeDeleteModal() {
+            document.getElementById('delete-modal').classList.remove('active');
+            postIdToDelete = null;
+        }
+
+        function confirmDelete() {
+            if (!postIdToDelete) return;
+
+            fetch('<?php echo admin_url('admin-ajax.php'); ?>', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: new URLSearchParams({
+                        action: 'delete_material_post',
+                        post_id: postIdToDelete,
+                        nonce: '<?php echo wp_create_nonce('delete_material_nonce'); ?>'
+                    })
+                })
+                .then(res => res.json())
+                .then(res => {
+                    if (res.success) {
+                        const row = document.querySelector(
+                            `tr[data-post-id="${postIdToDelete}"]`
+                        );
+                        if (row) {
+                            row.style.transition = 'opacity 0.3s ease';
+                            row.style.opacity = '0';
+                            setTimeout(() => row.remove(), 300);
+                        }
+                    }
+                    closeDeleteModal();
+                });
+        }
+    </script>
+
+
+
     <?php require_once get_stylesheet_directory() . '/templates/admaterials/features-menu.php'; ?>
 </div>
 
 </div>
 
-<?php
-get_footer('footer.php');
-?>
+<?php get_footer(); ?>

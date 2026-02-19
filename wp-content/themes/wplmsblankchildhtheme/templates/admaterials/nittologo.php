@@ -23,7 +23,7 @@ require_once get_stylesheet_directory() . '/templates/admaterials/top-navigation
 <div class="main-table">
     <div class="table-header">
         <a class="header-ads">Nitto Logo</a>
-        <button class="add-new-ad-button btn btn-primary" onclick="addNewAd('add_new')" id="print-ads-btn">Add New</button>
+        <button class="add-new-ad-button btn btn-primary" onclick="addNewAd('add_new')" id="print-ads-btn">Add New Nitto Logo</button>
         <button class="add-new-ad-button btn btn-primary" onclick="addNewAd('back')" id="back-btn" style="display:none;">Back</button>
 
         <div class="clearfix" id="new-ad-form" style="display:none;">
@@ -40,7 +40,7 @@ require_once get_stylesheet_directory() . '/templates/admaterials/top-navigation
                     'post_status' => 'publish',
                 ],
                 'field_groups' => ['group_6926a9a039b0f'],
-                'submit_value' => 'Add New Nitto Logo',
+                'submit_value' => 'Create Nitto Logo',
                 'return'       => $current_page_url,
                 'uploader'     => 'wp',
             ]);
@@ -55,7 +55,7 @@ require_once get_stylesheet_directory() . '/templates/admaterials/top-navigation
                     'post_id'      => $edit_post_id,
                     'field_groups' => ['group_6926a9a039b0f'],
                     'submit_value' => 'Update',
-                    'return'       => get_permalink($edit_post_id),
+                    'return'       => $current_page_url,
                     'uploader'     => 'wp',
                 ]);
                 ?>
@@ -100,9 +100,9 @@ require_once get_stylesheet_directory() . '/templates/admaterials/top-navigation
                             $title_fr = get_post_meta($post_id, 'logo_name_french', true);
                             $start    = get_post_meta($post_id, 'do_not_use_before', true);
                             $end      = get_post_meta($post_id, 'do_not_use_after', true);
-                            $coop     = get_post_meta($post_id, 'coop_%_', true);
-                            $note_en  = get_post_meta($post_id, 'do_not_use_before_title_english_', true);
-                            $note_fr  = get_post_meta($post_id, 'do_not_use_before_title_french_', true);
+                            $coop     = get_post_meta($post_id, 'coop_%', true);
+                            $note_en  = get_post_meta($post_id, 'do_not_use_before_title_english', true);
+                            $note_fr  = get_post_meta($post_id, 'do_not_use_before_title_french', true);
 
                             $start_date = covertDateToReadableFormat($start);
                             $end_date   = covertDateToReadableFormat($end);
