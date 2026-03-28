@@ -23,7 +23,9 @@ require_once get_stylesheet_directory() . '/templates/admaterials/top-navigation
 <div class="main-table">
     <div class="table-header">
         <a class="header-ads">Nitto Logo</a>
-        <button class="add-new-ad-button btn btn-primary" onclick="addNewAd('add_new')" id="print-ads-btn">Add New Nitto Logo</button>
+        <?php if (current_user_can('edit_materials')) : ?>
+            <button class="add-new-ad-button btn btn-primary" onclick="addNewAd('add_new')" id="print-ads-btn">Add New Nitto Logo</button>
+        <?php endif; ?>
         <button class="add-new-ad-button btn btn-primary" onclick="addNewAd('back')" id="back-btn" style="display:none;">Back</button>
 
         <div class="clearfix" id="new-ad-form" style="display:none;">
@@ -70,7 +72,9 @@ require_once get_stylesheet_directory() . '/templates/admaterials/top-navigation
                         <th class="tbl-heading">Description English</th>
                         <th class="tbl-heading">Image French</th>
                         <th class="tbl-heading">Description French</th>
-                        <th class="tbl-heading">Action</th>
+                        <?php if (current_user_can('edit_materials')) : ?>
+                            <th class="tbl-heading">Action</th>
+                        <?php endif; ?>
                     </tr>
                 </thead>
                 <tbody id="materials-sortable">
@@ -143,24 +147,26 @@ require_once get_stylesheet_directory() . '/templates/admaterials/top-navigation
                                     <?php endif; ?>
                                 </td>
 
-                                <td class="actions">
-                                    <?php if (current_user_can('edit_post', $post_id)) : ?>
-                                        <a class="action-icons" href="<?php echo esc_url(add_query_arg('edit', $post_id, $current_page_url)); ?>" title="Edit">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-                                    <?php endif; ?>
+                                <?php if (current_user_can('edit_materials')) : ?>
+                                    <td class="actions">
+                                        <?php if (current_user_can('edit_post', $post_id)) : ?>
+                                            <a class="action-icons" href="<?php echo esc_url(add_query_arg('edit', $post_id, $current_page_url)); ?>" title="Edit">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                        <?php endif; ?>
 
-                                    <div class="action-icons delete-action">
-                                        <a href="javascript:void(0);" onclick="openDeleteModal(<?php echo esc_js($post_id); ?>)"
-                                            title="Delete">
-                                            <i class="fa fa-trash"></i>
-                                        </a>
-                                    </div>
+                                        <div class="action-icons delete-action">
+                                            <a href="javascript:void(0);" onclick="openDeleteModal(<?php echo esc_js($post_id); ?>)"
+                                                title="Delete">
+                                                <i class="fa fa-trash"></i>
+                                            </a>
+                                        </div>
 
-                                    <div class="action-icons" title="Preview (not implemented)">
-                                        <i class="fa fa-eye"></i>
-                                    </div>
-                                </td>
+                                        <div class="action-icons" title="Preview (not implemented)">
+                                            <i class="fa fa-eye"></i>
+                                        </div>
+                                    </td>
+                                <?php endif; ?>
                             </tr>
 
                         <?php

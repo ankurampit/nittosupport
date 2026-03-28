@@ -96,7 +96,7 @@ if (!isset($permissions[$user_role])) {
                             <li>
                                 <div class="dash-items"
                                     style="background-image: url('https://nittosupport.ca/assets/uploads/dashboardmenustyle_images/1547593506_Dealer_resources.jpg');">
-                                    <a href="https://nittosupport.ca/dealerresource/index">
+                                    <a href="<?php echo home_url() . '/dealer-resources' ?>">
                                         <h5>Dealer Resources</h5>
                                         <p>Download catalogues, general information.</p>
                                     </a>
@@ -110,7 +110,7 @@ if (!isset($permissions[$user_role])) {
                             <li>
                                 <div class="dash-items"
                                     style="background-image: url('https://nittosupport.ca/assets/uploads/dashboardmenustyle_images/1547594567_Management_icon2.jpg');">
-                                    <a href="<?php echo home_url() . '/user-management' ?>">
+                                    <a href="<?php echo home_url() . '/management' ?>">
                                         <h5>Management</h5>
                                         <p>Super user management tools</p>
                                     </a>

@@ -8,26 +8,32 @@
 
     <?php wp_head(); ?>
 </head>
+<?php $shared_theme_uri = content_url('themes/wplmsblankchildhtheme'); ?>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-<link href="<?php echo get_stylesheet_directory_uri() . '/assets/css/bootstrap.css' ?>" rel="stylesheet">
-<link href="<?php echo get_stylesheet_directory_uri() . '/assets/css/global-style.css' ?>" rel="stylesheet">
-<link href="<?php echo get_stylesheet_directory_uri() . '/assets/css/media-queries.css' ?>" rel="stylesheet" type="text/css">
+<link href="<?php echo esc_url($shared_theme_uri . '/assets/css/bootstrap.css'); ?>" rel="stylesheet">
+<link href="<?php echo esc_url($shared_theme_uri . '/assets/css/global-style.css'); ?>" rel="stylesheet">
+<link href="<?php echo esc_url($shared_theme_uri . '/assets/css/media-queries.css'); ?>" rel="stylesheet" type="text/css">
 <!-- bootstrap select CSS -->
-<link rel="stylesheet" type="text/css" href="<?php echo get_stylesheet_directory_uri() . '/assets/css/bootstrap-select.min.css' ?>">
+<link rel="stylesheet" type="text/css" href="<?php echo esc_url($shared_theme_uri . '/assets/css/bootstrap-select.min.css'); ?>">
 <!-- Custom css for listing page  -->
-<link href="<?php echo get_stylesheet_directory_uri() . '/assets/css/jquery.scrolling-tabs.css' ?>" rel="stylesheet">
+<link href="<?php echo esc_url($shared_theme_uri . '/assets/css/jquery.scrolling-tabs.css'); ?>" rel="stylesheet">
 <!-- Custom css for listing page  -->
-<link href="<?php echo get_stylesheet_directory_uri() . '/assets/css/custom.css' ?>" rel="stylesheet">
-<link href="<?php echo get_stylesheet_directory_uri() . '/assets/css/admaterials.css' ?>" rel="stylesheet">
-<link href="<?php echo get_stylesheet_directory_uri() . '/assets/css/responsive.css' ?>" rel="stylesheet">
-<link rel="icon" href="<?php echo get_stylesheet_directory_uri() . '/assets/img/favicon.ico'; ?>" type="image/x-icon">
+<link href="<?php echo esc_url($shared_theme_uri . '/assets/css/custom.css'); ?>" rel="stylesheet">
+<link href="<?php echo esc_url($shared_theme_uri . '/assets/css/admaterials.css'); ?>" rel="stylesheet">
+<link href="<?php echo esc_url($shared_theme_uri . '/assets/css/dealer-resources.css'); ?>" rel="stylesheet">
+<link href="<?php echo esc_url($shared_theme_uri . '/assets/css/training.css'); ?>" rel="stylesheet">
+<link href="<?php echo esc_url($shared_theme_uri . '/assets/css/management.css'); ?>" rel="stylesheet">
+<link href="<?php echo esc_url($shared_theme_uri . '/assets/css/user.css'); ?>" rel="stylesheet">
+<link href="<?php echo esc_url($shared_theme_uri . '/assets/css/responsive.css'); ?>" rel="stylesheet">
+<link rel="icon" href="<?php echo esc_url($shared_theme_uri . '/assets/img/favicon.ico'); ?>" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <body>
     <header class="headerWide">
         <div class="container header">
             <div class="row">
                 <div class="col-xs-7 logo">
-                    <a href="https://nittosupport.ca/"><img src="https://nittosupport.ca/assets/img/logo.png" alt="Logo" title="Logo" class="img-responsive"></a>
+                    <a href="<?php echo home_url(); ?>"><img src="https://nittosupport.ca/assets/img/logo.png" alt="Logo" title="Logo" class="img-responsive"></a>
                 </div>
                 <div class="col-xs-5">
                     <nav class="navbar navbar-default" role="navigation">
@@ -85,7 +91,7 @@
     <div class="innerSlider">
         <section id="myCarousel" class="carousel">
             <?php
-            echo do_shortcode('[metaslider id="11672"]');
+            echo do_shortcode('[metaslider id="90"]');
             ?>
         </section>
     </div>

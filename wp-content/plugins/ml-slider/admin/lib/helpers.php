@@ -397,15 +397,21 @@ function metaslider_global_settings()
  * Upgrade to pro small yellow button with lock icon
  * 
  * @since 3.101
+ * @since 3.106 - Added $tooltip param
  * 
- * @param string $text Optional tooltip text
+ * @param string $text  Optional tooltip text
+ * @param bool $tooltip If no tooltip is required, set as false
  * 
  * @return html
  */
-function metaslider_upgrade_pro_small_btn($text = '')
+function metaslider_upgrade_pro_small_btn( $text = '', $tooltip = true )
 {
     if (empty($text)) {
         $text = __( 'Some of these features are available in MetaSlider Pro', 'ml-slider' );
+    }
+
+    if ( ! $tooltip ) {
+        $text = '';
     }
     
     $link = 'https://www.metaslider.com/upgrade?utm_source=lite&utm_medium=banner&utm_campaign=pro';

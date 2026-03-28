@@ -2,7 +2,7 @@
 Contributors: andergmartins, htmgarcia, publishpress, stevejburge, rochdesigns
 Tags: slider, video slider, image slider, carousel slider, gallery
 Requires at least: 5.0
-Stable tag: 3.105.0
+Stable tag: 3.106.0
 Requires PHP: 7.0
 Tested up to: 6.9
 License: GPLv2 or later
@@ -319,6 +319,17 @@ Yes, you can build Elementor slides and Beaver Builder slideshows. You can creat
 
 The format is based on [Keep a Changelog recommendations](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
+
+= [3.106.0] - Mar 02, 2026 =
+
+* ADDED: Pro ad to "Add CSS" buton, #1970;
+* FIXED: Precognition theme's navigation in mobile, #1997;
+* FIXED: Disjoint theme's navigation in mobile, #1996;
+* FIXED: Preview, #1998;
+* CHANGED: New quickstart page, #1896, #1981, #1982, #1983, #1984, #1986, #1987, #1988, #1990, #1993, #1999, #2002, #2005, #2006, #2009, #2010, #2013, #2014, #2016, #2018, #2020, #2022, #2024, #2027, #2018, #2019, #2032, #2034, #2035, #2036, #2041, #2050;
+* CHANGED: Italian, Spanish and French translation updates, #1973;
+* CHANGED: Small text correction for theme recommendation, #1979;
+* CHANGED: Legacy quickstart uses the same new quickstart approach, #2043;
 
 = [3.105.0] - Jan 27, 2026 =
 

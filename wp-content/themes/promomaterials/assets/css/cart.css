@@ -1,0 +1,398 @@
+/* ===================================
+PROMOMATERIALS CART + CHECKOUT STYLES
+Brand Color: #880b17
+=================================== */
+
+
+/* ===============================
+GLOBAL RESET
+=============================== */
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
+
+html, body{
+height:auto !important;
+min-height:100%;
+overflow-x:hidden;
+overflow-y:auto !important;
+}
+
+
+/* ===============================
+PREVENT DOUBLE SCROLLBAR
+=============================== */
+
+.pm-site-main,
+.pm-cart-main,
+.pm-checkout-main,
+.pm-container,
+.pm-cart-wrapper,
+.pm-checkout-wrapper,
+.woocommerce,
+.woocommerce-cart,
+.woocommerce-checkout{
+height:auto !important;
+max-height:none !important;
+overflow:visible !important;
+}
+
+
+/* ===============================
+MAIN LAYOUT
+=============================== */
+
+.pm-cart-main,
+.pm-checkout-main{
+padding:70px 0;
+}
+
+.pm-container{
+max-width:1100px;
+margin:0 auto;
+padding:0 20px;
+}
+
+
+/* ===============================
+PAGE HEADER
+=============================== */
+
+.pm-page-header{
+text-align:center;
+margin-bottom:40px;
+}
+
+.pm-page-title{
+font-size:38px;
+font-weight:700;
+color:#880b17;
+margin-bottom:10px;
+}
+
+.pm-page-subtitle{
+font-size:16px;
+color:#666;
+}
+
+
+/* ===============================
+CONTENT WRAPPER
+=============================== */
+
+.pm-cart-wrapper,
+.pm-checkout-wrapper{
+background:#ffffff;
+padding:35px;
+border-radius:6px;
+box-shadow:0 8px 25px rgba(0,0,0,0.05);
+}
+
+
+/* ===============================
+TABLE STYLING
+=============================== */
+
+.woocommerce table.shop_table{
+width:100%;
+border-collapse:collapse;
+margin-bottom:30px;
+}
+
+.woocommerce table.shop_table th{
+text-align:left;
+font-weight:600;
+padding:15px;
+border-bottom:2px solid #ddd;
+}
+
+.woocommerce table.shop_table td{
+padding:20px 15px;
+border-bottom:1px solid #eee;
+vertical-align:middle;
+}
+
+.woocommerce table.shop_table tbody tr:hover{
+background:#fff3f4;
+}
+
+
+/* ===============================
+PRODUCT STYLING
+=============================== */
+
+.woocommerce table.cart img{
+width:70px;
+border-radius:6px;
+}
+
+.woocommerce .product-name a{
+color:#333;
+font-weight:600;
+font-size:16px;
+text-decoration:none;
+}
+
+.woocommerce .product-name a:hover{
+color:#880b17;
+}
+
+
+/* ===============================
+QUANTITY
+=============================== */
+
+.woocommerce .quantity input{
+width:60px;
+padding:6px;
+text-align:center;
+border:1px solid #ccc;
+border-radius:4px;
+}
+
+
+/* ===============================
+REMOVE BUTTON
+=============================== */
+
+.woocommerce a.remove{
+color:#880b17;
+font-size:16px;
+}
+
+.woocommerce a.remove:hover{
+background:#880b17;
+color:#fff;
+}
+
+
+/* ===============================
+COUPON
+=============================== */
+
+.woocommerce .coupon{
+margin-top:20px;
+}
+
+.woocommerce .coupon input{
+padding:10px;
+border:1px solid #ccc;
+border-radius:4px;
+}
+
+.woocommerce .coupon button{
+background:#880b17;
+color:#fff;
+border:none;
+padding:10px 18px;
+margin-left:10px;
+border-radius:4px;
+cursor:pointer;
+}
+
+.woocommerce .coupon button:hover{
+background:#6c0911;
+}
+
+
+/* ===============================
+BUTTONS
+=============================== */
+
+.woocommerce button.button,
+.woocommerce a.button{
+background:#880b17;
+color:#fff;
+padding:12px 20px;
+border:none;
+border-radius:4px;
+font-weight:600;
+cursor:pointer;
+transition:0.3s;
+}
+
+.woocommerce button.button:hover,
+.woocommerce a.button:hover{
+background:#6c0911;
+}
+
+
+/* ===============================
+CART TOTALS
+=============================== */
+
+.woocommerce-cart .cart-collaterals{
+margin-top:40px;
+max-width:1100px;
+margin-left:auto;
+margin-right:auto;
+}
+
+.woocommerce .cart_totals{
+margin:0 auto;
+background:#fafafa;
+padding:25px;
+border-radius:6px;
+border:1px solid #eee;
+}
+
+.woocommerce .cart_totals h2{
+font-size:24px;
+color:#880b17;
+margin-bottom:20px;
+}
+
+.woocommerce .cart_totals table{
+width:100%;
+margin-bottom:20px;
+}
+
+.woocommerce .cart_totals th{
+text-align:left;
+font-weight:600;
+}
+
+.woocommerce .cart_totals td{
+text-align:right;
+}
+
+
+/* ===============================
+PROCEED TO CHECKOUT BUTTON
+=============================== */
+
+.woocommerce-cart .wc-proceed-to-checkout a.checkout-button{
+background:#880b17 !important;
+color:#fff !important;
+padding:14px;
+border-radius:6px;
+font-weight:600;
+display:block;
+width:100%;
+text-align:center;
+transition:0.3s;
+}
+
+.woocommerce-cart .wc-proceed-to-checkout a.checkout-button:hover{
+background:#6c0911 !important;
+}
+
+
+/* ===============================
+CHECKOUT FORM
+=============================== */
+
+.woocommerce-checkout form.checkout{
+display:block;
+}
+
+.woocommerce-checkout .woocommerce-billing-fields,
+.woocommerce-checkout .woocommerce-additional-fields{
+margin-bottom:30px;
+}
+
+.woocommerce-checkout input,
+.woocommerce-checkout select,
+.woocommerce-checkout textarea{
+width:100%;
+padding:10px;
+border:1px solid #ccc;
+border-radius:4px;
+margin-top:5px;
+}
+
+
+/* ===============================
+ORDER REVIEW
+=============================== */
+
+.woocommerce-checkout-review-order{
+background:#fafafa;
+padding:25px;
+border-radius:6px;
+border:1px solid #eee;
+margin-top:30px;
+}
+
+
+/* ===============================
+PLACE ORDER BUTTON
+=============================== */
+
+#place_order{
+background:#880b17;
+color:#fff;
+padding:14px;
+font-size:16px;
+font-weight:600;
+border-radius:5px;
+width:100%;
+}
+
+#place_order:hover{
+background:#6c0911;
+}
+
+
+/* ===============================
+RESPONSIVE
+=============================== */
+
+@media (max-width:768px){
+
+.pm-cart-wrapper,
+.pm-checkout-wrapper{
+padding:20px;
+}
+
+.woocommerce table.shop_table th,
+.woocommerce table.shop_table td{
+padding:10px;
+font-size:14px;
+}
+
+.woocommerce table.cart img{
+width:55px;
+}
+
+}
+
+/* Override WooCommerce cart totals layout */
+
+.woocommerce .cart-collaterals .cart_totals,
+.woocommerce-page .cart-collaterals .cart_totals{
+float: none !important;
+width: 100% !important;
+margin: 0 auto !important;
+}
+
+/* ===================================
+PROMOMATERIALS BUTTON STYLE
+=================================== */
+
+/* Default button */
+
+.woocommerce a.button.alt,
+.woocommerce button.button.alt,
+.woocommerce input.button.alt{
+background:#880b17 !important;
+color:#ffffff !important;
+border:none;
+border-radius:6px;
+padding:12px 22px;
+font-weight:600;
+transition:color 0.3s ease;
+}
+
+
+/* Hover effect (only text color changes) */
+
+.woocommerce a.button.alt:hover,
+.woocommerce button.button.alt:hover,
+.woocommerce input.button.alt:hover{
+background:#880b17 !important;
+color:#000000 !important;
+}

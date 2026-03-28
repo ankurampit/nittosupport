@@ -1,3 +1,7 @@
+<?php
+$current_user_id = get_current_user_id();
+$edit_permission_access = is_user_can_edit($current_user_id, 'edit_admaterials');
+?>
 <div class="container">
     <div class="tabs">
         <ul class="material-tabs">

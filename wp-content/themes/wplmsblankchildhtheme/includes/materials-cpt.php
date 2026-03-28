@@ -138,3 +138,74 @@ function covertDateToReadableFormat($dateString)
     }
     return '';
 }
+
+function get_image_by_id($image_id)
+{
+    if (!empty($image_id)) {
+        $image_url = wp_get_attachment_url($image_id);
+        return $image_url;
+    }
+}
+
+function get_youtube_thumbnail($url, $quality = 'hqdefault')
+{
+    // Extract video ID
+    preg_match('/(youtu\.be\/|youtube\.com\/(embed\/|watch\?v=))([^?&]+)/', $url, $matches);
+
+    if (!empty($matches[3])) {
+        $video_id = $matches[3];
+        $thumbnail_url = "https://img.youtube.com/vi/{$video_id}/{$quality}.jpg";
+        return $thumbnail_url;
+    }
+
+    return false;
+}
+
+function get_edit_link($item_details)
+{
+
+    if ($item_details['type'] == 'tire-photo') {
+        return home_url() . '/tire-photo-page/?edit=' . $item_details['post_id'];
+    }
+
+    if ($item_details['type'] == 'print-ads') {
+        return home_url() . '/print-ads/?edit=' . $item_details['post_id'];
+    }
+
+    if ($item_details['type'] == 'radio') {
+        return home_url() . '/radio-page/?edit=' . $item_details['post_id'];
+    }
+
+    if ($item_details['type'] == 'nittologo') {
+        return home_url() . '/nitto-logo-page/?edit=' . $item_details['post_id'];
+    }
+
+    if ($item_details['type'] == 'television-and-video') {
+        return home_url() . '/television-and-video-page/?edit=' . $item_details['post_id'];
+    }
+
+    if ($item_details['type'] == 'web-online') {
+        return home_url() . '/web-online-page/?edit=' . $item_details['post_id'];
+    }
+}
+
+function is_user_can_edit($user_id, $permission_type = '')
+{
+    if (!$user_id) {
+        return false;
+    }
+    $user = get_userdata($user_id);
+    if (!$user) {
+        return false;
+    }
+    if ($user) {
+        $user_role = $user->roles[0];
+        if (in_array($user_role, ['administrator', 'um_super_user', 'super_user'])) {
+            if (!empty($user->caps[$permission_type])) {
+                return true;
+            }
+        }
+    }
+
+    return false;
+}

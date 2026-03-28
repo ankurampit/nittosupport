@@ -1,7 +1,98 @@
 /*
 Theme Name: Promo Materials
-Theme URI: http://example.com
+Theme URI: http://localhost
 Author: Ankur Saha
+Author URI: http://localhost
 Description: My first custom WordPress theme
 Version: 1.0
 */
+
+/* BREADCRUMB CONTAINER */
+
+.woocommerce-breadcrumb{
+display:flex;
+align-items:center;
+flex-wrap:wrap;
+gap:8px;
+margin-bottom:25px;
+font-size:14px;
+font-weight:500;
+}
+
+
+/* LINKS */
+
+.woocommerce-breadcrumb a{
+display:inline-block;
+padding:6px 14px;
+border-radius:6px;
+background:#f3f3f3;
+color:#880b17;
+text-decoration:none;
+transition:all 0.25s ease;
+}
+
+
+/* HOVER */
+
+.woocommerce-breadcrumb a:hover{
+background:#880b17;
+color:#ffffff;
+transform:translateY(-2px);
+box-shadow:0 4px 10px rgba(0,0,0,0.15);
+}
+
+
+/* ACTIVE / CURRENT PAGE */
+
+.woocommerce-breadcrumb span{
+padding:6px 14px;
+border-radius:6px;
+background:#880b17;
+color:#fff;
+font-weight:600;
+}
+
+
+/* SEPARATOR */
+
+.woocommerce-breadcrumb .breadcrumb-separator{
+color:#bbb;
+font-size:12px;
+padding:0 2px;
+}
+
+
+
+/* Wallet Balence */
+/* Vertical centering and spacing for the table cells */
+.pm-wallet-row th,
+.pm-wallet-row td {
+    padding: 12px 10px; /* Adjust padding to match your theme */
+    vertical-align: middle; 
+}
+
+/* Flexbox magic to perfectly align the checkbox and text */
+.pm-wallet-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Adds space between the checkbox and the text */
+    cursor: pointer;
+    margin: 0;
+    font-weight: 600; /* Makes the label stand out slightly */
+}
+
+/* Ensure the checkbox itself doesn't have weird default margins */
+.pm-wallet-checkbox input[type="checkbox"] {
+    margin: 0;
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+}
+
+/* Align the amount to the right and style the text */
+.pm-wallet-amount {
+    text-align: left; 
+    color: #2e7d32; /* A nice 'success' green to indicate money available (optional) */
+    font-weight: bold;
+}

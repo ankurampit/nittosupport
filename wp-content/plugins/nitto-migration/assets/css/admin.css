@@ -1,0 +1,548 @@
+/* Container Spacing */
+.nitto-dashboard-wrapper {
+    margin: 20px 20px 0 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+/* Header Section */
+.nitto-header {
+    margin-bottom: 30px;
+}
+
+.nitto-header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1d2327;
+    margin: 0;
+}
+
+.nitto-header .version-tag {
+    font-size: 12px;
+    background: #e2e8f0;
+    padding: 2px 8px;
+    border-radius: 12px;
+    vertical-align: middle;
+    color: #475569;
+}
+
+.nitto-header p {
+    color: #64748b;
+    font-size: 16px;
+    margin-top: 5px;
+}
+
+/* Grid Layout */
+.nitto-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+    max-width: 1200px;
+}
+
+/* Card Styling */
+.nitto-card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.nitto-card:hover:not(.is-disabled) {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 20px -5px rgba(0,0,0,0.1);
+    border-color: #2271b1;
+}
+
+.nitto-card.is-disabled {
+    background: #f8fafc;
+    opacity: 0.8;
+}
+
+/* Card Elements */
+.card-icon {
+    font-size: 32px;
+    margin-bottom: 16px;
+}
+
+.nitto-card h2 {
+    font-size: 20px;
+    margin: 0 0 10px 0;
+    color: #1e293b;
+}
+
+.nitto-card p {
+    color: #64748b;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 24px;
+    flex-grow: 1;
+}
+
+/* Buttons */
+.nitto-btn {
+    display: inline-block;
+    text-decoration: none;
+    background: #2271b1;
+    color: #fff !important;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 14px;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.nitto-btn:hover {
+    background: #135e96;
+}
+
+.nitto-btn.secondary {
+    background: #cbd5e1;
+    color: #64748b !important;
+    cursor: not-allowed;
+}
+
+/* Badge */
+.badge {
+    background: #fef3c7;
+    color: #92400e;
+    font-size: 11px;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-left: 8px;
+}
+
+.title-row {
+    display: flex;
+    align-items: center;
+}
+
+/* For Users */
+.nitto-migration-container{
+    background:white;
+    padding:20px;
+    border:1px solid #ddd;
+    max-width:900px;
+}
+
+.nitto-section{
+    margin-bottom:30px;
+}
+
+.nitto-progress-bar{
+    width:100%;
+    height:20px;
+    background:#eee;
+    border-radius:5px;
+    overflow:hidden;
+}
+
+.nitto-progress{
+    height:20px;
+    width:0%;
+    background:#2271b1;
+}
+
+/* Section Container */
+.nitto-section {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 30px;
+    margin-top: 24px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    max-width: 100%;
+}
+
+/* Header & Title */
+.nitto-section h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 30px 0 15px 0;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #f1f5f9;
+}
+
+/* The Load Button - Customizing the standard button-primary */
+#nitto-load-users.button-primary {
+    background: #2271b1;
+    border: none;
+    border-radius: 6px;
+    padding: 0 24px;
+    height: 40px;
+    line-height: 40px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(34, 113, 177, 0.2);
+}
+
+#nitto-load-users.button-primary:hover {
+    background: #135e96;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(34, 113, 177, 0.3);
+}
+
+/* Users List Area */
+#nitto-users-list {
+    background: #f8fafc;
+    border: 2px dashed #cbd5e1;
+    border-radius: 8px;
+    padding: 20px;
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Empty State Styling */
+#nitto-users-list p {
+    color: #94a3b8;
+    font-style: italic;
+    text-align: center;
+    margin: 20px 0;
+}
+
+/* Transition for when users are injected via JS */
+.nitto-user-row {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    padding: 12px 16px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    animation: fadeIn 0.3s ease forwards;
+}
+
+/* Uses Table */
+/* Container styling */
+.nitto-table-container {
+    width: 100%;
+    max-height: 600px;
+    overflow: auto;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    background: #fff;
+}
+
+/* Table Base */
+.nitto-modern-table {
+    border-collapse: separate; /* Required for rounded corners */
+    border-spacing: 0;
+    width: 100%;
+    min-width: 3500px; /* Increased to accommodate 60+ columns comfortably */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 13px;
+    color: #334155;
+}
+
+/* Sticky Header */
+.nitto-modern-table th {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: #f8fafc;
+    color: #64748b;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    padding: 14px 16px;
+    border-bottom: 2px solid #e2e8f0;
+    text-align: left;
+    white-space: nowrap;
+}
+
+/* Table Cells */
+.nitto-modern-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #f1f5f9;
+    white-space: nowrap; /* Prevents columns from getting too squished */
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Zebra Striping */
+.nitto-modern-table tr:nth-child(even) td {
+    background-color: #fbfcfe;
+}
+
+/* Hover Effect */
+.nitto-modern-table tr:hover td {
+    background-color: #f1f5f9 !important;
+    color: #1e293b;
+}
+
+/* ID Column highlight */
+.nitto-modern-table td:first-child {
+    font-weight: bold;
+    color: #2271b1;
+    background: #f8fafc;
+}
+
+/* Custom Scrollbar for a cleaner look */
+.nitto-table-container::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.nitto-table-container::-webkit-scrollbar-track {
+    background: #f1f5f9;
+}
+
+.nitto-table-container::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 10px;
+}
+
+.nitto-table-container::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* Magento Products */
+/* Container Styling */
+.nitto-product-grid {
+    margin: 20px 0;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.nitto-product-grid h2 {
+    margin-bottom: 20px;
+    color: #23282d; /* WordPress Dark Grey */
+    font-size: 1.5em;
+    border-left: 4px solid #007cba; /* WordPress Blue Accent */
+    padding-left: 15px;
+}
+
+/* Table Base Styling */
+.nitto-modern-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+/* Horizontal & Vertical Alignment */
+.nitto-modern-table th, 
+.nitto-modern-table td {
+    padding: 12px 15px;
+    text-align: center;      /* Horizontal Center */
+    vertical-align: middle;  /* Vertical Center */
+    border-bottom: 1px solid #f0f0f1;
+}
+
+/* Product Name Alignment (Usually better left-aligned) */
+.nitto-modern-table td.text-left {
+    text-align: left;
+}
+
+/* Header Styling */
+.nitto-modern-table thead th {
+    background-color: #f6f7f7;
+    color: #50575e;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+}
+
+/* Row Hover Effect */
+.nitto-modern-table tbody tr:hover {
+    background-color: #f0f6fa;
+}
+
+/* Image Styling */
+.nitto-modern-table img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    display: inline-block; /* Helps with alignment */
+}
+
+/* Empty State / No Image Text */
+.no-image {
+    color: #a7aaad;
+    font-size: 0.8rem;
+    font-style: italic;
+}
+
+
+/* Container styling */
+.progress-container {
+    margin: 24px 0;
+    max-width: 500px; /* Optional: keeps it from stretching too wide */
+}
+
+/* The Background Track */
+.progress-track {
+    width: 100%;
+    background-color: #f0f2f5; /* Softer light gray */
+    height: 12px;              /* Slimmer is often more modern */
+    border-radius: 100px;      /* Pill shape */
+    overflow: hidden;          /* Ensures the bar stays inside the curves */
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle depth */
+}
+
+/* The Actual Bar */
+#progress-bar {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, #0073aa 0%, #00a0d2 100%); /* Gradient adds life */
+    border-radius: 100px;
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* Smooth "springy" animation */
+}
+
+/* Progress Text */
+#progress-text {
+    margin-top: 8px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #444;
+    text-align: right; /* Aligned to the end of the bar looks cleaner */
+}
+
+
+#migration-status {
+    margin: 20px 0;
+    padding: 16px 20px;
+    background-color: #ffffff;
+    border-left: 4px solid #2271b1; /* WordPress Blue */
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #1d2327;
+    display: inline-block;
+    min-width: 300px;
+    transition: all 0.3s ease;
+}
+
+/* Container & Layout */
+.nitto-table-container {
+    padding: 24px;
+    font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+    background-color: #fcfcfc;
+}
+
+.nitto-table-container h2 {
+    margin: 0 0 20px 0;
+    color: #1a1a1b;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+}
+
+/* modern Header Action Area (Flexbox) */
+.nitto-table-container {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Create a row for the Button and Status */
+.header-actions {
+    display: flex;
+    align-items: flex-start; /* Keeps button at top if status expands */
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+/* Modernized Button */
+button[onclick="startPromoOrderMigration()"] {
+    background: #ffffff;
+    border: 1px solid #d1d5db;
+    color: #374151;
+    padding: 10px 18px;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    white-space: nowrap;
+}
+
+button[onclick="startPromoOrderMigration()"]:hover {
+    background: #f9fafb;
+    border-color: #9ca3af;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* Modernized Status Box */
+#migration-status {
+    background-color: #f0fdf4; /* Very light green */
+    border: 1px solid #bbf7d0;
+    border-left: 4px solid #22c55e;
+    padding: 12px 20px;
+    border-radius: 8px;
+    min-width: 280px;
+    color: #166534;
+    font-size: 14px;
+    line-height: 1.5;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+}
+
+/* Success State refinement */
+#migration-status.success {
+    border-left-color: #22c55e;
+    background-color: #f0fdf4;
+}
+
+/* Error State refinement */
+#migration-status.error {
+    border-left-color: #ef4444;
+    background-color: #fef2f2;
+    color: #991b1b;
+    border-color: #fecaca;
+}
+
+/* Table Styling Refinement */
+.nitto-modern-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.nitto-modern-table thead th {
+    background-color: #f9fafb;
+    text-transform: uppercase;
+    font-size: 11px;
+    font-weight: 700;
+    color: #6b7280;
+    padding: 14px 16px;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+    letter-spacing: 0.05em;
+}
+
+/* Fix for the Sl No. blue style from image */
+.nitto-modern-table tbody td:first-child {
+    color: #2563eb;
+    font-weight: 700;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}

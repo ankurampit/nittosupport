@@ -4,14 +4,16 @@
  * Template Name: Training Program page 
  */
 
-get_header('header.php');
-?>
+get_header();
 
-<?php get_template_part('header-inner');
+get_template_part('header-inner');
 $terms = get_terms(array(
     'taxonomy'   => 'course-cat',
     'hide_empty' => false,
+    'parent'     => 0,
+    'orderby'    => 'term_order',
 ));
+
 ?>
 <section id="content">
     <div class="container">
@@ -44,10 +46,45 @@ $terms = get_terms(array(
                 <?php
                 if ($terms) {
                     foreach ($terms as $term) { ?>
-                        <div class="col-sm-6">
-                            <div class="course-cate">
-                                <a href="#"><?php echo $term->name ?></a>
+                        <div class="col-sm-6 col-md-4 mb-4">
+
+                            <?php
+                            $thumbnail_id = get_term_meta($term->term_id, 'course_cat_thumbnail_id', true);
+                            $image_url = $thumbnail_id ? wp_get_attachment_url($thumbnail_id) : get_template_directory_uri() . '/assets/images/default-category.jpg';
+                            ?>
+
+                            <div class="course-category-card">
+
+                                <div class="category-image">
+                                    <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($term->name); ?>">
+                                </div>
+
+                                <div class="category-card-body">
+
+                                    <h5 class="category-title">
+                                        <?php echo esc_html($term->name); ?>
+                                    </h5>
+
+                                    <p class="category-description">
+                                        <?php echo esc_html($term->description); ?>
+                                    </p>
+
+                                    <div class="category-meta">
+                                        <span class="course-count">
+                                            <?php echo $term->count; ?> Courses
+                                        </span>
+                                    </div>
+
+                                    <div class="category-action">
+                                        <a href="<?php echo esc_url(get_term_link($term)); ?>" class="enter-btn">
+                                            Enter Category
+                                        </a>
+                                    </div>
+
+                                </div>
+
                             </div>
+
                         </div>
                 <?php
                     }

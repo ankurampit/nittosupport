@@ -5,7 +5,7 @@
  * Plugin Name: MetaSlider
  * Plugin URI:  https://www.metaslider.com
  * Description: MetaSlider gives you the power to create a beautiful slideshow, carousel, or gallery on your WordPress site.
- * Version:     3.105.0
+ * Version:     3.106.0
  * Author:      MetaSlider
  * Author URI:  https://www.metaslider.com
  * License:     GPL-2.0+
@@ -44,7 +44,7 @@ if (! class_exists('MetaSliderPlugin')) {
          *
          * @var string
          */
-        public $version = '3.105.0';
+        public $version = '3.106.0';
 
         /**
          * Pro installed version number
@@ -212,7 +212,8 @@ if (! class_exists('MetaSliderPlugin')) {
                 'metaslider_slide' => METASLIDER_PATH . 'admin/Slideshows/slides/Slide.php',
                 'metaslider_themes' => METASLIDER_PATH . 'admin/Slideshows/Themes.php',
                 'metaslider_image' => METASLIDER_PATH . 'admin/Slideshows/Image.php',
-                'metaslider_gutenberg' => METASLIDER_PATH . 'admin/Gutenberg.php'
+                'metaslider_gutenberg' => METASLIDER_PATH . 'admin/Gutenberg.php',
+                'metasliderquickstart' => METASLIDER_PATH . 'inc/metaslider.quickstart.class.php',
             );
         }
 
@@ -346,6 +347,7 @@ if (! class_exists('MetaSliderPlugin')) {
             add_action('wp_ajax_permanent_delete_slide', array($this, 'ajax_permanent_delete_slide'));
             add_action('wp_ajax_quickstart_upload', array($this, 'ajax_quickstart_upload'));
             add_action('wp_ajax_quickstart_slideshow', array($this, 'ajax_quickstart_slideshow'));
+            add_action('wp_ajax_quickstart_slideshow_v2', array($this, 'ajax_quickstart_slideshow_v2'));
 
             add_action( 'load-toplevel_page_metaslider', array($this, 'valid_slideshow_or_die') );
 
@@ -1176,157 +1178,8 @@ if (! class_exists('MetaSliderPlugin')) {
 
             $id = MetaSlider_Slideshows::create();
 
-            if ( isset( $_GET['metaslider_add_sample_slides'] ) ) {
-                $slideInstance    = new MetaSlider_Slideshows();
-                $sampleType       = sanitize_key( $_GET['metaslider_add_sample_slides'] );
-                $default_settings = class_exists( 'MetaSlider_Slideshow_Settings' ) 
-                    ? MetaSlider_Slideshow_Settings::defaults() : array();
-
-                // Get slugs from Free slides to import sample content
-                $quickstart_free_slugs = array(
-                    'carousel',
-                    'withcaption'
-                );
-
-                // Get slugs from Pro slides to import sample content
-                $quickstart_pro_slugs = $this->quickstart_slugs();
-
-                if ( in_array( $sampleType, $quickstart_pro_slugs ) ) {
-                    // Pro quickstart demos
-
-                    if ( ! metaslider_pro_is_active() || count( $quickstart_pro_slugs ) === 0 ) {
-                        // @TODO - Maybe display an error?
-                        wp_redirect( esc_url_raw( admin_url( "admin.php?page=metaslider-start&error=pro-version" ) ) );
-                        exit;
-                    }
-
-                    // Get slideshow settings
-                    if ( ! class_exists( 'MetaSliderPro_Quickstart' ) ) {
-                        // @TODO - Maybe display an error?
-                        wp_redirect( esc_url_raw( admin_url( "admin.php?page=metaslider-start&error=quickstart-class" ) ) );
-                        exit;
-                    }
-
-                    $msQuickstartPro = new MetaSliderPro_Quickstart();
-
-                    // Get settings
-                    $settings = array_merge(
-                        $default_settings,
-                        $msQuickstartPro->set_slideshow_settings( $sampleType )
-                    );
-
-                    // Save settings
-                    $sampleId = $slideInstance->save( $id, $settings );
-
-                    // The cases match with MetaSliderPro->quickstart_options() each array 'slug' values
-                    switch ( $sampleType ) {
-
-                        case 'youtube':
-                            $msQuickstartPro->set_slideshow_theme( $id, 'simply-dark' );
-                            break;
-
-                        case 'youtube-shorts':
-                            $msQuickstartPro->set_slideshow_theme( $id, 'outline' );
-                            break;
-
-                        case 'tiktok':
-                            $msQuickstartPro->set_slideshow_theme( $id, 'social-play' );
-                            break;
-
-                        case 'vimeo':
-                            $msQuickstartPro->set_slideshow_theme( $id, 'outline' );
-                            break;
-
-                        case 'html_overlay':
-                            $msQuickstartPro->set_slideshow_theme( $id, 'radix' );
-                            break;
-
-                        case 'post_feed':
-                            $msQuickstartPro->set_slideshow_theme( $id, 'highway' );
-                            break;
-
-                        case 'external':
-                            $msQuickstartPro->set_slideshow_theme( $id, 'bubble' );
-                            break;
-
-                        case 'external_video':
-                            $msQuickstartPro->set_slideshow_theme( $id, 'blend' );
-                            break;
-
-                        case 'local_video':
-                            $msQuickstartPro->set_slideshow_theme( $id, 'blend' );
-                            break;
-
-                        case 'custom_html':
-                            $msQuickstartPro->set_slideshow_theme( $id, 'blend' );
-                            break;
-
-                        case 'woocommerce':
-                            $msQuickstartPro->set_slideshow_theme( $id, 'zonora' );
-                            break;
-                    }
-
-                } elseif ( in_array( $sampleType, $quickstart_free_slugs ) ) {
-                    // Free quickstart demos
-
-                    if ($sampleType == 'carousel') {
-                        $settings = array_merge(
-                            $default_settings,
-                            array(
-                                'type' => 'flex',
-                                'printCss' => 'on',
-                                'printJs' => 'on',
-                                'width' => 400,
-                                'height' => 400,
-                                'center' => 'on',
-                                'carouselMode' => 'on',
-                                'fullWidth' => 'on',
-                                'noConflict' => 'on',
-                                'effect' => 'slide'
-                            )
-                        );
-                        $sampleId = $slideInstance->save($id, $settings);
-                    } elseif ($sampleType == 'withcaption') {
-                        $settings = array_merge(
-                            $default_settings,
-                            array(
-                                'type' => 'flex',
-                                'printCss' => 'on',
-                                'printJs' => 'on',
-                                'width' => 400,
-                                'height' => 400,
-                                'center' => 'on',
-                                'carouselMode' => 'on',
-                                'fullWidth' => 'on',
-                                'noConflict' => 'on',
-                                'effect' => 'slide'
-                            )
-                        );
-                        $sampleId = $slideInstance->save($id, $settings);
-    
-                        $themeInstance = new MetaSlider_Themes();
-                        $outlineTheme = $themeInstance->get_theme_object($id,'outline');
-                        $setTheme = $themeInstance->set($id, $outlineTheme);
-                    } else {
-                        $sampleId = $id;
-                        $sampleType = "";
-                    }
-                    
-                } else {
-                    // @TODO - Do we really need an else?
-                    $sampleId = $id;
-                    $sampleType = "";
-                }
-
-                
-
-                wp_redirect(esc_url_raw(admin_url("admin.php?page=metaslider&id={$sampleId}&metaslider_add_sample_slides={$sampleType}")));
-                exit;
-                
-            } else {
-                wp_redirect(esc_url_raw(admin_url("admin.php?page=metaslider&id={$id}")));
-                exit;
-            }          
+            wp_redirect(esc_url_raw(admin_url("admin.php?page=metaslider&id={$id}")));
+            exit;
         }
 
         /**
@@ -1966,21 +1819,6 @@ if (! class_exists('MetaSliderPlugin')) {
 
                                     <?php
                                     do_action("metaslider_admin_table_before", $this->slider->id); ?>
-
-                                    <?php if ( isset( $_GET['metaslider_add_sample_slides'] ) ) : ?>
-                                        <p id="loading-add-sample-slides-notice" style="display: none;">
-                                            <span style="background-image: url(<?php echo esc_url(admin_url( '/images/loading.gif' )); ?>);">
-                                                <?php 
-                                                if ($_GET['metaslider_add_sample_slides'] !== 'local_video') {
-                                                    _e( 'Loading... Please wait!', 'ml-slider' );
-                                                } else {
-                                                    // Only for Local videos
-                                                    _e( "Loading... Please wait! This may take some minutes due we're downloading sample Local videos.", 'ml-slider' );
-                                                }
-                                                ?>
-                                            </span>
-                                        </p>
-                                    <?php endif; ?>
 
                                     <table id="metaslider-slides-list"
                                            class="widefat sortable metaslider-slides-container table-fixed">
@@ -2867,6 +2705,7 @@ if (! class_exists('MetaSliderPlugin')) {
                         }
                     })
                 });
+                
              });   
            </script>
            <?php
@@ -2911,6 +2750,83 @@ if (! class_exists('MetaSliderPlugin')) {
             }
 
             wp_send_json($slideshow_id);
+            wp_die();
+        }
+
+        /**
+         * New quickstart approach
+         */
+        public function ajax_quickstart_slideshow_v2() {
+            if ( ! isset( $_REQUEST['_wpnonce'] ) || ! wp_verify_nonce(
+                sanitize_key( $_REQUEST['_wpnonce'] ),
+                'metaslider_quickstart_slideshow'
+            ) ) {
+                wp_send_json_error( array(
+                    'message' => __( 'The security check failed. Please refresh the page and try again.', 'ml-slider' )
+                ), 401 );
+            }
+
+            $capability = apply_filters( 'metaslider_capability', MetaSliderPlugin::DEFAULT_CAPABILITY_EDIT_SLIDES );
+            if ( ! current_user_can( $capability ) ) {
+                wp_send_json_error(
+                    [
+                        'message' => __( 'Access denied. Sorry, you do not have permission to complete this task.', 'ml-slider' )
+                    ],
+                    403
+                );
+            }
+
+            if ( ! isset( $_GET['slug'] ) ) {
+                wp_send_json_error( array(
+                    'message' => __('Bad request', 'ml-slider'),
+                ), 400 );
+            }
+
+            $slug = $_GET['slug'];
+            $price = null;
+            $file = null;
+
+            if ( $slug ) {
+                $msQuickstart = new MetaSliderQuickstart();
+
+                foreach ( $msQuickstart->quickstart_options() as $option ) {
+                    if ( isset( $option['slug'] ) && $option['slug'] === $slug ) {
+                        $price = $option['price'] ?? null;
+                        break;
+                    }
+                }
+            }
+
+            if ( $price === 'free' ) {
+                $file = file_exists( METASLIDER_PATH . 'admin/quickstart/' . $slug . '.json' ) 
+				    ? METASLIDER_PATH . 'admin/quickstart/' . $slug . '.json' : null; 
+            } elseif ( $price === 'pro' && class_exists( 'MetaSliderPro' ) ) {
+                $file = file_exists( METASLIDERPRO_PATH . 'modules/quickstart/import/' . $slug . '.json' ) 
+				    ? METASLIDERPRO_PATH . 'modules/quickstart/import/' . $slug . '.json' : null; 
+            }
+            
+            if ( $file === null ) {
+                wp_send_json_error( array(
+                    'message' => __( 'Import file is missing', 'ml-slider' ),
+                ), 400 );
+            }
+
+            $data = wp_json_file_decode( $file, array( 'associative' => true ) );
+
+            $msSlideshows = new MetaSlider_Slideshows();
+
+            $slideshow_id = $msSlideshows->import( array( $data[0] ), 'last_id' ); // We only need the first slideshow
+
+            if ( is_wp_error( $slideshow_id ) ) {
+                wp_send_json_error( array(
+                    'message' => $slideshow_id->get_error_message()
+                ), 409 );
+            }
+
+            wp_send_json( array(
+                'slideshow_id' => $slideshow_id,
+                'data' => array( $data[0] ) 
+            ) );
             wp_die();
         }
 
@@ -3006,6 +2922,7 @@ if (! class_exists('MetaSliderPlugin')) {
          * We use this to allow t create demo sldieshows through Quick start screen
          * 
          * @since 3.70
+         * @deprecated 3.106 - Use MetaSliderQuickstart::quickstart_slugs() instead
          * 
          * @return array
          */

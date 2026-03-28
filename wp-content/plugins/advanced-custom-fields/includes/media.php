@@ -3,7 +3,7 @@
  * @package ACF
  * @author  WP Engine
  *
- * © 2025 Advanced Custom Fields (ACF®). All rights reserved.
+ * © 2026 Advanced Custom Fields (ACF®). All rights reserved.
  * "ACF" is a trademark of WP Engine.
  * Licensed under the GNU General Public License v2 or later.
  * https://www.gnu.org/licenses/gpl-2.0.html
@@ -219,10 +219,11 @@ if ( ! class_exists( 'ACF_Media' ) ) :
 			// Validate the attachment and append any errors.
 			$errors                 = acf_validate_attachment( $response, $field, 'prepare' );
 			$response['acf_errors'] = false;
-
-			if (is_array($errors) && ! empty($errors)) {
-				$response['acf_errors'] = implode('<br />', $errors);
+			if ( ! empty( $errors ) ) {
+				$response['acf_errors'] = implode( '<br />', $errors );
 			}
+
+			// Return.
 			return $response;
 		}
 

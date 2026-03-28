@@ -1,87 +1,525 @@
-.course-details-wrapper {
-    background: #fff;
-    padding: 20px;
-}
 
-.course-title-heading {
-    text-align: center;
-    font-weight: 800;
-    font-size: 28px;
-    margin-bottom: 25px;
-}
+    .course-details-wrapper {
+        background: #fff;
+        padding: 20px;
+    }
 
-.course-details-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: white;
-    font-family: Arial, sans-serif;
-}
+    .course-title-heading {
+        text-align: center;
+        font-weight: 800;
+        font-size: 28px;
+        margin-bottom: 25px;
+    }
 
-.course-details-table thead th {
-    background: #f4f4f4;
-    padding: 12px 10px;
-    border: 1px solid #ddd;
-    font-weight: 600;
-    text-align: left;
-}
+    .course-details-table {
+        width: 100%;
+        border-collapse: collapse;
+        background: white;
+        font-family: Arial, sans-serif;
+    }
 
-.course-details-table tbody td {
-    padding: 15px 10px;
-    border: 1px solid #eee;
-    vertical-align: middle;
-}
+    .course-details-table thead th {
+        background: #f4f4f4;
+        padding: 12px 10px;
+        border: 1px solid #ddd;
+        font-weight: 600;
+        text-align: left;
+    }
 
-/* Course titles */
-.course-lines .line-en,
-.course-lines .line-fr {
-    font-size: 15px;
-    line-height: 20px;
-}
+    .course-details-table tbody td {
+        padding: 15px 10px;
+        border: 1px solid #eee;
+        vertical-align: middle;
+    }
 
-.course-lines .line-fr {
-    color: #444;
-}
+    /* Course titles */
+    .course-lines .line-en,
+    .course-lines .line-fr {
+        font-size: 15px;
+        line-height: 20px;
+    }
 
-/* Badge images */
-.course-badge img {
-    width: 60px;
-    height: 60px;
-    border-radius: 6px;
-    object-fit: cover;
-}
+    .course-lines .line-fr {
+        color: #444;
+    }
 
-/* Completion date two-line structure */
-.completion-date div {
-    font-size: 14px;
-    color: #333;
-    line-height: 18px;
-}
+    /* Badge images */
+    .course-badge img {
+        width: 60px;
+        height: 60px;
+        border-radius: 6px;
+        object-fit: cover;
+    }
 
-/* Progress Bar */
-.progress-bar {
-    background: #e6e6e6;
-    height: 14px;
-    border-radius: 20px;
-    width: 140px;
-    position: relative;
-    overflow: hidden;
-}
+    /* Completion date two-line structure */
+    .completion-date div {
+        font-size: 14px;
+        color: #333;
+        line-height: 18px;
+    }
 
-.progress-fill {
-    height: 100%;
-    background: #2d9cdb; /* blue like your screenshot */
-    border-radius: 20px;
-}
+    /* Progress Bar */
+    .progress-bar {
+        background: #e6e6e6;
+        height: 27px;
+        border-radius: 20px;
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+    }
 
-.progress-text {
-    margin-top: 5px;
-    font-size: 14px;
-    font-weight: 600;
-}
+    .progress-label {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 12px;
+        font-weight: bold;
+        color: #e9e6e6ff;
+        pointer-events: none;
+        vertical-align: middle;
+    }
 
-/* Toyo Dollar */
+    .progress-fill {
+        height: 100%;
+        background: #2d9cdb;
+        /* blue like your screenshot */
+        border-radius: 20px;
+    }
+
+    .progress-text {
+        margin-top: 5px;
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    /* Toyo Dollar */
+    .toyo-dollar {
+        font-weight: 600;
+        color: #444;
+        white-space: nowrap;
+    }
+
+    .actions-control {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        gap: 10px;
+        text-align: center
+    }
+
+    .actions-cell {
+        width: 100px;
+    }
+
+    /* Curiculumn Pop up */
+
+    .course-popup {
+        display: none;
+        position: fixed;
+        z-index: 99999;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+    }
+
+    .course-popup-content {
+        background: #fff;
+        padding: 20px;
+        width: 60%;
+        margin: 80px auto;
+        border-radius: 8px;
+        position: relative;
+    }
+
+    .course-popup-close {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 22px;
+        cursor: pointer;
+    }
+
+
+    /* Stateement Section */
+
+    :root {
+        --primary: #2563eb;
+        --primary-hover: #1d4ed8;
+        --bg: #f8fafc;
+        --card-bg: #ffffff;
+        --text-main: #1e293b;
+        --text-muted: #64748b;
+        --border: #e2e8f0;
+        --success: #10b981;
+        --danger: #ef4444;
+        --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    }
+
+    
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    /* Header Section */
+    header {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .badge-count {
+        background: var(--primary);
+        color: white;
+        padding: 0.25rem 0.75rem;
+        border-radius: 99px;
+        font-weight: 700;
+        font-size: 0.9rem;
+    }
+
+    h1 {
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        font-size: 1.5rem;
+        margin-top: 1rem;
+        color: var(--text-main);
+    }
+
+    /* Dashboard Grid */
+    .dashboard-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* Two equal columns */
+        gap: 1.5rem;
+        width: 100%;       /* Takes full width of the container */
+        max-width: 900px;  /* Optional: limits how wide the cards can get */
+        margin: 0 auto 2rem auto;
+        justify-content: center; /* Centers the grid tracks */
+    }
+
+    .card {
+        background: var(--card-bg);
+        padding: 1.5rem;
+        border-radius: 12px;
+        box-shadow: var(--shadow);
+        border: 1px solid var(--border);
+        width: 100%; /* Makes sure they fill the grid cell */
+        box-sizing: border-box;
+    }
+
+    .card h3 {
+        margin-top: 0;
+        font-size: 1.1rem;
+        border-bottom: 2px solid var(--bg);
+        padding-bottom: 0.75rem;
+        margin-bottom: 1rem;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.025em;
+    }
+
+    .detail-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid #f1f5f9;
+    }
+
+    .detail-label { color: var(--text-muted); font-weight: 500; }
+    .detail-value { font-weight: 600; }
+
+    .balance-highlight {
+        color: var(--primary);
+        font-size: 1.5rem;
+        font-weight: 800;
+    }
+
+    /* Inputs & Buttons */
+    .action-group {
+        margin-top: 1rem;
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    input[type="text"] {
+        flex: 1;
+        padding: 0.6rem;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        outline: none;
+    }
+
+    input[type="text"]:focus { border-color: var(--primary); }
+
+    button {
+        padding: 0.6rem 1.2rem;
+        border-radius: 6px;
+        border: none;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.2s;
+    }
+
+    .btn-primary { background: var(--primary); color: white; }
+    .btn-primary:hover { background: var(--primary-hover); }
+    .btn-danger { background: var(--danger); color: white; margin-bottom: 1rem; }
+
+    /* Table Styling */
+    .table-container {
+        background: var(--card-bg);
+        border-radius: 12px;
+        box-shadow: var(--shadow);
+        overflow: hidden;
+        border: 1px solid var(--border);
+        margin-bottom: 40px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: left;
+    }
+
+    thead {
+        background: #f1f5f9;
+    }
+
+    th {
+        padding: 1rem;
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        text-transform: uppercase;
+    }
+
+    td {
+        padding: 1rem;
+        border-bottom: 1px solid var(--border);
+        font-size: 0.95rem;
+    }
+
+    tr:hover { background: #f8fafc; }
+
+    .amt-pos { color: var(--success); font-weight: 600; }
+    .amt-neg { color: var(--danger); font-weight: 600; }
+    .text-muted {
+        color: var(--text-muted);
+        opacity: 0.6;
+        font-weight: 400;
+    }
+
+    /* Footer Info */
+    .table-footer {
+        padding: 1.5rem;
+        background: #fdfdfd;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 16px;
+    }
+
+    .amount_style {
+        font-weight: 700;
+        color: var(--text-main);
+        font-family: monospace;
+    }
+
+    /* Popup Css */
+
+    /* Popup Overlay - Dims the background */
+    .confirm-popup {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(15, 23, 42, 0.5);
+        backdrop-filter: blur(8px); 
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        /* Hidden by default - toggle with JS or change to flex to see it */
+        display: none; 
+    }
+
+    /* The Modal Box */
+    .confirm-popup-content {
+        background: var(--card-bg);
+        padding: 2.5rem;
+        border-radius: 20px;
+        width: 90%;
+        max-width: 400px;
+        text-align: center;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        animation: modalAppear 0.3s ease-out;
+    }
+
+    /* Modal Typography */
+    .confirm-popup-content h3 {
+        margin-top: 0;
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: var(--text-main);
+        letter-spacing: -0.025em;
+    }
+
+    .confirm-popup-content p {
+        color: var(--text-muted);
+        font-size: 1rem;
+        margin-bottom: 2rem;
+        line-height: 1.5;
+    }
+
+    /* Button Layout inside Popup */
+    .confirm-popup-content .btn-primary, 
+    .confirm-popup-content .btn-secondary {
+        width: 100%;
+        margin-bottom: 0.75rem;
+        padding: 0.8rem;
+        font-size: 1rem;
+    }
+
+    /* Modern Secondary/Cancel Button */
+    .btn-secondary {
+        background-color: #f1f5f9;
+        color: #475569;
+        border: 1px solid #e2e8f0;
+        padding: 0.75rem 1.5rem;
+        border-radius: 10px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .btn-secondary:hover {
+        background-color: #e2e8f0;
+        color: #1e293b;
+    }
+
+    .tabs{
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        margin-bottom: 2rem;
+        border-bottom: 2px solid var(--border);
+        margin-top: 10px;
+    }
+    #first-tab{
+        margin-bottom: 5px;
+    }
+    .button-active{
+        background: #d63638;
+        color: white;
+        display: disabled;
+        pointer-events: none;
+        opacity: 0.8;
+        cursor: not-allowed;
+    }
+
+    /* button tab css */
+    .tabs {
+        display: flex;
+        gap: 10px;
+        
+    }
+
+    .btn-primary-new{
+        padding: 10px 20px;
+        border-radius: 8px;
+        border: none;
+        background: #e5e5e5;
+        color: #333;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-bottom: 20px;
+    }
+
+    /* Active button */
+    .btn-primary-new.active {
+        background: linear-gradient(135deg, #880b17, #b31222);
+        color: #fff;
+        box-shadow: 0 6px 15px rgba(136, 11, 23, 0.4);
+    }
+
+    /* Hover effect for active */
+    .btn-primary-new.active:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(136, 11, 23, 0.5);
+    }
+
+    /* The Table Cell */
 .toyo-dollar {
-    font-weight: 600;
-    color: #444;
-    white-space: nowrap;
+    padding: 16px;
+    vertical-align: middle;
+    text-align: center; /* Centers the badge in the column */
 }
+
+/* The New Inner Class */
+.status-label {
+    --bg-color: #f3f4f6;
+    --text-color: #6b7280;
+    --border-color: #e5e7eb;
+    
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    border-radius: 8px; /* Modern "soft square" look */
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* Success State Modifier */
+.status-label.is-earned {
+    --bg-color: #ecfdf5;   /* Soft emerald */
+    --text-color: #065f46;  /* Deep emerald */
+    --border-color: #a7f3d0;
+}
+
+/* Optional: Add a small pulsing dot for "Earned" status */
+.status-label.is-earned::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    background-color: #10b981;
+    border-radius: 50%;
+}
+
+/* Pending/Default State Modifier */
+.status-label.is-pending {
+    --bg-color: #fffbeb;   /* Soft amber */
+    --text-color: #92400e;  /* Deep amber */
+    --border-color: #fde68a;
+    font-style: italic;
+    opacity: 0.8;
+}
+
+    /* Entrance Animation */
+    @keyframes modalAppear {
+        from {
+            opacity: 0;
+            transform: scale(0.9) translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+    }
+
+    @media (max-width: 768px) {
+        .dashboard-grid {
+            grid-template-columns: 1fr;
+            max-width: 400px; /* Centers a single card nicely on mobile */
+        }
+    }

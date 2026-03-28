@@ -32,7 +32,7 @@ foreach (glob(get_stylesheet_directory() . '/includes/*.php') as $file) {
 add_filter('theme_page_templates', function ($templates) {
 
     $base_dir = get_stylesheet_directory() . '/templates/';
-    $subfolders = ['admaterials', 'management'];
+    $subfolders = ['admaterials', 'management', 'dealer-resources', 'profile'];
 
     foreach ($subfolders as $folder) {
         $template_dir = $base_dir . $folder . '/';
@@ -100,3 +100,14 @@ add_action('init', function () {
         $role->add_cap('edit_posts');
     }
 });
+
+function custom_course_sidebar_widgets()
+{
+
+    register_sidebar(array(
+        'name' => __('Course Sidebar', 'vibe'),
+        'id' => 'course',
+    ));
+}
+
+add_action('widgets_init', 'custom_course_sidebar_widgets');

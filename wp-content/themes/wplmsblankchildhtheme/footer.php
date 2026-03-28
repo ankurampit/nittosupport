@@ -18,14 +18,23 @@
     </div>
 </footer>
 <!-- Footer end -->
-
+<script>
+    const ajax_obj = {
+        ajax_url: "<?php echo admin_url('admin-ajax.php'); ?>",
+        nonce: "<?php echo wp_create_nonce('security_nonce'); ?>"
+    };
+</script>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<!-- <script src="</?php echo get_stylesheet_directory_uri() . '/assets/js/jquery-min-3.2.1.js' ?>"></script> -->
+<script src="<?php echo get_stylesheet_directory_uri() . '/assets/js/jquery-min-3.2.1.js' ?>"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo get_stylesheet_directory_uri() . '/assets/js/bootstrap.min.js' ?>"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <!-- Script for custom select -->
 <script src="<?php echo get_stylesheet_directory_uri() . '/assets/js/customSelect.js' ?>"></script>
 <script src="<?php echo get_stylesheet_directory_uri() . '/assets/js/custom-script.js' ?>"></script>
 <script src="<?php echo get_stylesheet_directory_uri() . '/assets/js/admaterials.js' ?>"></script>
+<script src="<?php echo get_stylesheet_directory_uri() . '/assets/js/security.js' ?>"></script>
+
 <?php wp_footer(); ?>
 
 </body>

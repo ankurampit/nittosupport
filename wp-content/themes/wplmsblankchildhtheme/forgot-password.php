@@ -9,7 +9,7 @@ get_header('header.php');
 ?>
 
 
-<section class="container">
+<section class="container" style="min-height: 39rem !important;">
     <div class="content loginContent">
         <!--Paragraph text start-->
         <div class="topody">
@@ -44,8 +44,8 @@ get_header('header.php');
                             <?php echo esc_html($error_message); ?>
                         </div>
                     <?php endif; ?>
-                    <form id="Loginfrm"
-                        name="Loginfrm"
+                    <form id="grorgotPass"
+                        name="grorgotPass"
                         class="Loginfrm mailIcon"
                         role="form"
                         autocomplete="off"
@@ -53,8 +53,8 @@ get_header('header.php');
                         method="post"
                         novalidate="novalidate">
 
-                        <!-- 🔸 Tell WordPress what action to trigger -->
-                        <input type="hidden" name="action" value="custom_user_login">
+                        <!-- Tell WordPress what action to trigger -->
+                        <input type="hidden" name="action" value="custom_forgot_password">
 
                         <div class="input-group">
                             <input type="text" name="EmailAddress" id="EmailAddress" tabindex="1" class="form-control" placeholder="Email">

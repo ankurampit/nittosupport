@@ -11,10 +11,13 @@ $featured_query = new WP_Query($featured_args);
 
     <ul>
         <?php if ($featured_query->have_posts()) : ?>
-            <?php while ($featured_query->have_posts()) : $featured_query->the_post(); ?>
+            <?php while ($featured_query->have_posts()) : $featured_query->the_post();
+                $image_id = get_post_meta(get_the_ID(), 'image', true);
+            ?>
                 <li>
-                    <a href="javascript:{}"><img
-                            src="<?php echo get_the_post_thumbnail_url(get_the_ID(), 'medium'); ?>" alt=""></a>
+                    <a href="javascript:{}">
+                        <?php echo wp_get_attachment_image($image_id, 'medium'); ?>
+                    </a>
                     <h5><a href="javascript:{}"><?php the_title(); ?></a></h5>
                     <p><?php the_excerpt(); ?></p>
                     <a href="javascript:{}"

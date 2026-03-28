@@ -485,7 +485,7 @@ export default {
 			const linkStart = `<a href="${this.metaslider_settings_page}" target="_blank" style="color:#135e96">`;
 			const linkEnd = `</a>`;
 			return this.sprintf(
-				this.__('We recommend to enable %1$s"Recommended Theme Options"%2$s to automatically adjust slideshow settings when selecting a new theme.', 'ml-slider'),
+				this.__('We recommend you enable %1$s"Recommended Theme Options"%2$s to automatically adjust slideshow settings when selecting a new theme.', 'ml-slider'),
 				linkStart,
 				linkEnd
 			);

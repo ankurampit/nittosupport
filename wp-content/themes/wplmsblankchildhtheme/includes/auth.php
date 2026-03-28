@@ -1,5 +1,6 @@
 <?php
 // Register User
+
 /**
  * Handle custom front-end registration form submission
  */
@@ -244,11 +245,86 @@ function custom_login_redirect_logic()
 }
 add_action('template_redirect', 'custom_login_redirect_logic');
 
-function get_all_user_groups()
-{
-    global $wpdb;
-    $table_name = 'usergroup';
+// Forgot Password
 
-    $results = $wpdb->get_results("SELECT * FROM $table_name");
-    return $results;
+add_action('admin_post_nopriv_custom_forgot_password', 'handle_forgot_password');
+add_action('admin_post_custom_forgot_password', 'handle_forgot_password');
+
+function handle_forgot_password()
+{
+    if (empty($_POST['EmailAddress'])) {
+        wp_redirect(add_query_arg('login', 'empty', wp_get_referer()));
+        exit;
+    }
+
+    $email = sanitize_email($_POST['EmailAddress']);
+
+    if (!is_email($email)) {
+        wp_redirect(add_query_arg('login', 'invalid_request', wp_get_referer()));
+        exit;
+    }
+
+    $user = get_user_by('email', $email);
+
+    if (!$user) {
+        wp_redirect(add_query_arg('login', 'email_not_found', wp_get_referer()));
+        exit;
+    }
+
+    $reset_key = get_password_reset_key($user);
+
+    if (is_wp_error($reset_key)) {
+        wp_redirect(add_query_arg('login', 'failed', wp_get_referer()));
+        exit;
+    }
+
+    $reset_url = network_site_url(
+        "wp-login.php?action=rp&key=$reset_key&login=" . rawurlencode($user->user_login),
+        'login'
+    );
+
+    // --- MODERN HTML EMAIL START ---
+    $subject = 'Password Reset Request';
+
+    // Set headers for HTML email
+    $headers = array('Content-Type: text/html; charset=UTF-8');
+
+    $message = '
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <style>
+            .wrapper { width: 100%; background-color: #f4f7f9; padding: 40px 0; font-family: sans-serif; }
+            .main { background-color: #ffffff; margin: 0 auto; width: 90%; max-width: 600px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); overflow: hidden; }
+            .content { padding: 40px 30px; line-height: 1.6; color: #333; }
+            .button-container { text-align: center; padding: 30px 0; }
+            .button { background-color: #007bff; color: #ffffff !important; padding: 14px 28px; text-decoration: none; border-radius: 6px; font-weight: bold; display: inline-block; }
+            .footer { text-align: center; font-size: 12px; color: #888; margin-top: 20px; }
+        </style>
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="main">
+                <div class="content">
+                    <h2 style="margin-top:0;">Password Reset</h2>
+                    <p>Hi ' . esc_html($user->display_name) . ',</p>
+                    <p>We received a request to reset your password. Click the button below to choose a new one:</p>
+                    <div class="button-container">
+                        <a href="' . esc_url($reset_url) . '" class="button">Reset Password</a>
+                    </div>
+                    <p>If you didn’t request this, you can safely ignore this email. Your password will not change until you access the link above.</p>
+                </div>
+            </div>
+            <div class="footer">
+                &copy; ' . date("Y") . ' ' . get_bloginfo('name') . '
+            </div>
+        </div>
+    </body>
+    </html>';
+    // --- MODERN HTML EMAIL END ---
+
+    wp_mail($email, $subject, $message, $headers);
+
+    wp_redirect(add_query_arg('login', 'reset_sent', wp_get_referer()));
+    exit;
 }

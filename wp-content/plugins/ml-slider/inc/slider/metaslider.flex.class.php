@@ -1093,7 +1093,7 @@ class MetaFlexSlider extends MetaSlider
             $options['init'] = array_merge( $options['init'], array(
                 "var ms_target_width = function() {
                     return $('{$fullWidthTarget}').width();
-                }
+                };
 
                 var ms_full_width_slideshow = function() {
                     var has_container = $('#metaslider_container_box_{$slider_id}').length ? true : false;
@@ -1131,14 +1131,13 @@ class MetaFlexSlider extends MetaSlider
                             });
                         }
                     }
-                }
+                };
                 
                 ms_full_width_slideshow();
                 setTimeout(function() {
                     $(window).trigger('resize');
                 }, 200);
                 $(window).on('resize', function() {
-                    console.log(ms_target_width());
                     ms_full_width_slideshow();
                 });"
             ) );
